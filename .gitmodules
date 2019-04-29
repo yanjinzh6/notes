@@ -1,0 +1,3 @@
+[submodule "development/java-notes"]
+	path = development/java-notes
+	url = git@github.com:yanjinzh6/java-notes.git
