@@ -1,3 +1,6 @@
 [submodule "development/java-notes"]
 	path = development/java-notes
 	url = git@github.com:yanjinzh6/java-notes.git
+[submodule "deployment/k8s-notes"]
+	path = deployment/k8s-notes
+	url = git@github.com:yanjinzh6/k8s-notes.git
