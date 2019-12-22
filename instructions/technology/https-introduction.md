@@ -23,7 +23,7 @@ permalink: https-introduction
 2. 主机 B 收到请求后要确认联机信息, 向 A 发送 ack number=(主机 A 的 seq+1),syn=1,ack=1,随机产生 seq=0 的包
 3. 主机 A 收到后检查 ack number 是否正确, 即第一次发送的 seq number+1,以及位码 ack 是否为 1, 若正确, 主机 A 会再发送 ack number=(主机 B 的 seq+1),ack=1, 主机 B 收到后确认 seq 值与 ack=1 则连接建立成功.
 
-![tcp 三次握手](./images/tcp)
+![tcp 三次握手](https-introduction/tcp)
 
 完成三次握手, 主机 A 与主机 B 开始传送数据. 注意, seq number 是随机数, 这里的数字显示为相对数字, 方便对照看.
 
@@ -51,7 +51,7 @@ permalink: https-introduction
 
 这里关键的一步就是服务器发送过来的证书, 是通过一个信任的 CA 签名的, 所以值得信任. 公钥即使被中间人截获以后也没用, 因为拿到公钥也解密不出来到底双方是用哪种算法加密的.
 
-![中间人攻击](./images/man-in-middle)
+![中间人攻击](https-introduction/man-in-middle)
 
 ### 解决中间人攻击问题
 
@@ -63,7 +63,7 @@ permalink: https-introduction
 
 ### HTTPS 的流程
 
-![HTTPS 的流程](./images/https)
+![HTTPS 的流程](https-introduction/https)
 
 1. 先看蓝色的部分, 可以看出来, 这是 tcp 链接. 所以 https 的加密层也是在 tcp 之上的.
 1. 客户端首先发起 clientHello 消息. 包含一个客户端随机生成的 random1 数字, 客户端支持的加密算法, 以及 SSL 信息.
@@ -142,7 +142,7 @@ DNS.1 = localhost
 
 ## 总结
 
-![HTTPS 基本原理](./images/full)
+![HTTPS 基本原理](https-introduction/full)
 
 1. 一般【客户端】首先发起请求, 例如请求网站 www.thinktxt.com/, 生成一个随机数 (RandomC) , 携带支持的 TLS 版本、加密算法等信息发送至【服务端】.
 2. 【服务端】收到请求, 返回证书、一个随机数 (RandomS) 、协商加密算法.
