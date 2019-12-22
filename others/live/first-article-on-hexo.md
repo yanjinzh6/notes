@@ -4,7 +4,10 @@ date: 2019-12-21 17:25:54
 tags: '搭建'
 categories: '生活'
 permalink: first-article-on-hexo
+photo:
 ---
+
+![图片](first-article-on-hexo/asphalt-highway.jpg)
 
 # 起因
 
@@ -32,3 +35,4 @@ permalink: first-article-on-hexo
 * 个人 vps 速度慢, 还是得使用静态托管平台
 * 不方便笔记的输出
 * markdown 文件如何美丽的书写
+* markdown 图片索引问题

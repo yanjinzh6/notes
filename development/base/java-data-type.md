@@ -26,6 +26,8 @@ permalink: java-data-type
 - 对象, 数组都是引用数据类型
 - 所有引用类型的默认值都是 null
 
+<!-- more -->
+
 ## Java 常量
 
 ## 转义字符序列

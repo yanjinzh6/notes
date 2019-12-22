@@ -15,6 +15,8 @@ permalink: https-introduction
 3. SSL (Secure Socket Layer, 安全套接字层): 1994 年为 Netscape 所研发, SSL 协议位于 TCP/IP 协议与各种应用层协议之间, 为数据通讯提供安全支持.
 4. TLS (Transport Layer Security, 传输层安全): 其前身是 SSL, 它最初的几个版本 (SSL 1.0、SSL 2.0、SSL 3.0) 由网景公司开发, 1999 年从 3.1 开始被 IETF 标准化并改名, 发展至今已经有 TLS 1.0、TLS 1.1、TLS 1.2 三个版本. SSL3.0 和 TLS1.0 由于存在安全漏洞, 已经很少被使用到. TLS 1.3 改动会比较大, 目前还在草案阶段, 目前使用最广泛的是 TLS 1.1、TLS 1.2.
 
+<!-- more -->
+
 ## 过程解析
 
 ### 三次 tcp 握手

@@ -12,6 +12,8 @@ permalink: java-collection
 - Set: 不允许重复的集合, 不会有多个元素引用相同的对象.
 - Map: 使用键值对存储.两个 Key 可以引用相同的对象, 但 Key 不能重复.
 
+<!-- more -->
+
 ## 集合框架底层数据结构总结
 
 - List

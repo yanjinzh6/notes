@@ -16,6 +16,8 @@ permalink: package-management
 
 Debian 软件包管理叫做 Advanced Packaging Tool(APT), 是一套管理软件包和相关依赖的机制, 可以实现应用程序的安装, 移除和更新等. APT 有很多的实现, 如 dpkg, apt-get 等.
 
+<!-- more -->
+
 软件源的格式通常是4部分:
 
 `[archive type] [repository URL] [distribution] [component]`
