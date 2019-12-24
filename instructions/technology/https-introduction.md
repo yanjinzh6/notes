@@ -2,7 +2,8 @@
 title: HTTPS 简介
 date: 2019-12-21 18:28:54
 tags: '技术'
-categories: '使用说明'
+categories:
+  - ['使用说明', '技术']
 permalink: https-introduction
 ---
 

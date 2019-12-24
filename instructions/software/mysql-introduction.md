@@ -2,7 +2,8 @@
 title: MySQL 数据库
 date: 2019-12-21 18:26:54
 tags: '开发软件'
-categories: '使用说明'
+categories:
+  - ['使用说明', '软件']
 permalink: mysql-introduction
 ---
 

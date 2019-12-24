@@ -2,7 +2,8 @@
 title: 操作系统包管理
 date: 2019-12-21 18:25:54
 tags: '操作系统'
-categories: '使用说明'
+categories:
+  - ['使用说明', '操作系统']
 permalink: package-management
 ---
 

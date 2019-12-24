@@ -1,8 +1,9 @@
 ---
 title: IO 简介
 date: 2019-12-21 20:28:54
-tags: 'Java'
-categories: '开发技术'
+tags: '开发技能'
+categories:
+  - ['Java', 'IO']
 permalink: java-io
 ---
 

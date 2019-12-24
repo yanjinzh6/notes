@@ -1,8 +1,9 @@
 ---
 title: 数据类型简介
 date: 2019-12-21 19:38:54
-tags: 'Java'
-categories: '开发技术'
+tags: '开发技能'
+categories:
+  - ['Java', '基础']
 permalink: java-data-type
 ---
 

@@ -1,8 +1,9 @@
 ---
 title: JVM 简介
 date: 2019-12-21 19:29:54
-tags: 'Java'
-categories: '开发技术'
+tags: '开发技能'
+categories:
+  - ['Java', '基础']
 permalink: java-jvm
 ---
 
