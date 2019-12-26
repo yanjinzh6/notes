@@ -58,12 +58,9 @@ eg:
 
 ```
 source/_posts
-|
-└─ example-post
-  |
-  └─ first.jpg
-|
-└─ example-post.md
+├── example-post
+| └── first.jpg
+└── example-post.md
 ```
 
 在 markdown 文件中, 会使用 `![first](example-post/first.jpg)` 来进行显示, 这时候 GitHub 和本地编辑器是可以进行预览的
