@@ -3,7 +3,7 @@ title: 解决插入图片的问题
 date: 2019-12-23 9:54:00
 tags: '博客'
 categories:
-  - ['生活', '博客']
+  - ['其他', '生活']
 permalink: jie-jue-cha-ru-tu-pian-de-wen-ti
 ---
 

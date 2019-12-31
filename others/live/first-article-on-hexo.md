@@ -3,7 +3,7 @@ title: 第一篇 hexo 博客
 date: 2019-12-21 17:25:54
 tags: '博客'
 categories:
-  - ['生活', '博客']
+  - ['其他', '生活']
 permalink: first-article-on-hexo
 photo:
 ---
