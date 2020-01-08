@@ -5,6 +5,7 @@ tags: 'MySQL'
 categories:
   - ['使用说明', '软件']
 permalink: mysql-introduction
+photo:
 ---
 
 # MySQL
