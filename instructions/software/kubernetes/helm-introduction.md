@@ -18,6 +18,8 @@ Helm 是 Kubernetes 的一个包管理工具, 用来简化 Kubernetes 应用的�
 * Release: 是 chart 的部署实例, 一个 chart 在一个 Kubernetes 集群上可以有多个 release, 即这个 chart 可以被安装多次
 * Repository: chart 的仓库, 用于发布和存储 chart
 
+<!-- more -->
+
 ## 作用
 
 * 管理 Kubernetes manifest files

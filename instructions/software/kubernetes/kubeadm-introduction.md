@@ -14,6 +14,8 @@ photo:
 
 [Kubeadm](https://kubernetes.io/zh/docs/reference/setup-tools/kubeadm/kubeadm/) 是一个工具, 它提供了 kubeadm init 以及 kubeadm join 这两个命令作为快速创建 kubernetes 集群的最佳实践.
 
+<!-- more -->
+
 # 前提
 
 ## 关闭 Swap
