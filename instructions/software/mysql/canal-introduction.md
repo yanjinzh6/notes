@@ -57,7 +57,7 @@ Digest: sha256:40ae71b5d96baf6c408877ce9cd4261a5e5a085ab370ec47e6037000579c58c4
 Status: Downloaded newer image for docker.io/canal/canal-server:v1.1.4
 ```
 
-配置文件
+### docker-compose 配置文件
 
 ```yml
 version: '3.1'
@@ -110,12 +110,34 @@ services:
 
 具体配置参考[官方 GitHub](https://github.com/alibaba/canal/wiki/AdminGuide)
 
-通过 docker-compose 启动容器
+### 开启 MySQL binlog
+
+MySQL 5.7 镜像通过 `/etc/mysql/my.cnf` 指向 `/etc/mysql/mysql.cnf`, 实际上是包括了同目录下的 `/etc/mysql/conf.d/` 和 `/etc/mysql/mysql.conf.d/` 文件夹, 所以只需要在文件夹中添加个配置就可以了
+
+```cnf
+[mysqld]
+server_id=1918
+log-bin=mysql-bin
+binlog-format=Row
+```
+
+这里设置了 master ID, 避免与其他 slave 起冲突
+
+然后通过添加 canal 用户并且授权用户使用 slave 权限
+
+```sql
+CREATE USER canal IDENTIFIED BY 'canal';
+GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'canal'@'%';
+-- GRANT ALL PRIVILEGES ON *.* TO 'canal'@'%' ;
+FLUSH PRIVILEGES;
+```
+
+### 通过 docker-compose 启动容器
 
 ```sh
 $ docker-compose up -d
 
-$ docker logs canal-server                                                                                                              [18:19:55]
+$ docker logs canal-server
 DOCKER_DEPLOY_TYPE=VM
 ==> INIT /alidata/init/02init-sshd.sh
 ==> EXIT CODE: 0
