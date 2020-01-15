@@ -60,7 +60,7 @@ Reactor 负责 IO 事件的响应, 一旦有事件发生, 便广播发送给相�
 
 ### 文件锁定
 
-NIO 中的文件通道 (FileChannel) 在读写数据的时候主 要使用了阻塞模式, 它不能支持非阻塞模式的读写, 而且 FileChannel 的对象是不能够直接实例化的, 他的实例只能通过 getChannel()从一个打开的文件对象上边读取 (RandomAccessFile、 FileInputStream、FileOutputStream) , 并且通过调用 getChannel()方法返回一个 Channel 对象去连接同一个文件, 也就是针对同一个文件进行读写操作.
+NIO 中的文件通道 (FileChannel) 在读写数据的时候主 要使用了阻塞模式, 它不能支持非阻塞模式的读写, 而且 FileChannel 的对象是不能够直接实例化的, 他的实例只能通过 getChannel()从一个打开的文件对象上边读取 (RandomAccessFile,  FileInputStream, FileOutputStream) , 并且通过调用 getChannel()方法返回一个 Channel 对象去连接同一个文件, 也就是针对同一个文件进行读写操作.
 
 文件锁的出现解决了很多 Java 应用程序和非 Java 程序之间共享文件数据的问题
 
@@ -146,7 +146,7 @@ ByteBuffer buf = ByteBuffer.allocate(28);//以ByteBuffer为例子
 
 1. Selector (选择器) 介绍
 
-- Selector 一般称 为选择器 , 当然你也可以翻译为 多路复用器 . 它是 Java NIO 核心组件中的一个, 用于检查一个或多个 NIO Channel (通道) 的状态是否处于可读、可写. 如此可以实现单线程管理多个 channels,也就是可以管理多个网络链接.
+- Selector 一般称 为选择器 , 当然你也可以翻译为 多路复用器 . 它是 Java NIO 核心组件中的一个, 用于检查一个或多个 NIO Channel (通道) 的状态是否处于可读, 可写. 如此可以实现单线程管理多个 channels,也就是可以管理多个网络链接.
 - 使用 Selector 的好处在于： 使用更少的线程来就可以来处理通道了, 相比使用多个线程, 避免了线程上下文切换带来的开销.
 
 1. Selector (选择器) 的使用方法介绍

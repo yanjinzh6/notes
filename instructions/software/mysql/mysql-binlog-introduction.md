@@ -23,16 +23,16 @@ MySQL 中一般有以下几种日志:
 | 慢查询日志            | 记录所有执行时间超过 long_query_time 秒的所有查询或不使用索引的查询 |
 | DDL 日志 (元数据日志) | 元数据操作由 DDL 语句执行                                           |
 
-Mysql 5.0 以后, 支持通过 binary log (二进制日志) 以支持主从复制. 复制允许将来自一个 MySQL 数据库服务器 (master) 的数据复制到一个或多个其他 MySQL 数据库服务器 (slave), 以实现灾难恢复、水平扩展、统计分析、远程数据分发等功能. 它记录了所有的 DDL 和 DML 语句 (除了数据查询语句 select、show 等) , 以事件形式记录, 还包含语句所执行的消耗的时间, MySQL 的二进制日志是事务安全型的. binlog 的主要目的是复制和恢复.
+Mysql 5.0 以后, 支持通过 binary log (二进制日志) 以支持主从复制. 复制允许将来自一个 MySQL 数据库服务器 (master) 的数据复制到一个或多个其他 MySQL 数据库服务器 (slave), 以实现灾难恢复, 水平扩展, 统计分析, 远程数据分发等功能. 它记录了所有的 DDL 和 DML 语句 (除了数据查询语句 select, show 等) , 以事件形式记录, 还包含语句所执行的消耗的时间, MySQL 的二进制日志是事务安全型的. binlog 的主要目的是复制和恢复.
 
 # 使用场景
 
 * 最典型的场景就是通过 Mysql 主从之间通过 binlog 复制来实现横向扩展, 实现读写分离
   * 主库 Master 负责所有的更新操作
   * 同时会有多个 Slave, 每个 Slave 都连接到 Master 上, 获取 binlog 在本地回放, 实现数据复制.
-  * 在应用层面, 需要对执行的 sql 进行判断. 所有的更新操作都通过 Master(Insert、Update、Delete 等), 而查询操作(Select 等)都在 Slave 上进行. 由于存在多个 slave, 所以我们可以在 slave 之间做负载均衡. 通常业务都会借助一些数据库中间件, 如 tddl、sharding-jdbc 等来完成读写分离功能.
+  * 在应用层面, 需要对执行的 sql 进行判断. 所有的更新操作都通过 Master(Insert, Update, Delete 等), 而查询操作(Select 等)都在 Slave 上进行. 由于存在多个 slave, 所以我们可以在 slave 之间做负载均衡. 通常业务都会借助一些数据库中间件, 如 tddl, sharding-jdbc 等来完成读写分离功能.
 * 数据恢复: 通过使用 mysqlbinlog 工具来使恢复数据
-* 数据最终一致性: 通过解析 binlog 的信息, 去异步的更新缓存、索引或者发送 MQ 消息, 保证数据库与其他组件中数据的最终一致. 例如: linkedin 的 databus, 阿里巴巴的 canal, 美团点评的 puma
+* 数据最终一致性: 通过解析 binlog 的信息, 去异步的更新缓存, 索引或者发送 MQ 消息, 保证数据库与其他组件中数据的最终一致. 例如: linkedin 的 databus, 阿里巴巴的 canal, 美团点评的 puma
 * 通常索引分为全量索引和增量索引. 对于增量索引的部分, 可以通过监听 binlog 变化, 根据 binlog 中包含的信息, 转换成 es 语法, 进行实时索引更新
 
 <!-- more -->
@@ -173,7 +173,7 @@ binlog 是一个二进制文件集合, 每个 binlog 文件以一个 4 字节的
 * MIXED: 混合模式复制 (mixed-based replication, MBR) , 从 5.1.8 版本开始, MySQL 提供了 Mixed 格式, 实际上就是 Statement 与 Row 的结合.
   * 在 Mixed 模式下, 一般的语句修改使用 statment 格式保存 binlog, 如一些函数, statement 无法完成主从复制的操作, 则采用 row 格式保存 binlog, MySQL 会根据执行的每一条具体的 sql 语句来区分对待记录的日志形式, 也就是在 Statement 和 Row 之间选择一种.
 
-在 MySQL 5.7.7 之前, 默认的格式是 STATEMENT, 在 MySQL 5.7.7 及更高版本中, 默认值是 ROW. 日志格式通过 binlog-format 指定, 如 binlog-format=STATEMENT、binlog-format=ROW、binlog-format=MIXED.
+在 MySQL 5.7.7 之前, 默认的格式是 STATEMENT, 在 MySQL 5.7.7 及更高版本中, 默认值是 ROW. 日志格式通过 binlog-format 指定, 如 binlog-format=STATEMENT, binlog-format=ROW, binlog-format=MIXED.
 
 ## 格式
 
