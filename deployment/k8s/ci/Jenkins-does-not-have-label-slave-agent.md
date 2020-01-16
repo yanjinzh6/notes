@@ -1,7 +1,7 @@
 ---
 title: ‘Jenkins’ doesn’t have label ‘slave-agent’ 异常问题
 date: 2020-01-02 14:00:00
-tags: 'jenkins'
+tags: 'Jenkins'
 categories:
   - ['部署', 'k8s']
 permalink: Jenkins-does-not-have-label-slave-agent

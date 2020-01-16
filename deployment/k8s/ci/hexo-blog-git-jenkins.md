@@ -1,7 +1,7 @@
 ---
 title: 新建 hexo Jenkins 任务
 date: 2020-01-02 18:00:00
-tags: 'jenkins'
+tags: 'Jenkins'
 categories:
   - ['部署', 'ci']
 permalink: hexo-blog-git-jenkins
