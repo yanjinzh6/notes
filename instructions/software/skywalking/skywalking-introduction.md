@@ -41,7 +41,7 @@ SkyWalking：一个开源的观测平台, 用于从服务和云原生基础设�
 
 SkyWalking 逻辑上分为四部分: 探针, 平台后端, 存储和用户界面.
 
-![](skywalking-introduction/frame.jpeg)
+![SkyWalking 架构](skywalking-introduction/frame.jpeg)
 
 - 探针: 基于不同的来源可能是不一样的, 但作用都是收集数据, 将数据格式化为 SkyWalking 适用的格式.
 - 平台后端: 一个支持集群模式运行的后台, 用于数据聚合, 数据分析以及驱动数据流从探针到用户界面的流程. 平台后端还提供了各种可插拔的能力, 如不同来源数据 (如来自 Zipkin) 格式化, 不同存储系统以及集群管理. 你甚至还可以使用观测分析语言来进行自定义聚合分析.
