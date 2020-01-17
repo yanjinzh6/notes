@@ -81,4 +81,4 @@ OPTIONS说明
 
 # 小结
 
-比较简单的构建过程, 可以很好的集成到 ci 中, 也可以从另一个思路走, 通过 `docker save`, `docker import` 来保存和导入镜像
+比较简单的构建过程, 可以很好的集成到 ci 中, 也可以从另一个思路走, 通过 `docker save`, `docker load` 来保存和导入镜像
