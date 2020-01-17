@@ -1,9 +1,9 @@
 ---
 title: Markdown 中使用 html
 date: 2019-12-24 14:00:00
-tags: '开发技能'
+tags: 'Markdown'
 categories:
-  - ['markdown']
+  - ['开发', 'Markdown']
 permalink: markdown-html
 ---
 
