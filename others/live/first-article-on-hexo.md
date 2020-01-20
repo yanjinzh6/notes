@@ -8,7 +8,7 @@ permalink: first-article-on-hexo
 photo:
 ---
 
-![图片](first-article-on-hexo/asphalt-highway.jpg)
+![图片](/first-article-on-hexo/asphalt-highway.jpg)
 
 # 起因
 

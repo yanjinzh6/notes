@@ -8,4 +8,4 @@ permalink: 2020-nian-xin-nian-hao
 photo:
 ---
 
-![2020](2020-nian-xin-nian-hao/year-2020-4674937_1920.jpg)
+![2020](/2020-nian-xin-nian-hao/year-2020-4674937_1920.jpg)
