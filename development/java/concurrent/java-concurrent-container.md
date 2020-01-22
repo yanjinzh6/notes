@@ -21,7 +21,7 @@ Vector 或者 CopyOnWriteArrayList 是两个线程安全的List实现，ArrayLis
 
 ## Vector
 
-![Vector 依赖](/java-concurrent-container/vector)
+![Vector 依赖](./java-concurrent-container/vector)
 
 ```java
 public class Vector<E>

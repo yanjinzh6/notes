@@ -38,7 +38,7 @@ post_asset_folder: true
 {% asset_link slug [title] %}
 
 eg:
-![这样使用会出现的问题是无法在首页显示](/example.jpg)
+![这样使用会出现的问题是无法在首页显示](./example.jpg)
 
 正确的引用图片方式是使用下列的标签插件
 {% asset_img example.jpg This is an example image %}
