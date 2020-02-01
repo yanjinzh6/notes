@@ -1,6 +1,6 @@
 ---
 title: 543. 二叉树的直径
-date: 2020-01-28 15:20:00
+date: 2020-01-31 15:20:00
 tags: '算法'
 categories:
   - ['算法', '题目']
@@ -28,6 +28,8 @@ photo:
 注意：两结点之间的路径长度是以它们之间边的数目表示。
 
 [来源：力扣（LeetCode）](https://leetcode-cn.com/problems/diameter-of-binary-tree)
+
+<!-- more -->
 
 # 想法
 
