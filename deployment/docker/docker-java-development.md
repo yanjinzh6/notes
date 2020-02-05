@@ -1,6 +1,6 @@
 ---
 title: Docker 构建 Java 开发环境
-date: 2020-2-4 22:00:00
+date: 2020-02-04 22:00:00
 tags: 'Docker'
 categories:
   - ['部署', '容器化']
