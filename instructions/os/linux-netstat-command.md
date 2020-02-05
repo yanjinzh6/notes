@@ -88,3 +88,7 @@ Proto 显示连接使用的协议,RefCnt 表示连接到本套接口上的进程
 - LAST-ACK: 等待原来的发向远程 TCP 的连接中断请求的确认 (不是什么好东西, 此项出现, 检查是否被攻击)
 - TIME-WAIT: 等待足够的时间以确保远程 TCP 接收到连接中断请求的确认
 - CLOSED: 没有任何连接状态
+
+# 引用
+
+- [每天一个 linux 命令 (56): netstat 命令](https://www.cnblogs.com/peida/archive/2013/03/08/2949194.html)

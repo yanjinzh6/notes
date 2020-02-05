@@ -14,7 +14,7 @@ permalink: common-regexp
 
 # 空行
 
-匹配空白行: `\n\s*\r`
+匹配空白行: `^(\s*)\n`
 
 # 首尾空白字符
 
