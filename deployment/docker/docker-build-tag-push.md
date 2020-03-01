@@ -1,6 +1,6 @@
 ---
 title: Docker 构建和推送
-date: 2020-1-17 09:00:00
+date: 2020-01-17 09:00:00
 tags: 'Docker'
 categories:
   - ['部署', '容器化']
