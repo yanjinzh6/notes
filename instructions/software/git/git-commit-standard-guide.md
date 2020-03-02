@@ -1,6 +1,6 @@
 ---
 title: Git Commit 规范
-date: 2020-1-16 19:00:00
+date: 2020-01-16 19:00:00
 tags: 'Git'
 categories:
   - ['使用说明', '软件']
