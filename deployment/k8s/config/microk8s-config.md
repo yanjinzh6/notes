@@ -105,7 +105,7 @@ Server:
 ```sh
 ➜  WorkSpace microk8s.ctr --help
 NAME:
-   ctr - 
+   ctr -
         __
   _____/ /______
  / ___/ __/ ___/
@@ -157,7 +157,11 @@ GLOBAL OPTIONS:
 # 添加配置
 HTTP_PROXY=socks5://127.0.0.1:1080
 HTTPS_PROXY=socks5://127.0.0.1:1080
-NO_PROXY=localhost,127.0.0.0/8,10.0.0.0/8,172.16.0.0/16,192.168.0.0/16,https://mirror.ccs.tencentyun.com,https://docker.mirrors.ustc.edu.cn/
+NO_PROXY=kubernetes.docker.internal,gateway.docker.internal,host.docker.internallocalhost,127.0.0.0/8,10.0.0.0/8,172.0.0.0/8,172.16.0.0/16,192.168.0.0/16,https://mirror.ccs.tencentyun.com,https://docker.mirrors.ustc.edu.cn/
+
+# 重启
+systemctl daemon-reload
+systemctl restart snap.microk8s.daemon-containerd.service
 ```
 
 ## 开启插件
@@ -169,7 +173,7 @@ microk8s.enable dns registry storage
 ```
 
 ```sh
-➜  WorkSpace microk8s.status 
+➜  WorkSpace microk8s.status
 microk8s is running
 addons:
 cilium: disabled
@@ -243,7 +247,7 @@ microk8s.kubectl create secret generic kubernetes-dashboard-certs --from-file=./
 
 使用命令 `kubectl describe svc kubernetes-dashboard -n kube-system` 查看 `NodePort`, 该值则为主机端口, 访问 `https+主机 ip+NodePort` 即可
 
-登录之前需要获取 `token`, 使用如下命令获取: 
+登录之前需要获取 `token`, 使用如下命令获取:
 
 ```sh
 microk8s.kubectl -n kube-system describe secret $(microk8s.kubectl -n kube-system get secret | grep default-token | cut -d " " -f1) | grep token: | awk '{print $2;}'

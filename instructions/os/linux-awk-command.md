@@ -9,7 +9,7 @@ permalink: linux-awk-command
 
 # 简介
 
-`awk` 是一种编程语言, 用于在 `linux/unix` 下对文本和数据进行处理. 数据可以来自标准输入 (stdin), 一个或多个文件, 或其它命令的输出. 它支持用户自定义函数和动态正则表达式等先进功能, 是 `linux/unix` 下的一个强大编程工具. 它在命令行中使用, 但更多是作为脚本来使用. `awk` 有很多内建的功能, 比如数组, 函数等, 这是它和C语言的相同之处, 灵活性是awk最大的优势. 
+`awk` 是一种编程语言, 用于在 `linux/unix` 下对文本和数据进行处理. 数据可以来自标准输入 (stdin), 一个或多个文件, 或其它命令的输出. 它支持用户自定义函数和动态正则表达式等先进功能, 是 `linux/unix` 下的一个强大编程工具. 它在命令行中使用, 但更多是作为脚本来使用. `awk` 有很多内建的功能, 比如数组, 函数等, 这是它和C语言的相同之处, 灵活性是awk最大的优势.
 
 # 常用
 
@@ -59,6 +59,10 @@ syslog, 1
 1x7=7   2x7=14  3x7=21  4x7=28  5x7=35  6x7=42  7x7=49
 1x8=8   2x8=16  3x8=24  4x8=32  5x8=40  6x8=48  7x8=56  8x8=64
 1x9=9   2x9=18  3x9=27  4x9=36  5x9=45  6x9=54  7x9=63  8x9=72  9x9=81
+
+# 使用 $ 将返回结果作为变量
+# 结束所有 java 进程
+~ kill -9 $(ps -ef | grep java | awk '{print $2}')
 ```
 
 <!-- more -->
@@ -74,13 +78,13 @@ syslog, 1
 
 ```sh
 ~ echo 'this is a test \r\nthat was a test2' | awk '{print $0}'
-this is a test 
+this is a test
 that was a test2
 ```
 
 `awk` 命令后面的单引号里面的大括号就是处理的动作, 这里的 `print $0` 中 `print` 是打印命令, `$0` 是指所有列, 所以会打印出所有内容
 
-`awk` 会根据空格和制表符, 将每一行分成若干字段, 依次用 `$1`, `$2`, `$3` 代表第一列, 第二列, 第三列等等. 
+`awk` 会根据空格和制表符, 将每一行分成若干字段, 依次用 `$1`, `$2`, `$3` 代表第一列, 第二列, 第三列等等.
 
 ```sh
 ~ echo 'this is a test \r\nthat was a test2' | awk '{print $1}'
@@ -141,7 +145,7 @@ filename:/etc/passwd,linenumber:1,columns:7,linecontent:root:x:0:0:root:/root:/u
 
 ```sh
 # 例子
-~ echo 'this is a test \r\nthat was a test2' | awk '{print toupper($1)}'                                  
+~ echo 'this is a test \r\nthat was a test2' | awk '{print toupper($1)}'
 THIS
 THAT
 ```
@@ -225,7 +229,7 @@ BEGIN {
     math = 0
     english = 0
     computer = 0
- 
+
     printf "NAME    NO.   MATH  ENGLISH  COMPUTER   TOTAL\n"
     printf "---------------------------------------------\n"
 }
@@ -260,13 +264,13 @@ AVERAGE:     63.80    78.60    70.00
 
 ```sh
 $ x=5
- 
+
 $ y=10
 $ export y
- 
+
 $ echo $x $y
 5 10
- 
+
 $ awk -v val=$x '{print $1, $2, $3, $4+val, $5+ENVIRON["y"]}' OFS="\t" score.txt
 Marry   2143    78      89      87
 Jack    2321    66      83      55
