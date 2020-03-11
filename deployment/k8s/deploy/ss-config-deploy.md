@@ -1,7 +1,7 @@
 ---
 title: SS 部署配置
 date: 2020-02-05 17:30:00
-tags: '配置'
+tags: '部署'
 categories:
   - ['部署', 'k8s']
 permalink: ss-config-deploy
