@@ -1,6 +1,6 @@
 ---
 title: Debug 模块输出到 stdout
-date: 2020-03-24 21:00:00
+date: 2020-03-24 15:00:00
 tags: 'JavaScript'
 categories:
   - ['开发', 'JavaScript', 'debug']
