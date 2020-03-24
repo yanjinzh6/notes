@@ -36,6 +36,8 @@ export https_proxy=http://172.17.0.1:3128
 docker exec -it squid cat /var/log/squid/access.log
 ```
 
+<!-- more -->
+
 # 配置
 
 打开 squid 自带的配置文件, 可以感受到项目开发组已经把配置文件当成使用说明书了. 将近 8k 行的配置文件里面有 99% 的说明. 这里有一个中文的[在线文档](https://wiki.ubuntu.org.cn/Squid)可以参考
