@@ -41,6 +41,16 @@ await test().catch(err => log.error(err))
 await test().catch(err => log.error(e.message)).catch(err => log.error(err))
 ```
 
+使用 `try catch` 也可以比较方便的处理 `Promise` 中的异常
+
+```js
+try {
+  await test()
+} catch (e) {
+  log.error(err)
+}
+```
+
 可以通过捕获 `unhandledRejection` 事件来处理 `UnhandledPromiseRejectionWarning` 异常, 这样会把所有未主动处理的 `UnhandledPromiseRejectionWarning` 异常
 
 ```js
