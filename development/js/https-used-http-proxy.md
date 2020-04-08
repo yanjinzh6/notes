@@ -68,6 +68,8 @@ client:log DONE <html>
  +6ms
 ```
 
+注意: `rejectUnauthorized: false` 是不规范的行为, 正常是需要验证 CA 证书的, 可以使用 `ssl-root-cas/latest` 模块
+
 最简单的还是使用现成的模块
 
 ```js
