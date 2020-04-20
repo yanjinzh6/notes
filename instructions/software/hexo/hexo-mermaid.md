@@ -7,6 +7,47 @@ categories:
 permalink: hexo-mermaid
 ---
 
+使用 next 7.6.0 版本的发现自带的配置文件中有 mermaid 配置
+
+版本号
+
+```json
+{
+  "name": "hexo-theme-next",
+  "version": "7.6.0"
+}
+```
+
+配置文件
+
+```yaml
+# Mermaid tag
+mermaid:
+  enable: true
+  # Available themes: default | dark | forest | neutral
+  theme: forest
+```
+
+修改启用后使用 `npx hexo g` 生成静态页面, 查看页面后可以发现已经引用了相应的脚本
+
+```html
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest,',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+```
+
+<!-- more -->
+
 安装 [npm 模块](https://www.npmjs.com/package/hexo-filter-mermaid-diagrams)
 
 修改 Hexo 配置文件 `_config.yml`, 添加以下内容:
