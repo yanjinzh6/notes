@@ -72,6 +72,8 @@ synchronized (list) {
 
 # 并发 Deque
 
+##
+
 # 参考
 
 - [百密一疏之 Vector](https://juejin.im/post/5aedcc80518825673c61ccd6)
