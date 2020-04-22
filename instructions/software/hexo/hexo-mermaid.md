@@ -7,6 +7,8 @@ categories:
 permalink: hexo-mermaid
 ---
 
+安装 [npm 模块](https://www.npmjs.com/package/hexo-filter-mermaid-diagrams)
+
 使用 next 7.6.0 版本的发现自带的配置文件中有 mermaid 配置
 
 版本号
@@ -48,7 +50,7 @@ if (document.querySelectorAll('pre.mermaid').length) {
 
 <!-- more -->
 
-安装 [npm 模块](https://www.npmjs.com/package/hexo-filter-mermaid-diagrams)
+下面是 `hexo-filter-mermaid-diagrams` 说明中的方法, 主要是其他主题使用
 
 修改 Hexo 配置文件 `_config.yml`, 添加以下内容:
 
