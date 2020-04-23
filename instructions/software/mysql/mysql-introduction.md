@@ -8,24 +8,24 @@ permalink: mysql-introduction
 photo:
 ---
 
-# MySQL
+## MySQL
 
-## 简介
+### 简介
 
 MySQL 是一种关联数据库管理系统, 关联数据库将数据保存在不同的表中, 而不是将所有数据放在一个大仓库内, 这样就增加了速度并提高了灵活性. MySQL 所使用的 SQL 语言是用于访问数据库的最常用标准化语言. MySQL 软件采用了双授权政策, 它分为社区版和商业版, 由于其体积小, 速度快, 总体拥有成本低, 尤其是开放源码这一特点, 一般中小型网站的开发都选择 MySQL 作为网站数据库.
 
 <!-- more -->
 
-## 安装
+### 安装
 
 推荐使用 docker 容器.
 
 ```sh
-$ docker run -it --network some-network --rm mysql mysql -hsome-mysql -uexample-user -p
+docker run -it --network some-network --rm mysql mysql -hsome-mysql -uexample-user -p
 ```
 
 ```yml
-# Use root/example as user/password credentials
+## Use root/example as user/password credentials
 version: '3.1'
 
 services:
@@ -44,7 +44,7 @@ services:
       - 8080:8080
 ```
 
-## 基础命令
+### 基础命令
 
 * 创建用户 `mysql>create user test identified by 'BaC321@#';`
 * 修改密码
@@ -58,7 +58,7 @@ services:
   * ##通过现有的表创建新表 `mysql> create table T2 as select * from T1;`
 * 创建主键 `mysql> alter table T1 add primary key(name);`
 
-### mysql 程序命令
+#### mysql 程序命令
 
 mysql 是数据库管理命令, 通过 mysql --help 来查看相关参数及使用说明
 
@@ -99,7 +99,7 @@ mysql 是数据库管理命令, 通过 mysql --help 来查看相关参数及使�
 * --max-allowed-packet=# #服务器发送与接收包的最大长度
 * --show-warnings #显示警告信息
 
-### mysqldump 数据备份命令 (逻辑备份)
+#### mysqldump 数据备份命令 (逻辑备份)
 
 日常使用最为频繁的命令之一, 也是中小企业或者说数据量不大的情况下常用的数据库备份命令, 非常实用.
 
@@ -127,7 +127,7 @@ mysql 是数据库管理命令, 通过 mysql --help 来查看相关参数及使�
 * -V, --version #输出版本信息
 * -u, --user=name #连接服务器的用户名
 
-### mysqlbinlog 命令
+#### mysqlbinlog 命令
 
 mysqlbinlog 是用来查看 binlog 二进制日志文件信息的命令, 也是日常经常使用的命令之一, 通常在恢复数据库数据时使用.
 
@@ -142,16 +142,16 @@ mysqlbinlog 是用来查看 binlog 二进制日志文件信息的命令, 也是�
 * --stop-datetime= #结束时间点
 * --database= #指定只恢复数据库
 
-### SQL 语句
+#### SQL 语句
 
-#### SHOW
+##### SHOW
 
 ```sql
 SHOW PROCESSLIST -- 显示哪些线程正在运行
 SHOW VARIABLES -- 显示系统变量信息
 ```
 
-#### 数据库操作
+##### 数据库操作
 
 ```sql
 -- 查看当前数据库
@@ -180,7 +180,7 @@ DROP DATABASE [IF EXISTS] 数据库名
     -- 同时删除该数据库相关的目录及其目录内容
 ```
 
-#### 表的操作
+##### 表的操作
 
 ```sql
 -- 创建表
@@ -270,7 +270,7 @@ REPAIR [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... [QUICK] [EXT
 ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ...
 ```
 
-#### 数据操作
+##### 数据操作
 
 ```sql
 -- 增
@@ -294,7 +294,7 @@ SELECT 字段列表 FROM 表名 [其他子句]
   -- 字段列表可以用*代替, 表示所有字段
 ```
 
-#### 字符集编码
+##### 字符集编码
 
 ```sql
 -- MySQL, 数据库, 表, 字段均可设置编码
@@ -317,9 +317,9 @@ SET NAMES GBK; -- 相当于完成以上三个设置
   COLLATE 校对集编码 -- 设置校对集编码
 ```
 
-#### 数据类型 (列类型)
+##### 数据类型 (列类型)
 
-##### 整型
+###### 整型
 
 | 类型      | 字节   | 范围 (有符号位)              |
 | --------- | ------ | ---------------------------- |
@@ -335,7 +335,7 @@ SET NAMES GBK; -- 相当于完成以上三个设置
 * 在满足要求的情况下, 越小越好.
 * 1 表示 bool 值真, 0 表示 bool 值假. MySQL 没有布尔类型, 通过整型 0 和 1 表示. 常用 tinyint(1)表示布尔型.
 
-##### 浮点型
+###### 浮点型
 
 | 类型           | 字节   | 范围 |
 | -------------- | ------ | ---- |
@@ -352,14 +352,14 @@ SET NAMES GBK; -- 相当于完成以上三个设置
   * 支持科学计数法表示.
   * 浮点数表示近似值.
 
-##### 定点数
+###### 定点数
 
 * decimal -- 可变长度
 * decimal(M, D) M 也表示总位数, D 表示小数位数.
 * 保存一个精确的数值, 不会发生数据的改变, 不同于浮点数的四舍五入.
 * 将浮点数转换为字符串来保存, 每 9 位数字保存为 4 个字节.
 
-##### 字符串
+###### 字符串
 
 | 类型      | 描述                           |
 | --------- | ------------------------------ |
@@ -386,7 +386,7 @@ SET NAMES GBK; -- 相当于完成以上三个设置
   * text 类型在定义时, 不可给 default 值
 * char, varchar, text 对应 binary, varbinary, blob
 
-##### 日期时间类型
+###### 日期时间类型
 
 一般用整型保存时间戳, 方便多语言多系统使用.
 
@@ -423,7 +423,7 @@ SET NAMES GBK; -- 相当于完成以上三个设置
   * YYYY
   * YY
 
-##### 枚举和集合
+###### 枚举和集合
 
 * 枚举: `enum(val1, val2, val3...)`
   * 在已知的值中进行单选. 最大数量为 65535.
@@ -437,35 +437,35 @@ SET NAMES GBK; -- 相当于完成以上三个设置
   * 最多可以有 64 个不同的成员. 以 bigint 存储, 共 8 个字节. 采取位运算的形式.
   * 当创建表时, SET 成员值的尾部空格将自动被删除.
 
-#### 列属性 (列约束)
+##### 列属性 (列约束)
 
-1. PRIMARY 主键
-   * 能唯一标识记录的字段, 可以作为主键.
-   * 一个表只能有一个主键.
-   * 主键具有唯一性.
-   * 声明字段时, 用 primary key 标识.
-   * 也可以在字段列表之后声明, 例: `create table tab ( id int, stu varchar(10), primary key (id));`
-   * 主键字段的值不能为 null.
-   * 主键可以由多个字段共同组成. 此时需要在字段列表后声明的方法. 例: `create table tab ( id int, stu varchar(10), age int, primary key (stu, age));`
-2. UNIQUE 唯一索引 (唯一约束)
-   * 使得某字段的值也不能重复.
-3. NULL 约束
-   * null 不是数据类型, 是列的一个属性.
-   * 表示当前列是否可以为 null, 表示什么都没有.
-   * null, 允许为空. 默认.
-   * not null, 不允许为空.
-   * `insert into tab values (null, 'val'); -- 此时表示将第一个字段的值设为 null, 取决于该字段是否允许为 null`
-4. DEFAULT 默认值属性
-   * 当前字段的默认值.
-   * `insert into tab values (default, 'val'); -- 此时表示强制使用默认值. `
-   * `create table tab ( add_time timestamp default current_timestamp ); -- 表示将当前时间的时间戳设为默认值. current_date, current_time`
-5. AUTO_INCREMENT 自动增长约束
-   * 自动增长必须为索引 (主键或 unique)
-   * 只能存在一个字段为自动增长.
-   * 默认为 1 开始自动增长. 可以通过表属性 `auto_increment = x`进行设置, 或 `alter table tbl auto_increment = x;`
-6. COMMENT 注释
-   * 例: `create table tab ( id int ) comment '注释内容';`
-7. FOREIGN KEY 外键约束
+* PRIMARY 主键
+  * 能唯一标识记录的字段, 可以作为主键.
+  * 一个表只能有一个主键.
+  * 主键具有唯一性.
+  * 声明字段时, 用 primary key 标识.
+  * 也可以在字段列表之后声明, 例: `create table tab ( id int, stu varchar(10), primary key (id));`
+  * 主键字段的值不能为 null.
+  * 主键可以由多个字段共同组成. 此时需要在字段列表后声明的方法. 例: `create table tab ( id int, stu varchar(10), age int, primary key (stu, age));`
+* UNIQUE 唯一索引 (唯一约束)
+  * 使得某字段的值也不能重复.
+* NULL 约束
+  * null 不是数据类型, 是列的一个属性.
+  * 表示当前列是否可以为 null, 表示什么都没有.
+  * null, 允许为空. 默认.
+  * not null, 不允许为空.
+  * `insert into tab values (null, 'val'); -- 此时表示将第一个字段的值设为 null, 取决于该字段是否允许为 null`
+* DEFAULT 默认值属性
+  * 当前字段的默认值.
+  * `insert into tab values (default, 'val'); -- 此时表示强制使用默认值.`
+  * `create table tab ( add_time timestamp default current_timestamp ); -- 表示将当前时间的时间戳设为默认值. current_date, current_time`
+* AUTO_INCREMENT 自动增长约束
+  * 自动增长必须为索引 (主键或 unique)
+  * 只能存在一个字段为自动增长.
+  * 默认为 1 开始自动增长. 可以通过表属性 `auto_increment = x`进行设置, 或 `alter table tbl auto_increment = x;`
+* COMMENT 注释
+  * 例: `create table tab ( id int ) comment '注释内容';`
+* FOREIGN KEY 外键约束
 * 用于限制主表与从表数据完整性.
 * `alter table t1 add constraint t1_t2_fk foreign key (t1_id) references t2(id);`
   * -- 将表 t1 的 t1_id 外键关联到表 t2 的 id 字段.
@@ -482,7 +482,7 @@ SET NAMES GBK; -- 相当于完成以上三个设置
     3. restrict, 拒绝父表删除和更新.
 * 注意, 外键只被 InnoDB 存储引擎所支持. 其他引擎是不支持的.
 
-#### SELECT 查询
+##### SELECT 查询
 
 ```sql
 SELECT [ALL|DISTINCT] select_expr FROM -> WHERE -> GROUP BY [合计函数] -> HAVING -> ORDER BY -> LIMIT
@@ -553,7 +553,7 @@ SELECT [ALL|DISTINCT] select_expr FROM -> WHERE -> GROUP BY [合计函数] -> HA
   -- 默认为 all, 全部记录
 ```
 
-#### UNION
+##### UNION
 
 ```sql
 -- 将多个 select 查询的结果组合成一个结果集合.
@@ -565,7 +565,7 @@ SELECT ... UNION [ALL|DISTINCT] SELECT ...
 -- 每个 select 查询的字段列表(数量, 类型)应一致, 因为结果中的字段名以第一条 select 语句为准.
 ```
 
-#### 子查询
+##### 子查询
 
 ```sql
 -- 子查询需用括号包裹.
@@ -602,7 +602,7 @@ SELECT ... UNION [ALL|DISTINCT] SELECT ...
   -- all, some 可以配合其他运算符一起使用.
 ```
 
-#### 连接查询(join)
+##### 连接查询(join)
 
 ```sql
 -- 将多个表的字段进行连接, 可以指定连接条件.
@@ -633,7 +633,7 @@ SELECT ... UNION [ALL|DISTINCT] SELECT ...
 select info.id, info.name, info.stu_num, extra_info.hobby, extra_info.sex from info, extra_info where info.stu_num = extra_info.stu_id;
 ```
 
-#### 导出
+##### 导出
 
 ```sql
 select * into outfile 文件地址 [控制格式] from 表名; -- 导出表数据
@@ -660,7 +660,7 @@ load data [local] infile 文件地址 [replace|ignore] into table 表名 [控制
   terminated by 'string' -- 终止
 ```
 
-#### INSERT
+##### INSERT
 
 ```sql
 -- select 语句获得的数据可以用 insert 插入.
@@ -683,7 +683,7 @@ INSERT INTO tbl_name SELECT ...;
 INSERT INTO tbl_name VALUES/SET/SELECT ON DUPLICATE KEY UPDATE 字段=值, …;
 ```
 
-#### DELETE
+##### DELETE
 
 ```sql
 DELETE FROM tbl_name [WHERE where_definition] [ORDER BY ...] [LIMIT row_count]
@@ -694,7 +694,7 @@ DELETE FROM tbl_name [WHERE where_definition] [ORDER BY ...] [LIMIT row_count]
 -- delete from 需要删除数据多表 1, 表 2 using 表连接操作 条件.
 ```
 
-#### TRUNCATE
+##### TRUNCATE
 
 ```sql
 TRUNCATE [TABLE] tbl_name
@@ -708,7 +708,7 @@ TRUNCATE [TABLE] tbl_name
 
 ```
 
-#### 备份与还原
+##### 备份与还原
 
 ```sql
 -- 备份, 将数据的结构与表内数据保存起来.
@@ -735,7 +735,7 @@ mysqldump [options] --all--database
 　　mysql -u 用户名 -p 密码 库名 < 备份文件
 ```
 
-#### 视图
+##### 视图
 
 ```sql
 -- 什么是视图:
@@ -775,7 +775,7 @@ ALTER VIEW view_name [(column_list)] AS select_statement
   -- UNDEFINED 未定义(默认), 指的是 MySQL 自主去选择相应的算法.
 ```
 
-#### 事务(transaction)
+##### 事务(transaction)
 
 ```sql
 -- 事务是指逻辑上的一组操作, 组成这组操作的各个单元, 要不全成功要不全失败.
@@ -833,7 +833,7 @@ ALTER VIEW view_name [(column_list)] AS select_statement
     -- 而 START TRANSACTION 记录开启前的状态, 而一旦事务提交或回滚后就需要再次开启事务. (针对当前事务)
 ```
 
-#### 锁表
+##### 锁表
 
 ```sql
 -- 表锁定只用于防止其它客户端进行不正当地读取和写入
@@ -844,7 +844,7 @@ ALTER VIEW view_name [(column_list)] AS select_statement
   UNLOCK TABLES
 ```
 
-#### 触发器
+##### 触发器
 
 ```sql
 -- 触发程序是与表有关的命名数据库对象, 当该表出现特定事件时, 将激活该对象.
@@ -902,7 +902,7 @@ end
 -- 3. Replace 语法 如果有记录, 则执行 before insert, before delete, after delete, after insert
 ```
 
-#### SQL 编程
+##### SQL 编程
 
 ```sql
 --// 局部变量 ----------
@@ -1075,7 +1075,7 @@ BEGIN
 END
 ```
 
-#### 用户和权限管理
+##### 用户和权限管理
 
 ```sql
 -- root 密码重置
@@ -1166,7 +1166,7 @@ USAGE -- “无权限”的同义词
 GRANT OPTION -- 允许授予权限
 ```
 
-#### 表维护
+##### 表维护
 
 ```sql
 -- 分析和存储表的关键字分布
@@ -1180,7 +1180,7 @@ option = {QUICK | FAST | MEDIUM | EXTENDED | CHANGED}
 OPTIMIZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ...
 ```
 
-#### 杂项
+##### 杂项
 
 1. 可用反引号 (`) 为标识符 (库名, 表名, 字段名, 索引, 别名) 包裹, 以避免与关键字重名！中文也可以作为标识符！
 2. 每个库目录存在一个保存当前数据库的选项文件 db.opt.
@@ -1196,9 +1196,9 @@ OPTIMIZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ...
 6. SQL 对大小写不敏感
 7. 清除已有语句: \c
 
-## 核心
+### 核心
 
-### 存储引擎
+#### 存储引擎
 
 在 MySQL 中的存储引擎有很多种, 可以通过“SHOW ENGINES”语句来查看.
 
@@ -1233,7 +1233,7 @@ OPTIMIZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ...
 3. 在服务中实现的, 而不是在存储引擎中实现的.
 4. 地理位置索引, InnoDB 支持可 mysql5.7.5 或更高版本兼容
 
-#### InnoDB 存储引擎
+##### InnoDB 存储引擎
 
 InnoDB 给 MySQL 的表提供了事务处理, 回滚, 崩溃修复能力和多版本并发控制的事务安全. 在 MySQL 从 3.23.34a 开始包含 InnnoDB. 它是 MySQL 上第一个提供外键约束的表引擎. 而且 InnoDB 对事务处理的能力, 也是其他存储引擎不能比拟的. 靠后版本的 MySQL 的默认存储引擎就是 InnoDB.
 
@@ -1245,7 +1245,7 @@ InnoDB 中, 创建的表的表结构存储在.frm 文件中 (我觉得是 frame 
 
 InnoDB 的优势在于提供了良好的事务处理, 崩溃修复能力和并发控制. 缺点是读写效率较差, 占用的数据空间相对较大.
 
-#### MyISAM 存储引擎
+##### MyISAM 存储引擎
 
 MyISAM 是 MySQL 中常见的存储引擎, 曾经是 MySQL 的默认存储引擎. MyISAM 是基于 ISAM 引擎发展起来的, 增加了许多有用的扩展.
 
@@ -1255,7 +1255,7 @@ MyISAM 的表存储成 3 个文件. 文件的名字与表名相同. 拓展名为
 
 MyISAM 的优势在于占用空间小, 处理速度快. 缺点是不支持事务的完整性和并发性.
 
-#### MEMORY 存储引擎
+##### MEMORY 存储引擎
 
 MEMORY 是 MySQL 中一类特殊的存储引擎. 它使用存储在内存中的内容来创建表, 而且数据全部放在内存中. 这些特性与前面的两个很不同.
 
@@ -1265,9 +1265,9 @@ MEMORY 默认使用哈希索引. 速度比使用 B 型树索引快. 当然如果
 
 注意, MEMORY 用到的很少, 因为它是把数据存到内存中, 如果内存出现异常就会影响数据. 如果重启或者关机, 所有数据都会消失. 因此, 基于 MEMORY 的表的生命周期很短, 一般是一次性的.
 
-### 索引数据结构
+#### 索引数据结构
 
-#### B-树
+##### B-树
 
 B-树中有两种节点类型: 索引节点和叶子节点. 叶子节点是用来存储数据的, 而索引节点则用来告诉用户存储在叶子节点中的数据顺序, 并帮助用户找到相应的数据.
 
@@ -1284,7 +1284,7 @@ B-树是一种多路搜索树:
 7. 非叶子节点的指针: p [1], p [2], ·····, p [M]；其中 p [1] 指向的关键字小于 k [1] 的子树, p [M] 指向的关键字大于 K [m-1] 的子树;
 8. 所有的叶子节点位于同一层;
 
-#### B+树
+##### B+树
 
 B+树数据结构是 B-树实现的增强版本. 尽管 B+树支持 B-树索引的所有特性, 它们之间最显著的不同点在于 B+树中底层数据是根据被提及的索引列进行排序的. B+树还通过叶子节点之间的附加引用来优化扫描性能.
 
@@ -1296,19 +1296,19 @@ B+树的特性:
 2. 不可能在非叶子节点上命中.
 3. 非叶子节点相当于是叶子节点的索引, 叶子节点相当于数据层.
 
-#### 散列
+##### 散列
 
 散列表数据结构是一种很简单的概念, 它将一种算法应用到给定值中以在底层数据存储系统中返回一个唯一的指针或位置. 散列表的优点是始终以线性时间复杂度找到需要读取的行的位置, 而不像 B-树那样需要横跨多层节点来确定位置.
 
-#### 通信 R-树
+##### 通信 R-树
 
 R-树数据结构支持基于数据类型对几何数据进行管理. 目前只有 MyISAM 使用 R-树实现支持空间索引, 使用空间索引也有很多限制, 比如只支持唯一的 NOT NULL 列等.
 
-#### 全文本
+##### 全文本
 
 全文本结构也是一种 MySQL 采用的基本数据结构. 这种数据结构目前只有当前版本 MySQL 中的 MyISAM 存储引擎支持. 5.6 版本将要在 InnoDB 存储引擎中加入全文本功能. 全文本索引在大型系统中并没有什么实用的价值, 因为大规模系统有很多专门的文件检索产品. 所以不用在介绍.
 
-#### MyISAM 的 B-树
+##### MyISAM 的 B-树
 
 MyISAM 存储引擎使用 B-树数据结构来实现主码索引, 唯一索引以及非主码索引. 在 MyISAM 实现数据目录和数据库模式子目录中, 用户可以找到和每个 MySQL 表对应的.MYD 和.MYI 文件. 数据库表上定义的索引信息就存储在 MYI 文件中, 该文件的块大小是 1024 字节. 这个大小是可以通过 myisam-block-size 系统变量分配.
 
@@ -1316,7 +1316,7 @@ MyISAM 存储引擎使用 B-树数据结构来实现主码索引, 唯一索引�
 
 MyISAM 索引是在内存的一个公共缓存中管理的, 这个缓存的大小可以通过 key_buffer_size 或者其他命名键缓存来定义. 这是根据统计和规划的表索引的大小来设定缓存大小时主要的考虑因素.
 
-#### InnoDB 的 B+树聚簇主码
+##### InnoDB 的 B+树聚簇主码
 
 InnoDB 存储引擎在它的主码索引 (也被称为聚簇主码) 中使用了 B+树, 这种结构把所有数据都和对应的主码组织在一起, 并且在叶子节点这一层上添加额外的向前和向后的指针, 这样就可以更方便地进行范围扫描.
 
@@ -1326,25 +1326,25 @@ InnoDB 存储引擎在它的主码索引 (也被称为聚簇主码) 中使用了
 
 在改索引的实现方式中 B+树的叶子节点上是 data 就是数据本身, key 为主键, 如果是一般索引的话, data 便会指向对应的主索引. 在 B+树的每一个叶子节点上面增加一个指向相邻叶子节点的指针, 就形成了带有顺序访问指针的 B+树. 其目的是提高区间访问的性能.
 
-#### InnoDB 的 B-树非主码
+##### InnoDB 的 B-树非主码
 
 InnoDB 中的非主码索引使用了 B-树数据结构, 但 InnoDB 中的 B-树结构实现和 MyISAM 中并不一样. 在 InnoDB 中, 非主码索引存储的是主码的实际值. 而 MyISAM 中, 非主码索引存储的包含主码值的数据指针. 这一点很重要. 首先, 当定义很大的主码的时候, InnoDB 的非主码索引可能回更大, 随着非主码索引数量的增加, 索引之间大小差别可能会变得很大. 另一个不同点在于非主码索引当前可以包含主键的值, 并且可以不是索引必须有的部分.
 
-#### 内存散列索引
+##### 内存散列索引
 
 在默认 MySQL 的引擎索引中, 只有 MEMORY 引擎支持散列数据结构, 散列结构的强度可以表示为直接键查找的简单性, 散列索引的相似度模式匹配查询比直接查询慢. 也可以为 MEMORY 引擎指定一个 B-树索引实现.
 
-#### 内存 B-树索引
+##### 内存 B-树索引
 
 对于大型 MEMORY 表来说, 使用散列索引进行索引范围搜索的效率很低, B-树索引在执行直接键查询时确实比使用默认的散列索引快. 根据 B-树的不同深度, B-树索引在个别操作中的确可能比散列算法快.
 
-#### InnoDB 内部散列索引
+##### InnoDB 内部散列索引
 
 InnoDB 存储引擎在聚簇 B+树索引中存储主码: 但在 InnoDB 内部还是使用内存中的散列表来更高效地进行主码查询. 这个机制有 InnoDB 存储引擎来管理, 用户只能通过 innodb_adaptive_hash_index 配置项来选择是否启用这个唯一的配置选项.
 
-## 优化
+### 优化
 
-### Explain 执行计划
+#### Explain 执行计划
 
 在 select 语句之前增加 explain 关键字, MySQL 会在查询上设置一个标记, 执行查询时, 会返回执行计划的信息, 而不是执行这条 SQL (如果 from 中包含子查询, 仍会执行该子查询, 将结果放入临时表中) .
 
@@ -1369,7 +1369,7 @@ explain 有两个变种:
 * explain extended: 会在 explain  的基础上额外提供一些查询优化的信息. 紧随其后通过 showwarnings 命令可以 得到优化后的查询语句, 从而看出优化器优化了什么. 额外还有 filtered 列, 是一个半分比的值, rows * filtered/100 可以估算出将要和 explain 中前一个表进行连接的行数 (前一个表指 explain 中的 id 值比当前表 id 值小的表) .
 * explain partitions: 相比 explain 多了个 partitions 字段, 如果查询是基于分区表的话, 会显示查询将访问的分区.
 
-#### id
+##### id
 
 id 列的编号是 select 的序列号, 有几个 select 就有几个 id, 并且 id 的顺序是按 select 出现的顺序增长的. MySQL 将 select 查询分为简单查询和复杂查询. 复杂查询分为三类: 简单子查询, 派生表 (from 语句中的子查询) , union 查询.
 
@@ -1379,7 +1379,7 @@ union 结果总是放在一个匿名临时表中, 临时表不在 SQL 总出现,
 1. id 不同: 如果是子查询, id 的序号会递增, id 值越大优先级越高, 越先被执行. 理解是 SQL 执行的顺利的标识,SQL 从大到小的执行,先执行的语句编号大;
 1. id 相同又不同 (两种情况同时存在) : id 如果相同, 可以认为是一组, 从上往下顺序执行；在所有组中, id 值越大, 优先级越高, 越先执行
 
-#### select_type
+##### select_type
 
 查询的类型, 主要是用于区分普通查询, 联合查询, 子查询等复杂的查询.
 
@@ -1392,13 +1392,13 @@ union 结果总是放在一个匿名临时表中, 临时表不在 SQL 总出现,
 * DEPENDENT SUBQUERY: 子查询中的第一个 SELECT, 取决于外面的查询. 即子查询依赖于外层查询的结果.
 * DERIVED: 衍生, 表示导出表的 SELECT (FROM 子句的子查询)
 
-#### table
+##### table
 
 table 表示查询涉及的表或衍生的表:
 
 当 from 子句中有子查询时, table 列是 <derivenN> 格式, 表示当前查询依赖 id=N 的查询, 于是先执行 id=N 的查询. 当有 union 时, UNION RESULT 的 table 列的值为 <union1,2>, 1 和 2 表示参与 union 的 select 行 id.
 
-#### type
+##### type
 
 type 字段比较重要, 它提供了判断查询是否高效的重要依据依据. 通过 type 字段, 我们判断此次查询是 全表扫描 还是 索引扫描等.
 
@@ -1420,7 +1420,7 @@ type 常用的取值有:
 
 ALL 类型因为是全表扫描, 因此在相同的查询条件下, 它是速度最慢的. 而 index 类型的查询虽然不是全表扫描, 但是它扫描了所有的索引, 因此比 ALL 类型的稍快.后面的几种类型都是利用了索引来查询数据, 因此可以过滤部分或大部分数据, 因此查询效率就比较高了.
 
-#### possible_keys
+##### possible_keys
 
 这一列显示查询可能使用哪些索引来查找.  
 
@@ -1428,14 +1428,14 @@ explain 时可能出现 possible_keys 有列, 而 key 显示 NULL 的情况, 这
 
 如果该列是 NULL, 则没有相关的索引. 在这种情况下, 可以通过检查 where 子句看是否可以创造一个适当的索引来提高查询性能, 然后用 explain 查看效果.
 
-#### key
+##### key
 
 这一列显示 mysql 实际采用哪个索引来优化对该表的访问.
 
 如果没有使用索引, 则该列是 NULL. 如果想强制 mysql 使用或忽视 possible_keys 列中的索引, 在查询中使用 force index, ignore index.
 查询中如果使用了覆盖索引, 则该索引仅出现在 key 列表中.
 
-#### key_len
+##### key_len
 
 表示查询优化器使用了索引的字节数, 这个字段可以评估组合索引是否完全被使用. 查询中使用的索引的长度 (最大可能长度) , 并非实际使用长度, 理论上长度越短越好. key_len 是根据表定义计算而得的, 计算规则如下:
 
@@ -1447,7 +1447,7 @@ explain 时可能出现 possible_keys 有列, 而 key 显示 NULL 的情况, 这
   * smallint: 2 字节
   * int: 4 字节
   * bigint: 8 字节　　
-* 时间类型　
+* 时间类型
   * date: 3 字节
   * timestamp: 4 字节
   * datetime: 8 字节
@@ -1455,17 +1455,17 @@ explain 时可能出现 possible_keys 有列, 而 key 显示 NULL 的情况, 这
 
 索引最大长度是 768 字节, 当字符串过长时, mysql 会做一个类似左前缀索引的处理, 将前半部分的字符提取出来做索引.
 
-#### ref
+##### ref
 
 显示索引的那一列被使用了, 如果可能, 是一个常量 const.
 
 这一列显示了在 key 列记录的索引中, 表查找值所用到的列或常量, 常见的有: const (常量) , func, NULL, 字段名 (例: film.id) .
 
-#### rows
+##### rows
 
 mysql 查询优化器根据统计信息, 估算 sql 要查找到结果集需要扫描读取的数据行数, 这个值非常直观的显示 sql 效率好坏, 原则上 rows 越少越好.
 
-#### extra
+##### extra
 
 重要的额外信息
 
@@ -1482,9 +1482,9 @@ mysql 查询优化器根据统计信息, 估算 sql 要查找到结果集需要�
 | select tables optimized away | 在没有 GROUP BY 子句的情况下, 基于索引优化 MIN/MAX 操作, 或者对于 MyISAM 存储引擎优化 COUNT(*)操作, 不必等到执行阶段再进行计算, 查询执行计划生成的阶段即完成优化.                                                                                                                                                                                                                                                                       |
 | distinct                     | 优化 distinct 操作, 在找到第一匹配的元组后即停止找同样值的动作                                                                                                                                                                                                                                                                                                                                                                          |
 
-### 设计规范
+#### 设计规范
 
-#### 数据库设计
+##### 数据库设计
 
 1. 使用 Innodb 存储引擎: 没有特殊要求 (即 Innodb 无法满足的功能如: 列存储, 存储空间数据等) 的情况下, 所有表必须使用 Innodb 存储引擎 (mysql5.5 之前默认使用 Myisam, 5.6 以后默认的为 Innodb) Innodb 支持事务, 支持行级锁, 更好的恢复性, 高并发下性能更好
 2. 字符集统一使用 UTF8mb4: 兼容性更好, 统一字符集可以避免由于字符集转换产生的乱码, 不同的字符集进行比较前需要进行转换会造成索引失效
@@ -1495,7 +1495,7 @@ mysql 查询优化器根据统计信息, 估算 sql 要查找到结果集需要�
 7. 禁止在表中建立预留字段: 预留字段的命名很难做到见名识义 预留字段无法确认存储的数据类型, 所以无法选择合适的类型 对预留字段类型的修改, 会对表进行锁定
 8. 禁止在数据库中存储图片, 文件等大的二进制数据: 通常文件很大, 会短时间内造成数据量快速增长, 数据库进行数据库读取时, 通常会进行大量的随机 IO 操作, 文件很大时, IO 操作很耗时 通常存储于文件服务器, 数据库只存储文件地址信息
 
-#### 表字段设计
+##### 表字段设计
 
 1. 优先选择符合存储需要的最小的数据类型: 列的字段越大, 建立索引时所需要的空间也就越大, 这样一页中所能存储的索引节点的数量也就越少也越少, 在遍历时所需要的 IO 次数也就越多, 索引的性能也就越差
    1. 将字符串转换成数字类型存储, 如: 将 IP 地址转换成整形数据. inet_aton 把 ip 转为无符号整型(4-8 位), inet_ntoa 把整型的 ip 转为地址
@@ -1518,14 +1518,14 @@ mysql 查询优化器根据统计信息, 估算 sql 要查找到结果集需要�
 6. 字符串存储日期型的数据无法用日期函数进行计算和比较, 用字符串存储日期要占用更多的空间
 7. 同财务相关的金额类数据必须使用 decimal 类型: Decimal 类型为精准浮点数, 在计算时不会丢失精度. 占用空间由定义的宽度决定, 每 4 个字节可以存储 9 位数字, 并且小数点要占用一个字节. 可用于存储比 bigint 更大的整型数据.
 
-### 索引设计
+#### 索引设计
 
 * 出现在 SELECT, UPDATE, DELETE 语句的 WHERE 从句中的列
 * 包含在 ORDER BY, GROUP BY, DISTINCT 中的字段
 * 不要将符合 1 和 2 中的字段的列都建立一个索引, 通常将 1, 2 中的字段建立联合索引效果更好
 * 多表 join 的关联列
 
-#### 联合索引
+##### 联合索引
 
 建立索引的目的是: 希望通过索引进行数据查找, 减少随机 IO, 增加查询性能 , 索引能过滤出越少的数据, 则从磁盘中读入的数据也就越少.
 
@@ -1533,7 +1533,7 @@ mysql 查询优化器根据统计信息, 估算 sql 要查找到结果集需要�
 * 尽量把字段长度小的列放在联合索引的最左侧 (因为字段长度越小, 一页能存储的数据量越大, IO 性能也就越好) ；
 * 使用最频繁的列放到联合索引的左侧 (这样可以比较少的建立一些索引) .
 
-#### 覆盖索引
+##### 覆盖索引
 
 对于频繁的查询优先考虑使用覆盖索引. 就是包含了所有查询字段(where,select,ordery by,group by 包含的字段)的索引
 
@@ -1542,13 +1542,13 @@ mysql 查询优化器根据统计信息, 估算 sql 要查找到结果集需要�
 * 避免 Innodb 表进行索引的二次查询: Innodb 是以聚集索引的顺序来存储的, 对于 Innodb 来说, 二级索引在叶子节点中所保存的是行的主键信息, 如果是用二级索引查询数据的话, 在查找到相应的键值后, 还要通过主键进行二次查询才能获取我们真实所需要的数据. 而在覆盖索引中, 二级索引的键值中可以获取所有的数据, 避免了对主键的二次查询 , 减少了 IO 操作, 提升了查询效率.
 * 可以把随机 IO 变成顺序 IO 加快查询效率: 由于覆盖索引是按键值的顺序存储的, 对于 IO 密集型的范围查找来说, 对比随机从磁盘读取每一行的数据 IO 要少的多, 因此利用覆盖索引在访问时也可以把磁盘的随机读取的 IO 转变成索引查找的顺序 IO.
 
-#### 尽量避免使用外键约束
+##### 尽量避免使用外键约束
 
 * 不建议使用外键约束 (foreign key) , 但一定要在表与表之间的关联键上建立索引；
 * 外键可用于保证数据的参照完整性, 但建议在业务端实现；
 * 外键会影响父表和子表的写操作从而降低性能.
 
-# 引用
+## 引用
 
 * [数据库存储引擎](https://github.com/jaywcjlove/mysql-tutorial/blob/master/chapter3/3.5.md)
 * [吐血总结｜史上最全的 MySQL 学习资料！！](https://juejin.im/post/5c91ac636fb9a071012a0c28)

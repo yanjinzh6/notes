@@ -7,7 +7,7 @@ categories:
 permalink: hexo-theme-next-introduction
 ---
 
-# 简介
+## 简介
 
 [Next](https://theme-next.iissnan.com/) 主题应该算是最流行的一套主题了, 这里提供一个旧版本的中文文档. 很多基础配置都在文档中有详细介绍了.
 
@@ -15,9 +15,9 @@ permalink: hexo-theme-next-introduction
 
 <!--more-->
 
-# 配置
+## 配置
 
-## 浏览器小图标
+### 浏览器小图标
 
 ```yml
 favicon:
@@ -31,11 +31,11 @@ favicon:
 
 这里的 `android_manifest` 参数提供一个 [Web 应用程序清单](https://developer.mozilla.org/zh-CN/docs/Web/Manifest)配置, 具体情况可以参考相应的文档, 当使用移动版浏览器时可以添加为主屏幕的网络应用程序.
 
-## footer
+### footer
 
 底部的配置比较简单, 对比了一下旧版本主要添加了备案信息的配置.
 
-## 版权申明
+### 版权申明
 
 ```yml
 creative_commons:
@@ -45,16 +45,16 @@ creative_commons:
   language:
 ```
 
-## 主题样式
+### 主题样式
 
 ```yml
 scheme: Muse    # 大量留白
-#scheme: Mist   # 紧凑
-#scheme: Pisces # 双栏
-#scheme: Gemini #
+##scheme: Mist   # 紧凑
+##scheme: Pisces # 双栏
+##scheme: Gemini #
 ```
 
-## 菜单
+### 菜单
 
 ```yml
 menu:
@@ -67,7 +67,7 @@ menu:
   sitemap: /sitemap.xml || sitemap
   commonweal: /404/ || heartbeat
 
-# Enable / Disable menu icons / item badges.
+## Enable / Disable menu icons / item badges.
 menu_settings:
   icons: true   # 显示图标
   badges: false # 显示统计
@@ -137,4 +137,4 @@ hexo g
 
 执行以上命令就可以生成 Google 和 baidu 的 `sitemap.xml`.
 
-# 待更...
+## 待更

@@ -7,11 +7,11 @@ categories:
 permalink: linux-netstat-command
 ---
 
-# 简介
+## 简介
 
-netstat 命令用于显示与 IP, TCP, UDP 和 ICMP 协议相关的统计数据, 一般用于检验本机各端口的网络连接情况. netstat 是在内核中访问网络及相关信息的程序, 它能提供 TCP 连接, TCP 和 UDP 监听, 进程内存管理的相关报告. 
+netstat 命令用于显示与 IP, TCP, UDP 和 ICMP 协议相关的统计数据, 一般用于检验本机各端口的网络连接情况. netstat 是在内核中访问网络及相关信息的程序, 它能提供 TCP 连接, TCP 和 UDP 监听, 进程内存管理的相关报告.
 
-# 常用
+## 常用
 
 查看当前所有 tcp 端口
 
@@ -27,7 +27,7 @@ netstat -ntulp | grep 3306
 
 <!-- more -->
 
-# 命令详情
+## 命令详情
 
 ```sh
 netstat [-acCeFghilMnNoprstuvVwx][-A<网络类型>][--ip]
@@ -58,14 +58,14 @@ netstat [-acCeFghilMnNoprstuvVwx][-A<网络类型>][--ip]
   –ip 或 –inet 此参数的效果和指定 "-A inet" 参数相同
 ```
 
-# 结果说明
+## 结果说明
 
-- Active Internet connections, 称为有源 TCP 连接, 其中 "Recv-Q" 和 "Send-Q" 指的是接收队列和发送队列. 这些数字一般都应该是 0. 如果不是则表示软件包正在队列中堆积. 这种情况只能在非常少的情况见到. 
-- Active UNIX domain sockets, 称为有源 Unix 域套接口(和网络套接字一样, 但是只能用于本机通信, 性能可以提高一倍). 
+- Active Internet connections, 称为有源 TCP 连接, 其中 "Recv-Q" 和 "Send-Q" 指的是接收队列和发送队列. 这些数字一般都应该是 0. 如果不是则表示软件包正在队列中堆积. 这种情况只能在非常少的情况见到.
+- Active UNIX domain sockets, 称为有源 Unix 域套接口(和网络套接字一样, 但是只能用于本机通信, 性能可以提高一倍).
 
-Proto 显示连接使用的协议,RefCnt 表示连接到本套接口上的进程号,Types 显示套接口的类型,State 显示套接口当前的状态,Path 表示连接到套接口的其它进程使用的路径名. 
+Proto 显示连接使用的协议,RefCnt 表示连接到本套接口上的进程号,Types 显示套接口的类型,State 显示套接口当前的状态,Path 表示连接到套接口的其它进程使用的路径名.
 
-## 套接口类型: 
+### 套接口类型
 
 - -t: TCP
 - -u: UDP
@@ -75,7 +75,7 @@ Proto 显示连接使用的协议,RefCnt 表示连接到本套接口上的进程
 - --ipx: ipx 类型
 - --netrom: netrom 类型
 
-## 状态说明: 
+### 状态说明
 
 - LISTEN: 侦听来自远方的 TCP 端口的连接请求
 - SYN-SENT: 再发送连接请求后等待匹配的连接请求 (如果有大量这样的状态包, 检查是否中招了)
@@ -89,6 +89,6 @@ Proto 显示连接使用的协议,RefCnt 表示连接到本套接口上的进程
 - TIME-WAIT: 等待足够的时间以确保远程 TCP 接收到连接中断请求的确认
 - CLOSED: 没有任何连接状态
 
-# 引用
+## 引用
 
 - [每天一个 linux 命令 (56): netstat 命令](https://www.cnblogs.com/peida/archive/2013/03/08/2949194.html)

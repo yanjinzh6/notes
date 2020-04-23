@@ -7,7 +7,7 @@ categories:
 permalink: xie-bo-ke-xin-suan-shi
 ---
 
-# :dizzy_face::dizzy_face::dizzy_face:
+## :dizzy_face::dizzy_face::dizzy_face: -
 
 > <i class="fa fa-quote-left fa-3x fa-pull-left" aria-hidden="true"></i>
 > 一转眼就年底底了, 看着自己还在敲敲打打键盘, 费尽心思的来挤出这一段尴尬的文字确实很为自己的脑子堪忧.
@@ -18,7 +18,7 @@ permalink: xie-bo-ke-xin-suan-shi
 
 折腾过后才觉得简单的才是好的, 只想写一些文章, 甚至大部分都准备作为片段记录工具, 实在没必要像要著一本知识百科全书似的, 就目录分类都得好几层, 好几页才装得下. 等想到头脑发麻, 整出巨大的目录后才会发现开头要怎么写呢? 难道真一句 "挖坑开始" 就可以解决整本书的序章吗. :joy::joy::joy:
 
-# 为了分段而分段的分段
+## 为了分段而分段的分段
 
 > <i class="fa fa-quote-left fa-3x fa-pull-left" aria-hidden="true"></i>
 > 写博客的高不成底不就
@@ -31,6 +31,6 @@ permalink: xie-bo-ke-xin-suan-shi
 
 当正在记录一些略知皮毛的领域的文档时, 那就是深深的 :weary::confounded::persevere: 想分开引用各个文章来显示自己是真的取其精华的, 过会便会觉得自己在写这个文档的时候是不是精分了, 现在的头脑还是刚刚的头脑吗? 当然只要不涉及到侵权的, 还是得多记录下来, 后续自己搞明白的再稍加处理, 这样也是一种很好的学习状态, 问题是时间, 耐心么...
 
-# :two::zero::two::zero:
+## :two::zero::two::zero: -
 
 对于这个项目希望能有一个好的坚持

@@ -8,7 +8,7 @@ permalink: jupyter-notebook-deploy-config
 photo:
 ---
 
-# 简介
+## 简介
 
 > [Jupyter Notebook](https://jupyter.org/install.html) 是一个基于 Web 的交互式计算环境, 用于创建 Jupyter Notebook 文档, 对于 python 的初学者, 提供了一套可视化的交互式的试验环境
 
@@ -37,7 +37,7 @@ photo:
 
 <!-- more -->
 
-# 创建 Deployment
+## 创建 Deployment
 
 ```yml
 apiVersion: apps/v1
@@ -67,7 +67,7 @@ spec:
 
 这里我们使用了 `jupyter/base-notebook` 镜像, 由于不需要 token 登录, 所以使用了 `--NotebookApp.token=''` 参数
 
-# 创建 Service
+## 创建 Service
 
 ```yml
 kind: Service
@@ -85,7 +85,7 @@ spec:
 
 暴露 `8888` 端口
 
-# 创建 nginx 入口
+## 创建 nginx 入口
 
 ```yml
 apiVersion: extensions/v1beta1
@@ -126,7 +126,7 @@ Adding password for user jupyter
 ```
 
 ```sh
-# 使用 htpasswd 生成的 auth 文件
+## 使用 htpasswd 生成的 auth 文件
 kubectl create secret generic basic-auth --from-file=auth
 secret "basic-auth" created
 ```
@@ -134,7 +134,7 @@ secret "basic-auth" created
 匿名访问返回 401
 
 ```sh
-curl -v https://e.yzer.club -H 'Host:e.yzer.club'                        
+curl -v https://e.yzer.club -H 'Host:e.yzer.club'
 * Rebuilt URL to: https://e.yzer.club/
 *   Trying 111.230.168.38...
 * TCP_NODELAY set
@@ -170,16 +170,16 @@ curl -v https://e.yzer.club -H 'Host:e.yzer.club'
 > Host:e.yzer.club
 > User-Agent: curl/7.58.0
 > Accept: */*
-> 
+>
 * Connection state changed (MAX_CONCURRENT_STREAMS updated)!
-< HTTP/2 401 
+< HTTP/2 401
 < server: nginx/1.15.8
 < date: Wed, 22 Jan 2020 10:02:12 GMT
 < content-type: text/html
 < content-length: 179
 < www-authenticate: Basic realm="Authentication Required - jupyter"
 < strict-transport-security: max-age=15724800; includeSubDomains
-< 
+<
 <html>
 <head><title>401 Authorization Required</title></head>
 <body>

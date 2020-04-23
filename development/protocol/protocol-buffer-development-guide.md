@@ -7,7 +7,7 @@ categories:
 permalink: protocol-buffer-development-guide
 ---
 
-# 简介
+## 简介
 
 > 本文是对中文文档的整理, 大部分内容都是引用其他一些作者的优质翻译, 需要进行更新优化
 
@@ -15,7 +15,7 @@ permalink: protocol-buffer-development-guide
 
 <!-- more -->
 
-# Defining A Message Type (定义一个消息类型)
+## Defining A Message Type (定义一个消息类型)
 
 ```
 syntax = "proto3";
@@ -32,22 +32,22 @@ message SearchRequest {
 - `syntax` 前只能是空行或者注释
 - 每个字段由字段限制, 字段类型, 字段名和编号四部分组成
 
-## Specifying Field Types (指定字段类型)
+### Specifying Field Types (指定字段类型)
 
 在上面的例子中, 该消息定义了三个字段, 两个 `int32` 类型和一个 `string` 类型的字段
 
-## Assigning Tags (赋予编号)
+### Assigning Tags (赋予编号)
 
 消息中的每一个字段都有一个独一无二的数值类型的编号. 1 到 15 使用一个字节编码, 16 到 2047 使用 2 个字节编码, 所以应该将编号 1 到 15 留给频繁使用的字段.
 可以指定的最小的编号为 1, 最大为 2^{29}-1 或 536, 870, 911. 但是不能使用 19000 到 19999 之间的值, 这些值是预留给 protocol buffer 的.
 
-## Specifying Field Rules (指定字段限制)
+### Specifying Field Rules (指定字段限制)
 
 - `required`: 必须赋值的字段
 - `optional`: 可有可无的字段
 - `repeated`: 可重复字段 (变长字段)
 
-## Adding More Message Types (添加更多消息类型)
+### Adding More Message Types (添加更多消息类型)
 
 一个 `.proto` 文件可以定义多个消息类型:
 
@@ -63,7 +63,7 @@ message SearchResponse {
 }
 ```
 
-## Adding Comments (添加注释)
+### Adding Comments (添加注释)
 
 `.proto` 文件也使用 `C/C++` 风格的注释语法 `//`
 
@@ -75,11 +75,11 @@ message SearchRequest {
 }
 ```
 
-## What's Generated From Your `.proto`？ (编译 `.proto` 文件)
+### What's Generated From Your `.proto`？ (编译 `.proto` 文件)
 
 对于 C++, 每一个 `.proto` 文件经过编译之后都会对应的生成一个 .h 和一个 .cc 文件.
 
-# Scalar Value Types (类型对照表)
+## Scalar Value Types (类型对照表)
 
 | `.proto` Type | Notes                                                                                                                                           | C++ Type |
 | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
@@ -99,7 +99,7 @@ message SearchRequest {
 | string      | A string must always contain UTF-8 encoded or 7-bit ASCII text.                                                                                 | string   |
 | bytes       | May contain any arbitrary sequence of bytes.                                                                                                    | string   |
 
-# Default Values (缺省值)
+## Default Values (缺省值)
 
 如果没有指定默认值,则会使用系统默认值,
 
@@ -110,7 +110,7 @@ message SearchRequest {
 对于 enum 默认值为定义中的第一个元素,
 对于 repeated 默认值为空.
 
-# Enumerations (枚举)
+## Enumerations (枚举)
 
 ```
 message SearchRequest {
@@ -148,7 +148,7 @@ enum EnumNotAllowingAlias {
 
 由于枚举值采用 varint 编码, 所以为了提高效率, 不建议枚举值取负数. 这些枚举值可以在其他消息定义中重复使用.
 
-## Reserved Fields (预留字段)
+### Reserved Fields (预留字段)
 
 如果通过完全删除枚举或将其注释掉来更新枚举类型, 则以后进行更新时可以重用数值, 如果与旧版本的 proto 文件一起加载, 便会导致冲突, 包括数据损坏, 隐私错误等. 一种避免此类问题的方法就是指明这些删除的字段是保留的. 如果有用户使用这些字段的编号, protocol buffer 编译器会发出告警. 可以使用 to max 关键字指定保留数值范围到最大值
 
@@ -159,7 +159,7 @@ enum Foo {
 }
 ```
 
-# Using Other Message Types (使用其他消息类型)
+## Using Other Message Types (使用其他消息类型)
 
 可以使用一个消息的定义作为另一个消息的字段类型.
 
@@ -175,7 +175,7 @@ message Result {
 }
 ```
 
-## Importing Definitions (导入定义)
+### Importing Definitions (导入定义)
 
 就像 `C++` 的头文件一样, 你还可以导入其他的 `.proto` 文件
 
@@ -197,11 +197,11 @@ import "old.proto";
 // You use definitions from old.proto and new.proto, but not other.proto
 ```
 
-## 使用 proto2 消息类型
+### 使用 proto2 消息类型
 
 可以导入 proto2 消息类型并在 proto3 消息中使用, 反之亦然, 但是不能在 proto3 语法中直接使用 proto2 的枚举
 
-# Nested Types (嵌套类型)
+## Nested Types (嵌套类型)
 
 在 protocol 中可以定义如下的嵌套类型
 
@@ -243,7 +243,7 @@ message Outer {                  // Level 0
 }
 ```
 
-# Updating A Message Type (更新一个数据类型)
+## Updating A Message Type (更新一个数据类型)
 
 在实际的开发中会存在这样一种应用场景, 既消息格式因为某些需求的变化而不得不进行必要的升级, 但是有些使用原有消息格式的应用程序暂时又不能被立刻升级, 这便要求我们在升级消息格式时要遵守一定的规则, 从而可以保证基于新老消息格式的新老程序同时运行. 规则如下:
 
@@ -253,9 +253,9 @@ message Outer {                  // Level 0
 - `int32`, `uint32`, `int64`, `uint64` 和 `bool` 等类型之间是兼容的, `sint32` 和 `sint64` 是兼容的, `string` 和 `bytes` 是兼容的, `fixed32` 和 `sfixed32`, 以及 `fixed64` 和 `sfixed64` 之间是兼容的, 这意味着如果想修改原有字段的类型时, 为了保证兼容性, 只能将其修改为与其原有类型兼容的类型, 否则就将打破新老消息格式的兼容性.
 - `optional` 和 `repeated` 限定符也是相互兼容的.
 
-# 未知字段
+## 未知字段
 
-# Any (任意消息类型)
+## Any (任意消息类型)
 
 `Any` 类型是一种不需要在 `.proto` 文件中定义就可以直接使用的消息类型, 使用前 `import google/protobuf/any.proto` 文件即可.
 
@@ -287,11 +287,11 @@ for (const Any& detail : status.details()) {
 }
 ```
 
-# Oneof (其中一个字段类型)
+## Oneof (其中一个字段类型)
 
 有点类似 `C++` 中的联合, 就是消息中的多个字段类型在同一时刻只有一个字段会被使用, 使用 `case()` 或 `WhichOneof()` 方法来检测哪个字段被使用了.
 
-## Using Oneof (使用 Oneof)
+### Using Oneof (使用 Oneof)
 
 ```
 message SampleMessage  {
@@ -304,7 +304,7 @@ message SampleMessage  {
 
 你可以添加除 `repeated` 外任意类型的字段到 `Oneof` 定义中
 
-## Oneof Features (Oneof 特性)
+### Oneof Features (Oneof 特性)
 
 `oneof` 字段只有最后被设置的字段才有效, 即后面的 `set` 操作会覆盖前面的 `set` 操作
 
@@ -339,17 +339,17 @@ CHECK(msg1.has_sub_message());
 CHECK(msg2.has_name());
 ```
 
-## Backwards-compatibility issues (向后兼容)
+### Backwards-compatibility issues (向后兼容)
 
 添加或删除 `oneof` 字段的时候要注意, 如果检测到 `oneof` 字段的返回值是 `None/NOT_SET`, 这意味着 `oneof` 没有被设置或者设置了一个不同版本的 `oneof` 的字段, 但是没有办法能够区分这两种情况, 因为没有办法确认一个未知的字段是否是一个 `oneof` 的成员.
 
-### Tag Reuse Issues (编号复用问题)
+#### Tag Reuse Issues (编号复用问题)
 
 - 删除或添加字段到 `oneof`: 在消息序列化或解析后会丢失一些信息, 一些字段将被清空
 - 删除一个字段然后重新添加: 在消息序列化或解析后会清除当前设置的 `oneof` 字段
 - 分割或合并字段: 同普通的删除字段操作
 
-# Maps (表映射)
+## Maps (表映射)
 
 protocol buffers 提供了简介的语法来实现 `map` 类型:
 
@@ -368,7 +368,7 @@ map<string,  Project> projects =  3;
 - `maps` 可以通过 `key` 来排序, 数值类型的 `key` 通过比较数值进行排序
 - 线性解析或者合并的时候, 如果出现重复的 `key` 值, 最后一个 `key` 将被使用. 从文本格式来解析 `map`, 如果出现重复 `key` 值则解析失败.
 
-## Backwards compatibility (向后兼容)
+### Backwards compatibility (向后兼容)
 
 `map` 语法下面的表达方式在线性上是等价的, 所以即使 protocol buffers 没有实现 `maps` 数据结构也不会影响数据的处理:
 
@@ -380,7 +380,7 @@ message MapFieldEntry  {
 repeated MapFieldEntry map_field = N;
 ```
 
-# 包
+## 包
 
 类似 `C++` 的命名空间, 用来防止名称冲突
 
@@ -399,7 +399,7 @@ message Foo {
 }
 ```
 
-# 定义服务
+## 定义服务
 
 如果想在 RPC 系统中使用消息类型, 就需要在 `.proto` 文件中定义 RPC 服务接口, 然后使用编译器生成对应语言的存根.
 
@@ -409,7 +409,7 @@ service SearchService {
 }
 ```
 
-# JSON 映射
+## JSON 映射
 
 Proto3 支持 JSON 格式的编码. 编码后的 JSON 数据的如果没有值或值为空, 解析时 protocol buffer 将会使用默认值, 在对 JSON 编码时可以节省空间.
 
@@ -435,9 +435,9 @@ Proto3 支持 JSON 格式的编码. 编码后的 JSON 数据的如果没有值�
 | Value                  | value         |                                         | Any JSON value                                                                                                                                                                                                                                                  |
 | NullValue              | null          | JSON null                               |
 
-## JSON 选项
+### JSON 选项
 
-# 选项
+## 选项
 
 Protocol Buffer 允许我们在 `.proto` 文件中定义一些常用的选项, 这样可以指示 Protocol Buffer 编译器帮助我们生成更为匹配的目标语言代码. Protocol Buffer 内置的选项被分为以下三个级别:
 
@@ -454,7 +454,7 @@ Protocol Buffer 允许我们在 `.proto` 文件中定义一些常用的选项, �
 - `cc_enable_arenas` (文件选项): 生成的 `C++` 代码启用 `arena allocation` 内存管理
 - `deprecated`(文件选项):
 
-# 参考资料
+## 参考资料
 
 - [Language Guide (proto3)](https://developers.google.com/protocol-buffers/docs/proto3)
 - [Protocol Buffer 使用简介](http://www.jianshu.com/p/b1f18240f0c7)

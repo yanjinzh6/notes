@@ -8,15 +8,15 @@ permalink: skywalking-introduction
 photo:
 ---
 
-# 简介
+## 简介
 
 > 文档仅对官方文档进行筛选和整合, 需要后续整理好逻辑
 
-## 什么是 SkyWalking
+### 什么是 SkyWalking
 
 SkyWalking：一个开源的观测平台, 用于从服务和云原生基础设施收集, 分析, 聚合以及可视化数据.
 
-## 为什么使用 SkyWalking
+### 为什么使用 SkyWalking
 
 观察和监控分布式系统
 
@@ -37,7 +37,7 @@ SkyWalking：一个开源的观测平台, 用于从服务和云原生基础设�
 
 <!-- more -->
 
-## 架构
+### 架构
 
 SkyWalking 逻辑上分为四部分: 探针, 平台后端, 存储和用户界面.
 
@@ -48,7 +48,7 @@ SkyWalking 逻辑上分为四部分: 探针, 平台后端, 存储和用户界面
 - 存储是开放式的. 你可以选择一个既有的存储系统, 如 ElasticSearch, H2 或 MySQL 集群 (Sharding-Sphere 管理), 也可以选择自己实现一个存储系统.
 - 用户界面对于 SkyWalking 的最终用户来说非常炫酷且强大. 同样它也是可定制以匹配你已存在的后端的.
 
-## 设计目标
+### 设计目标
 
 - 保持可观测性. SkyWalking 提供了数种运行时探针.
 - 拓扑结构, 性能指标和追踪一体化.
@@ -67,9 +67,9 @@ SkyWalking 逻辑上分为四部分: 探针, 平台后端, 存储和用户界面
 - 可互操作. 可观测性是一个庞大的领域, 即使有强大的社区, SkyWalking 不可能支持所有方方面面, 因此 SkyWalking 支持与其他运维支撑系统进行互操作,
   - 主要是探针, 如 Zipkin, Jaeger, OpenTracing 和 OpenCensus. SkyWalking 接收并理解他们的数据格式, 这对于终端用户来说是非常有用的, 因为不需要他们更换已有的库.
 
-## 探针
+### 探针
 
-### 简介
+#### 探针简介
 
 探针表示集成到目标系统中的代理或 SDK 库, 它负责收集遥测数据, 包括链路追踪和性能指标. 收集并格式化数据, 并发送到后端.
 
@@ -92,15 +92,15 @@ SkyWalking 逻辑上分为四部分: 探针, 平台后端, 存储和用户界面
 
 默认情况下, 基于语言的原生代理和第三方打点库都会发送分布式追踪数据到后台, 后者分析 / 聚合这些追踪数据. 追踪状态意味着, 后端把这些追踪数据看作是日志, 仅仅将他们保存下来, 并且在追踪和指标之间建立联系, 比如 "这个追踪数据属于哪个入口哪个服务?".
 
-### 服务自动打点代理
+#### 服务自动打点代理
 
 服务自动打点代理是基于语言的原生代理的一部分, 这种代理需要依靠某些语言特定的特性, 通常是一种基于虚拟机的语言.
 
-#### 什么是自动打点
+##### 什么是自动打点
 
 自动打点代理利用了虚拟机提供的用于修改代码的接口来动态加入打点的代码, 如通过 `javaagent premain` 来修改 Java 类. 此外, 大部分自动打点代理是基于虚拟机的, 但实际上你也可以在编译期构建这样的工具.
 
-#### 限制
+##### 限制
 
 - 进程内传播在大多数情况下成为可能. 许多高级编程语言 (如 Java, .NET) 都是用于构建业务系统. 大部分业务逻辑代码对于每一个请求来说都运行在同一个线程内, 这使得传播是基于线程 ID 的, 以确保上下文是安全的.
 - 仅仅对某些框架和库奏效. 因为是代理来在运行时修改代码的, 这也意味着代理插件开发者事先就要知道所要修改的代码是怎么样的.
@@ -108,17 +108,17 @@ SkyWalking 逻辑上分为四部分: 探针, 平台后端, 存储和用户界面
 
 所以说自动打点没有什么神秘的, 总而言之就是, 自动打点代理开发者写了一个激活程序, 使得打点的代码 自动运行, 仅此而已.
 
-### 手动打点 SDK
+#### 手动打点 SDK
 
 介绍了手动打点 SDK 在 SkyWalking 生态中所扮演的角色.
 
-### 服务网格 (Service Mesh) 探针
+#### 服务网格 (Service Mesh) 探针
 
 介绍了 SkyWalking 为何需要以及如何从服务网格和代理探针接收遥测数据的.
 
-## 后端
+### 后端
 
-### 观测分析平台 (Observability Analysis Platform, OAP)
+#### 观测分析平台 (Observability Analysis Platform, OAP)
 
 OAP 从多种数据源接收数据, 这些数据分为两大类, 链路追踪和度量指标.
 
@@ -129,7 +129,7 @@ OAP 从多种数据源接收数据, 这些数据分为两大类, 链路追踪和
 
 所有的服务都是通过 gRPC 和 HTTP 协议实现, 使得未来集成那些尚未支持的生态系统更加容易.
 
-### 观测分析语言 (Observability Analysis Language, OAL)
+#### 观测分析语言 (Observability Analysis Language, OAL)
 
 在流模式 (Streaming mode) 下, SkyWalking 提供了 OAL 来分析流入的数据.
 
@@ -137,7 +137,7 @@ OAL 聚焦于服务, 服务实例以及端点的度量指标, 因此 OAL 非常�
 
 考虑到性能, 可读性以及可调试性, OAL 被定义成一种编译语言. OAL 脚本会在打包阶段被编译为正常的 Java 代码.
 
-#### 语法
+##### 语法
 
 OAL 脚本文件应该以 `.oal` 为后缀.
 
@@ -147,17 +147,17 @@ METRIC_NAME = from(SCOPE.(* | [FIELD][,FIELD ...]))
 .FUNCTION([PARAM][, PARAM ...])
 ```
 
-#### 域( Scope)
+##### 域( Scope)
 
 主要的**域 (Scope)**包括 `All`, `Service`, `ServiceInstance`, `Endpoint`, `ServiceRelation`, `ServiceInstanceRelation`,`EndpointRelation`. 当然还有一些二级域, 他们都属于以上某个一级域.
 
-#### 过滤器(Filter)
+##### 过滤器(Filter)
 
 使用在使用过滤器的时候, 通过指定字段名或表达式来构建字段值的过滤条件.
 
 表达式可以使用 `and`, `or` 和 `()` 进行组合. 操作符包含 `=`, `!=`, `>`, `<`, `in (v1, v2, ...)`, `like "%..."`, 他们可以基于字段类型进行类型检测, 如果类型不兼容会在编译/代码生成期间报错.
 
-#### 聚合函数 (Aggregation Function)
+##### 聚合函数 (Aggregation Function)
 
 默认的聚合函数有 SkyWalking OAP 核心实现, 并可自由扩展更多函数.
 
@@ -193,11 +193,11 @@ METRIC_NAME = from(SCOPE.(* | [FIELD][,FIELD ...]))
 
 本例中统计所有进入请求的热力学热点图.
 
-#### 度量指标名称
+##### 度量指标名称
 
 存储实现, 报警以及查询模块的度量指标名称. SkyWalking 内核支持自动类型推断.
 
-#### 组(Group)
+##### 组(Group)
 
 所有度量指标数据都会使用 `Scope.ID` 和最小时间桶 (min-level time bucket)  进行分组.
 
@@ -231,20 +231,20 @@ Endpoint_500 = from(Endpoint.*).filter(responseCode like "5%").percent()
 EndpointCalls = from(Endpoint.*).sum()
 ```
 
-### 协议
+#### 协议
 
 - [探针协议](https://skyapm.github.io/document-cn-translation-of-skywalking/zh/master/protocols/#%E6%8E%A2%E9%92%88%E5%8D%8F%E8%AE%AE). 包括对探针如何发送收集到的度量数据, 跟踪信息以及涉及到的每个实体格式的描述和定义.
 - [查询协议](https://skyapm.github.io/document-cn-translation-of-skywalking/zh/master/protocols/#%E6%9F%A5%E8%AF%A2%E5%8D%8F%E8%AE%AE). 服务后端给 SkyWalking 自有的 UI 和任何第三方 UI 提供了查询的能力. 这些查询都是基于 GraphQL 的.
 
-# 安装
+## 安装
 
-**重要: 请确保被监控的服务器上的系统时间和OAP服务器上的系统时间是相同的**
+重要: **请确保被监控的服务器上的系统时间和OAP服务器上的系统时间是相同的**
 
-## 下载官方发行版
+### 下载官方发行版
 
 [Apache SkyWalking 下载页](http://skywalking.apache.org/downloads/)
 
-## 各语言代理
+### 各语言代理
 
 - [Java agent](https://skyapm.github.io/document-cn-translation-of-skywalking/zh/master/setup/service-agent/java-agent/). 介绍了如何将java agent安装到你的服务中, 不需要修改任何代码.
 
@@ -257,11 +257,11 @@ EndpointCalls = from(Endpoint.*).sum()
 
 [参考](https://github.com/apache/skywalking/blob/master/docs/en/setup/README.md)
 
-## 部署后端
+### 部署后端
 
 [参考](https://github.com/apache/skywalking/blob/master/docs/en/setup/backend/backend-ui-setup.md)
 
-### 容器部署
+#### 容器部署
 
 配置文件如下
 
@@ -339,13 +339,13 @@ services:
 docker-compose up -d
 ```
 
-# 插件开发指南
+## 插件开发指南
 
 针对自己项目需要开发相应的插件来精确处理
 
 [参考](https://skyapm.github.io/document-cn-translation-of-skywalking/zh/master/guides/Java-Plugin-Development-Guide.html)
 
-# 参考
+## 参考
 
 - [SkyWalking docs](https://github.com/apache/skywalking/tree/master/docs)
 - [SkyWalking 文档](https://skyapm.github.io/document-cn-translation-of-skywalking/zh/master/)

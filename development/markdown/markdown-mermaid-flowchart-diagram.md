@@ -9,7 +9,9 @@ permalink: markdown-mermaid-flowchart-diagram
 
 ## 简介
 
-[Mermaid](https://github.com/knsv/mermaid) 是一个用于画流程图, 状态图, 时序图, 甘特图的库, 使用 JS 进行本地渲染, 广泛集成于许多 Markdown 编辑器中.
+[Mermaid](https://github.com/knsv/mermaid) 是一个用于画流程图, 状态图, 时序图, 甘特图的库
+
+使用 JS 进行本地渲染, 广泛集成于许多 Markdown 编辑器中.
 
 ## [流程图](http://mermaid-js.github.io/mermaid/#/flowchart)
 
@@ -73,7 +75,7 @@ graph LR
 | `id[/文字\]` | 梯形节点 |
 | `id[\文字/]` | 梯形节点 |
 
-**注意: 如果节点的文字中包含标点符号, 需要时用双引号包裹起来. **
+注意: **如果节点的文字中包含标点符号, 需要时用双引号包裹起来.**
 
 ### 连线
 
@@ -95,9 +97,7 @@ graph LR
 | `A --> B & C --> D` | 多个节点连接 |
 | `A & B--> C & D` | 多个节点连接 |
 
-#### 例子
-
-**注意: 当文字中含有括号的需要使用双引号包括起来**
+注意: **当文字中含有括号的需要使用双引号包括起来**
 
 ```
 graph LR
@@ -109,7 +109,7 @@ graph LR
   id1["This is the (text) in the box"]
 ```
 
-**注意: 双引号或者其他字符需要转义**
+注意: **双引号或者其他字符需要转义**
 
 ```
 graph LR
@@ -167,8 +167,6 @@ subgraph 子图表名称
 end
 ```
 
-#### 示例
-
 ```
 graph TB
   id1(圆角矩形)--普通线-->id2[矩形]
@@ -195,16 +193,12 @@ graph TB
 
 **注意: `securityLevel='strict'` 时禁用点击事件, `securityLevel='loose'` 开启点击事件**
 
-#### 语法
-
 ```
 click nodeId callback
 ```
 
 - `nodeId` 是节点的 ID
 - `callback` 是在显示图形的页面上定义的 javascript 函数的名称, 该函数将使用 `nodeId` 作为参数来调用
-
-#### 例子
 
 ```js
 <script>
@@ -251,14 +245,16 @@ graph LR
 graph LR
   id1(Start)-->id2(Stop)
   style id1 fill:#f9f,stroke:#333,stroke-width:4px
-  style id2 fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5, 5
+  style id2 fill:#bbf,stroke:#f66,
+    stroke-width:2px,color:#fff,stroke-dasharray: 5, 5
 ```
 
 ```mermaid
 graph LR
   id1(Start)-->id2(Stop)
   style id1 fill:#f9f,stroke:#333,stroke-width:4px
-  style id2 fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5, 5
+  style id2 fill:#bbf,stroke:#f66,
+    stroke-width:2px,color:#fff,stroke-dasharray: 5, 5
 ```
 
 #### class 样式

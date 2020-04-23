@@ -8,13 +8,14 @@ permalink: canal-introduction
 photo:
 ---
 
-# 简介
+## 简介
 
 **[canal](https://github.com/alibaba/canal) [kə'næl]**, 译意为水道/管道/沟渠, 主要用途是基于 MySQL 数据库增量日志解析, 提供增量数据订阅和消费
 
 早期阿里巴巴因为杭州和美国双机房部署, 存在跨机房同步的业务需求, 实现方式主要是基于业务 trigger 获取增量变更。从 2010 年开始, 业务逐步尝试数据库日志解析获取增量变更进行同步, 由此衍生出了大量的数据库增量订阅和消费业务。
 
 基于日志增量订阅和消费的业务包括
+
 - 数据库镜像
 - 数据库实时备份
 - 索引构建和实时维护(拆分异构索引, 倒排索引等)
@@ -25,20 +26,20 @@ photo:
 
 <!-- more -->
 
-# 工作原理
+## 工作原理
 
-* MySQL 主备复制原理
-  * MySQL master 将数据变更写入二进制日志( binary log, 其中记录叫做二进制日志事件binary log events, 可以通过 show binlog events 进行查看 )
-  * MySQL slave 将 master 的 binary log events 拷贝到它的中继日志( relay log )
-  * MySQL slave 重放 relay log 中事件, 将数据变更反映它自己的数据
-* canal 工作原理
-  * canal 模拟 MySQL slave 的交互协议, 伪装自己为 MySQL slave , 向 MySQL master 发送dump 协议
-  * MySQL master 收到 dump 请求, 开始推送 binary log 给 slave ( 即 canal )
-  * canal 解析 binary log 对象( 原始为 byte 流 )
+- MySQL 主备复制原理
+  - MySQL master 将数据变更写入二进制日志( binary log, 其中记录叫做二进制日志事件binary log events, 可以通过 show binlog events 进行查看 )
+  - MySQL slave 将 master 的 binary log events 拷贝到它的中继日志( relay log )
+  - MySQL slave 重放 relay log 中事件, 将数据变更反映它自己的数据
+- canal 工作原理
+  - canal 模拟 MySQL slave 的交互协议, 伪装自己为 MySQL slave , 向 MySQL master 发送dump 协议
+  - MySQL master 收到 dump 请求, 开始推送 binary log 给 slave ( 即 canal )
+  - canal 解析 binary log 对象( 原始为 byte 流 )
 
-# 部署
+## 部署
 
-## 使用镜像部署
+### 使用镜像部署
 
 canal docker hub 上最新的版本是 1.1.4
 
@@ -57,7 +58,7 @@ Digest: sha256:40ae71b5d96baf6c408877ce9cd4261a5e5a085ab370ec47e6037000579c58c4
 Status: Downloaded newer image for docker.io/canal/canal-server:v1.1.4
 ```
 
-### docker-compose 配置文件
+#### docker-compose 配置文件
 
 ```yml
 version: '3.1'
@@ -110,7 +111,7 @@ services:
 
 具体配置参考[官方 GitHub](https://github.com/alibaba/canal/wiki/AdminGuide)
 
-### 开启 MySQL binlog
+#### 开启 MySQL binlog
 
 MySQL 5.7 镜像通过 `/etc/mysql/my.cnf` 指向 `/etc/mysql/mysql.cnf`, 实际上是包括了同目录下的 `/etc/mysql/conf.d/` 和 `/etc/mysql/mysql.conf.d/` 文件夹, 所以只需要在文件夹中添加个配置就可以了
 
@@ -132,7 +133,7 @@ GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'canal'@'%';
 FLUSH PRIVILEGES;
 ```
 
-### 通过 docker-compose 启动容器
+#### 通过 docker-compose 启动容器
 
 ```sh
 $ docker-compose up -d

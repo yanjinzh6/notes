@@ -7,30 +7,30 @@ categories:
 permalink: linux-lsof-command
 ---
 
-# 简介
+## 简介
 
-lsof (list open files) 是一个列出当前系统打开文件的工具. 在linux环境下, 任何事物都以文件的形式存在, 通过文件不仅仅可以访问常规数据, 还可以访问网络连接和硬件. 所以如传输控制协议 (TCP) 和用户数据报协议 (UDP) 套接字等, 系统在后台都为该应用程序分配了一个文件描述符, 无论这个文件的本质如何, 该文件描述符为应用程序与基础操作系统之间的交互提供了通用接口. 因为应用程序打开文件的描述符列表提供了大量关于这个应用程序本身的信息, 因此通过lsof工具能够查看这个列表对系统监测以及排错将是很有帮助的. 
+lsof (list open files) 是一个列出当前系统打开文件的工具. 在linux环境下, 任何事物都以文件的形式存在, 通过文件不仅仅可以访问常规数据, 还可以访问网络连接和硬件. 所以如传输控制协议 (TCP) 和用户数据报协议 (UDP) 套接字等, 系统在后台都为该应用程序分配了一个文件描述符, 无论这个文件的本质如何, 该文件描述符为应用程序与基础操作系统之间的交互提供了通用接口. 因为应用程序打开文件的描述符列表提供了大量关于这个应用程序本身的信息, 因此通过lsof工具能够查看这个列表对系统监测以及排错将是很有帮助的.
 
 ```sh
 lsof [参数][文件]
 ```
 
-# 常用
+## 常用
 
 ```sh
-# 列出使用某个端口的应用
+## 列出使用某个端口的应用
 lsof -i :3306
-# 列出多个进程多个打开的文件信息
+## 列出多个进程多个打开的文件信息
 lsof -c mysql -c apache
-# 列出某个用户打开的文件信息
+## 列出某个用户打开的文件信息
 lsof -u username
 ```
 
 <!-- more -->
 
-# 详情
+## 详情
 
-lsof打开的文件可以是: 
+lsof打开的文件可以是:
 
 1. 普通文件
 2. 目录
@@ -39,7 +39,7 @@ lsof打开的文件可以是:
 5. (函数)共享库
 6. 管道, 命名管道
 7. 符号链接
-8. 网络文件 (例如: NFS file, 网络socket, unix域名socket) 
+8. 网络文件 (例如: NFS file, 网络socket, unix域名socket)
 9. 还有其它类型的文件, 等等
 
 ```sh
@@ -51,18 +51,18 @@ lsof
   +d<目录>  列出目录下被打开的文件
   +D<目录>  递归列出目录下被打开的文件
   -n<目录>  列出使用NFS的文件
-  -i<条件>  列出符合条件的进程.  (4, 6, 协议, :端口,  @ip ) 
+  -i<条件>  列出符合条件的进程.  (4, 6, 协议, :端口,  @ip )
   -p<进程号> 列出指定进程号所打开的文件
   -u  列出UID号进程详情
   -h 显示帮助信息
   -v 显示版本信息
 ```
 
-# 输出详解
+## 输出详解
 
 - COMMAND: 进程的名称
 - PID: 进程标识符
-- PPID: 父进程标识符 (需要指定-R参数) 
+- PPID: 父进程标识符 (需要指定-R参数)
 - USER: 进程所有者
 - PGID: 进程所属组
 - FD: 文件描述符, 应用程序通过文件描述符识别该文件. 如cwd, txt等
@@ -93,8 +93,8 @@ lsof
   - N: for a Solaris NFS lock of unknown type;
   - r: for read lock on part of the file;
   - R: for a read lock on the entire file;
-  - w: for a write lock on part of the file; (文件的部分写锁) 
-  - W: for a write lock on the entire file; (整个文件的写锁) 
+  - w: for a write lock on part of the file; (文件的部分写锁)
+  - W: for a write lock on the entire file; (整个文件的写锁)
   - u: for a read and write lock of any length;
   - U: for a lock of unknown type;
   - x: for an SCO OpenServer Xenix lock on part      of the file;
@@ -109,5 +109,5 @@ lsof
   - IPv4: 网际协议 (IP) 套接字
 - DEVICE: 指定磁盘的名称
 - SIZE: 文件的大小
-- NODE: 索引节点 (文件在磁盘上的标识) 
+- NODE: 索引节点 (文件在磁盘上的标识)
 - NAME: 打开文件的确切名称

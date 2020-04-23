@@ -25,6 +25,8 @@ classDiagram
   Vehicle <|-- Car
 ```
 
+<!-- more -->
+
 ### 定义类成员
 
 - 根据 `()` 来确定是属性还方法

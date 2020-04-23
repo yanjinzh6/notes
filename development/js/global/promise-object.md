@@ -7,7 +7,7 @@ categories:
 permalink: Promise-object
 ---
 
-# 简介
+## 简介
 
 [Promise](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise) 对象用于表示一个异步操作的最终完成 (或失败), 及其结果值.
 
@@ -30,7 +30,7 @@ console.log(promise1);
 
 <!-- more -->
 
-# 语法
+## 语法
 
 ```js
 /**
@@ -41,7 +41,7 @@ new Promise( function(resolve, reject) {...} /* executor */  );
 
 - `executor`: 带有 `resolve` 和 `reject` 两个参数的函数. `Promise` 构造函数执行时立即调用 `executor` 函数, `resolve` 和 `reject` 两个函数作为参数传递给 `executor` (`executor` 函数在 `Promise` 构造函数返回所建 `promise` 实例对象前被调用) . `resolve` 和 `reject` 函数被调用时, 分别将 `promise` 的状态改为 `fulfilled` (完成) 或 `rejected` (失败) .  `executor` 内部通常会执行一些异步操作, 一旦异步操作执行完毕 (可能成功/失败), 要么调用 `resolve` 函数来将 `promise` 状态改成 `fulfilled`, 要么调用 `reject` 函数将 `promise` 的状态改为 `rejected`. 如果在 `executor` 函数中抛出一个错误, 那么该 `promise` 状态为 `rejected`. `executor` 函数的返回值被忽略.
 
-# 方法
+## 方法
 
 - [Promise.all(iterable)](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)
   - 处理多个 promise 对象, 返回一个新的 `Promise` 对象
@@ -109,13 +109,13 @@ p3.then(function(v) {
 });
 ```
 
-# 原型
+## 原型
 
-## 属性
+### 属性
 
 `Promise.prototype.constructor`: 返回被创建的实例函数.  默认为 `Promise` 函数.
 
-## 方法
+### 原型方法
 
 - [Promise.prototype.catch(onRejected)](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch)
   - `then` 方法 `onRejected` 的语法糖

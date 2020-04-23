@@ -7,9 +7,9 @@ categories:
 permalink: java-data-type
 ---
 
-# 数据类型
+## 数据类型
 
-## 八种基本数据类型的默认值
+### 八种基本数据类型的默认值
 
 |    数据类型    | 大小/位 |  封装类   | 默认值 |                      可表示数据范围                      |
 | :------------: | :-----: | :-------: | :----: | :------------------------------------------------------: |
@@ -22,16 +22,16 @@ permalink: java-data-type
 |   char(字符)   |   16    | Character |  null  |                         0~65535                          |
 |    boolean     |    8    |  Boolean  | flase  |                      true or false                       |
 
-## 引用类型
+### 引用类型
 
 - 对象, 数组都是引用数据类型
 - 所有引用类型的默认值都是 null
 
 <!-- more -->
 
-## Java 常量
+### Java 常量
 
-## 转义字符序列
+### 转义字符序列
 
 |  符号  |          字符含义           |
 | :----: | :-------------------------: |
@@ -48,11 +48,11 @@ permalink: java-data-type
 |  \ddd  |      八进制字符 (ddd)       |
 | \uxxxx | 16 进制 Unicode 字符 (xxxx) |
 
-## 自动类型转换
+### 自动类型转换
 
 转换从低级到高级 byte,short,char—> int —> long—> float —> double
 
-## 注意
+### 注意
 
 String 是 final 类, 所以无法被继承
 

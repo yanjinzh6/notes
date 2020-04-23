@@ -21,7 +21,7 @@ jupyter-notebook-588b68dd65-5zbvf   0/1     ImagePullBackOff   0          28s
 <!-- more -->
 
 ```sh
-docker pull jupyter/base-notebook 
+docker pull jupyter/base-notebook
 Using default tag: latest
 latest: Pulling from jupyter/base-notebook
 Digest: sha256:7f696fe2cb4ee581262c8c053831188efbe048751bd8e7f0e2011cae41ec555c
@@ -45,9 +45,9 @@ IPs:
 Controlled By:  ReplicaSet/jupyter-notebook-588b68dd65
 Containers:
   scipy-notebook:
-    Container ID:  
+    Container ID:
     Image:         jupyter/scipy-notebook:latest
-    Image ID:      
+    Image ID:
     Port:          8888/TCP
     Host Port:     0/TCP
     Command:
@@ -63,10 +63,10 @@ Containers:
       /var/run/secrets/kubernetes.io/serviceaccount from default-token-8hq8q (ro)
 Conditions:
   Type              Status
-  Initialized       True 
-  Ready             False 
-  ContainersReady   False 
-  PodScheduled      True 
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
 Volumes:
   default-token-8hq8q:
     Type:        Secret (a volume populated by a Secret)

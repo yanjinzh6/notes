@@ -8,7 +8,7 @@ permalink: docker-save-load
 photo:
 ---
 
-# 简介
+## 简介
 
 > 这篇文章主要介绍了一种根据便捷的镜像交付过程
 
@@ -18,7 +18,7 @@ docker 也提供类似的功能，通过 `docker save`, `docker load` 来保存�
 
 <!-- more -->
 
-# docker save
+## docker save
 
 `docker save`: 将指定镜像保存成 tar 归档文件
 
@@ -30,7 +30,7 @@ OPTIONS说明
   -o: 输出的文件, tar 格式
 ```
 
-# docker load
+## docker load
 
 `docker load`: 导入使用 `docker save` 命令导出的镜像
 

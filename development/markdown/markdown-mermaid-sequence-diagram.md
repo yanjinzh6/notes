@@ -30,6 +30,8 @@ sequenceDiagram
   李四->>张三: 吃了
 ```
 
+<!-- more -->
+
 ### 参与者
 
 #### 简单语法
@@ -74,7 +76,7 @@ activate 参与者
 deactivate 参与者
 ```
 
-**可以对同一参与者进行堆叠激活**
+可以对同一参与者进行堆叠激活
 
 ```
 sequenceDiagram
@@ -93,8 +95,6 @@ sequenceDiagram
 ```
 
 ### 标注
-
-#### 语法
 
 ```
 Note 位置表述 参与者: 标注文字
@@ -202,8 +202,6 @@ sequenceDiagram
   end
 ```
 
-#### 示例
-
 ```
 sequenceDiagram
   participant z as 张三
@@ -297,7 +295,6 @@ rect rgba(0, 0, 255, .1)
 ... content ...
 end
 ```
-
 
 ```
 sequenceDiagram

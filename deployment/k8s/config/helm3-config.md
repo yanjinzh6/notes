@@ -8,11 +8,11 @@ permalink: helm3-config
 photo:
 ---
 
-# 简介
+## 简介
 
 Helm 是管理 Kubernetes 的应用管理工具
 
-## 相关术语
+### 相关术语
 
 - Helm 是一个命令行下的客户端工具. 主要用于 Kubernetes 应用程序 Chart 的创建, 打包, 发布以及创建和管理本地和远程的 Chart 仓库.
 - Tiller 是 Helm 的服务端, 部署在 Kubernetes 集群中. Tiller 用于接收 Helm 的请求, 并根据 Chart 生成 Kubernetes 的部署文件 ( Helm 称为 Release ) , 然后提交给 Kubernetes 创建应用. Tiller 还提供了 Release 的升级, 删除, 回滚等一系列功能.
@@ -20,7 +20,7 @@ Helm 是管理 Kubernetes 的应用管理工具
 - Repoistory 是 Helm 的软件仓库, Repository 本质上是一个 Web 服务器, 该服务器保存了一系列的 Chart 软件包以供用户下载, 并且提供了一个该 Repository 的 Chart 包的清单文件以供查询. Helm 可以同时管理多个不同的 Repository.
 - Release 是 使用 `helm install` 命令在 Kubernetes 集群中部署的 Chart
 
-## Helm3 新功能
+### Helm3 新功能
 
 - 移除了 Tiller
 - 不同的 namespace 可以使用相同的 Release Name
@@ -40,49 +40,49 @@ Helm 是管理 Kubernetes 的应用管理工具
 
 <!-- more -->
 
-# 安装
+## 安装
 
-## helm github
+### helm github
 
 访问 [Helm GitHub release](https://github.com/helm/helm/releases) 下载最新的客户端
 
 接下来解压下载的包, 然后将客户端放置到 `/usr/local/bin/` 目录下:
 
 ```sh
-#下载Helm客户端
-$ wget https://get.helm.sh/helm-v3.1.0-linux-amd64.tar.gz
+## 下载Helm客户端
+wget https://get.helm.sh/helm-v3.1.0-linux-amd64.tar.gz
 
-#解压 Helm
-$ tar -zxvf helm-v3.1.0-linux-amd64.tar.gz
+## 解压 Helm
+tar -zxvf helm-v3.1.0-linux-amd64.tar.gz
 
-#复制客户端执行文件到 bin 目录下, 方便在系统下能执行 helm 命令
-$ cp linux-amd64/helm /usr/local/bin/
+## 复制客户端执行文件到 bin 目录下, 方便在系统下能执行 helm 命令
+cp linux-amd64/helm /usr/local/bin/
 ```
 
-**注意: helm 客户端需要下载到安装了 kubectl 并且能执行能正常通过 kubectl 操作 kubernetes 的服务器上, 否则 helm 将不可用**
+注意: **helm 客户端需要下载到安装了 kubectl 并且能执行能正常通过 kubectl 操作 kubernetes 的服务器上, 否则 helm 将不可用**
 
-## microk8s
+### microk8s
 
 microk8s 自带 helm3 组件, 只需要使用 `microk8s.enable helm3` 命令, 等待下载完成即可使用
 
-# 配置
+## 配置
 
 Helm3 默认是不会添加 Chart 仓库, 需要添加常用的仓库
 
 ```sh
-$ helm repo add  elastic    https://helm.elastic.co
-$ helm repo add  gitlab     https://charts.gitlab.io
-$ helm repo add  harbor     https://helm.goharbor.io
-$ helm repo add  bitnami    https://charts.bitnami.com/bitnami
-$ helm repo add  incubator  https://kubernetes-charts-incubator.storage.googleapis.com
-$ helm repo add  stable     https://kubernetes-charts.storage.googleapis.com
+helm repo add  elastic    https://helm.elastic.co
+helm repo add  gitlab     https://charts.gitlab.io
+helm repo add  harbor     https://helm.goharbor.io
+helm repo add  bitnami    https://charts.bitnami.com/bitnami
+helm repo add  incubator  https://kubernetes-charts-incubator.storage.googleapis.com
+helm repo add  stable     https://kubernetes-charts.storage.googleapis.com
 ```
 
 增加完仓库后, 需要执行更新命令, 将仓库中的信息进行同步 `helm repo update`
 
-**注意: 如果有的仓库不能正常解析, 请更换 DNS 地址, 在测试过程中, 发现有的能正常解析, 有的不能. 如果还不行, 就直接将域名和对应的地址写死在 Host 文件中. 或者配置代理**
+注意: **如果有的仓库不能正常解析, 请更换 DNS 地址, 在测试过程中, 发现有的能正常解析, 有的不能. 如果还不行, 就直接将域名和对应的地址写死在 Host 文件中. 或者配置代理**
 
-## 使用国内仓库
+### 使用国内仓库
 
 ```sh
 helm repo add stable http://mirror.azure.cn/kubernetes/charts
@@ -90,9 +90,9 @@ helm repo add aliyun https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
 helm repo update
 ```
 
-# 部署应用
+## 部署应用
 
-## 查询应用
+### 查询应用
 
 ```sh
 microk8s.helm3 search repo rabbitmq
@@ -102,22 +102,22 @@ stable/rabbitmq                         6.17.4          3.8.2           Open sou
 stable/rabbitmq-ha                      1.40.1          3.8.0           Highly available RabbitMQ cluster, the open sou...
 ```
 
-## 查看安装包的内容
+### 查看安装包的内容
 
 `helm inspect values` 查看暴露的自定义参数
 
-## 安装应用
+### 安装应用
 
 ```sh
 microk8s.helm3 install my-rabbitmq stable/rabbitmq -n default
 
-# -n, --namespace 参数指定安装的命名空间, Helm3 可以在不同的命名空间中部署相同名称的应用
-# -f values.yaml 使用自定义参数配置
-# --set 设置自定义参数列表
-# --dry-run --debug 模拟安装过程并打印配置信息.
+## -n, --namespace 参数指定安装的命名空间, Helm3 可以在不同的命名空间中部署相同名称的应用
+## -f values.yaml 使用自定义参数配置
+## --set 设置自定义参数列表
+## --dry-run --debug 模拟安装过程并打印配置信息.
 microk8s.helm3 template stable/rabbitmq -n default
 ---
-# Source: rabbitmq/templates/secrets.yaml
+## Source: rabbitmq/templates/secrets.yaml
 apiVersion: v1
 kind: Secret
 metadata:
@@ -135,7 +135,7 @@ data:
 
   rabbitmq-erlang-cookie: "a0k0YTlyYlZaTGRORG5vOGZXZTh0MmVodFlJY2xNd3A="
 ---
-# Source: rabbitmq/templates/configuration.yaml
+## Source: rabbitmq/templates/configuration.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -165,7 +165,7 @@ data:
     #disk_free_limit.absolute = 50MB
     #management.load_definitions = /app/load_definition.json
 ---
-# Source: rabbitmq/templates/healthchecks.yaml
+## Source: rabbitmq/templates/healthchecks.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -199,7 +199,7 @@ data:
     echo "${ACTUAL}"
     test "${EXPECTED}" = "${ACTUAL}"
 ---
-# Source: rabbitmq/templates/serviceaccount.yaml
+## Source: rabbitmq/templates/serviceaccount.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -210,7 +210,7 @@ metadata:
     release: "RELEASE-NAME"
     heritage: "Helm"
 ---
-# Source: rabbitmq/templates/role.yaml
+## Source: rabbitmq/templates/role.yaml
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -225,7 +225,7 @@ rules:
   resources: ["endpoints"]
   verbs: ["get"]
 ---
-# Source: rabbitmq/templates/rolebinding.yaml
+## Source: rabbitmq/templates/rolebinding.yaml
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -243,7 +243,7 @@ roleRef:
   kind: Role
   name: RELEASE-NAME-rabbitmq-endpoint-reader
 ---
-# Source: rabbitmq/templates/svc-headless.yaml
+## Source: rabbitmq/templates/svc-headless.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -272,7 +272,7 @@ spec:
     app: rabbitmq
     release: "RELEASE-NAME"
 ---
-# Source: rabbitmq/templates/svc.yaml
+## Source: rabbitmq/templates/svc.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -305,7 +305,7 @@ spec:
     app: rabbitmq
     release: "RELEASE-NAME"
 ---
-# Source: rabbitmq/templates/statefulset.yaml
+## Source: rabbitmq/templates/statefulset.yaml
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -486,7 +486,7 @@ spec:
 - 从 tgz 解压后的 Charts 目录
 - 从 url 连接
 
-## 查看状态
+### 查看状态
 
 ```sh
 microk8s.helm3 status my-rabbitmq
@@ -505,26 +505,26 @@ NAME            NAMESPACE       REVISION        UPDATED                         
 my-rabbitmq     default         1               2020-02-25 11:30:06.341856864 +0800 CST deployed        rabbitmq-6.17.4 3.8.2
 ```
 
-## 卸载应用
+### 卸载应用
 
 ```sh
 microk8s.helm3 uninstall my-rabbitmq -n default
 
-# -n, --namespace 参数指定安装的命名空间, Helm3 可以在不同的命名空间中部署相同名称的应用
+## -n, --namespace 参数指定安装的命名空间, Helm3 可以在不同的命名空间中部署相同名称的应用
 ```
 
-## 升级应用
+### 升级应用
 
 通过更新配置文件的方式来更新部署
 
 ```sh
-# values.yaml 参数配置文件
+## values.yaml 参数配置文件
 microk8s.helm3 upgrade -f values.yaml my-rabbitmq stable/rabbitmq -n default
-# 查看新配置是否生效
+## 查看新配置是否生效
 microk8s.helm3 get values my-rabbitmq -n default
 ```
 
-## 应用回滚
+### 应用回滚
 
 升级过程发生错误, 可以进行回滚, 操作过程为查看应用历史版本, 获取 REVISION 号后进行回滚操作
 
@@ -532,11 +532,11 @@ microk8s.helm3 get values my-rabbitmq -n default
 microk8s.helm3 history my-rabbitmq -n default
 REVISION        UPDATED                         STATUS          CHART           APP VERSION     DESCRIPTION
 1               Tue Feb 25 11:30:06 2020        deployed        rabbitmq-6.17.4 3.8.2           Install complete
-# 回滚到 1 版本
+## 回滚到 1 版本
 microk8s.helm3 rollback my-rabbitmq 1 -n default
 ```
 
-# 创建 Repository
+## 创建 Repository
 
 - 查看当前的仓库 `helm repo list`
 - 在本机创建仓库 `mkdir -p ~/my-repo & nohup helm serve --address 127.0.0.1:8879 --repo-path ~/my-repo &`
@@ -544,7 +544,7 @@ microk8s.helm3 rollback my-rabbitmq 1 -n default
 - 在仓库中添加包, 更新 index, 更新缓存
 
 ```sh
-# 先去 github 上下载 charts
+## 先去 github 上下载 charts
 cp -r mysql  ~/my-repo
 cd  ~/my-repo
 helm package mysql --save=false
@@ -552,7 +552,7 @@ helm repo index --url=http://127.0.0.1:8879 .
 helm update
 ```
 
-# 创建 Charts
+## 创建 Charts
 
 - 快速创建模板, `helm create my-charts` , 修改对应内容
 - 打包, 然后拷贝至 repository 的目录, 然后执行更新index操作. helm package
@@ -563,7 +563,7 @@ helm update
 - 查看 charts 目录下文件内容. `helm inspect my-charts`
 - 查看 charts 模板渲染后 k8s 的 yaml, `helm template my-charts -f configfile --set a=b`
 
-# 引用
+## 引用
 
 - [安装 Helm3 管理 Kubernetes 应用](http://www.mydlq.club/article/51/)
 - [helm3 基础使用](https://blog.csdn.net/qq_25611295/article/details/103624669)

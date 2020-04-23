@@ -8,7 +8,7 @@ permalink: kubernates-loval-volume
 photo:
 ---
 
-# 简介
+## 简介
 
 kubernetes 从 1.10 版本开始支持 local volume (本地卷) , workload (不仅是 statefulsets 类型) 可以充分利用本地快速 SSD, 从而获取比 remote volume (如 cephfs, RBD) 更好的性能.
 
@@ -21,9 +21,9 @@ kubernetes 从 1.10 版本开始支持 local volume (本地卷) , workload (不�
 
 <!-- more -->
 
-# 配置
+## 配置
 
-## 创建一个 storage class
+### 创建一个 storage class
 
 ```yaml
 kind:  StorageClass
@@ -38,7 +38,7 @@ sc 的 provisioner 是 `kubernetes.io/no-provisioner`
 
 WaitForFirstConsumer 表示 PV 不要立即绑定 PVC , 而是直到有 Pod 需要用 PVC 的时候才绑定. 调度器会在调度时综合考虑选择合适的 local PV, 这样就不会导致跟 Pod 资源设置, selectors, affinity and anti-affinity 策略等产生冲突. 很明显：如果 PVC 先跟 local PV 绑定了, 由于 local PV 是跟n ode 绑定的, 这样 selectors, affinity 等等就基本没用了, 所以更好的做法是先根据调度策略选择 node, 然后再绑定 local PV
 
-## 静态创建 PV
+### 静态创建 PV
 
 通过 kubectl 命令, 静态创建一个 1GiB 的 PV; 该 PV 使用 node ubuntu-node1 的 /data/local/vol 目录; 该 PV 的 sc 为 local-volume.
 
@@ -70,7 +70,7 @@ spec:
 
 需要指定 PV 对应的 sc; 目录 `/data/local/vol` 也需要创建
 
-## 使用 local volume PV
+### 使用 local volume PV
 
 创建一个关联 sc: local-volume 的 PVC, 然后将该 PVC 挂到 nginx 容器里
 
@@ -116,7 +116,7 @@ echo "hello world" > /data/local/vol1/index.html
 
 删除 Pod/PVC, 之后 PV 状态改为 Released , 该 PV 不会再被绑定 PVC 了.
 
-## 动态创建 PV
+### 动态创建 PV
 
 手工管理 local PV 显然是很费劲的, 社区提供了 external storage 可以动态的创建 PV (实际仍然不够自动化) .
 
@@ -257,9 +257,9 @@ discovery.go: 201] Path "/data/local/xxx" is not an actual mountpoint
 将下面的代码保存为文件 loopmount, 加执行权限并拷贝到 /bin 目录下, 就可以使用该命令来创建挂载点了.
 
 ```sh
-#!/bin/bash
+##!/bin/bash
 
-# Usage:  sudo loopmount file size mount-point
+## Usage:  sudo loopmount file size mount-point
 
 touch $1
 truncate -s $2 $1
@@ -275,7 +275,7 @@ df -h |grep $3
 使用脚本创建一个 6G 的文件, 并挂载到 /data/local 下. 之所以要 6G, 是因为前面 PVC 需要的是 5GB, 而格式化后剩余空间会小一点, 所以设置文件更大一些, 后面才好绑定 PVC.
 
 ```sh
-# loopmount xxx 6G /data/local/xxx
+## loopmount xxx 6G /data/local/xxx
 /data/local/xxx  not exist, creating...
 /dev/loop0     5.9G   24M  5.6G   1% /data/local/x1
 ```
@@ -283,7 +283,7 @@ df -h |grep $3
 查看 PV, 可见 Provisioner 自动创建了 PV, 而 kubernetes 会将该 PV 供给给前面的 PVC myclam, mypod 也 run 起来了.
 
 ```sh
-# kubectl get pv
+## kubectl get pv
 NAME              CAPACITY  ACCESS MODES   RECLAIM POLICY   STATUS  CLAIM            STORAGECLASS          REASON   AGE
 local-pv-600377f7 5983Mi    RWO            Delete           Bound   default/myclaim  local-volume                   1s
 ```
@@ -296,6 +296,6 @@ local-pv-600377f7 5983Mi    RWO            Delete           Bound   default/mycl
 mount -t tmpfs -o size=1G,nr_inodes=10k,mode=700 tmpfs /data/local/tmpfs
 ```
 
-# 参考
+## 参考
 
 - [ref](https://ieevee.com/tech/2019/01/17/local-volume.html)

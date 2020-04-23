@@ -8,7 +8,7 @@ permalink: mysql-binlog-introduction
 photo:
 ---
 
-# 简介
+## 简介
 
 该文档仅记录相应的描述, 说明文档
 
@@ -25,7 +25,7 @@ MySQL 中一般有以下几种日志:
 
 Mysql 5.0 以后, 支持通过 binary log (二进制日志) 以支持主从复制. 复制允许将来自一个 MySQL 数据库服务器 (master) 的数据复制到一个或多个其他 MySQL 数据库服务器 (slave), 以实现灾难恢复, 水平扩展, 统计分析, 远程数据分发等功能. 它记录了所有的 DDL 和 DML 语句 (除了数据查询语句 select, show 等) , 以事件形式记录, 还包含语句所执行的消耗的时间, MySQL 的二进制日志是事务安全型的. binlog 的主要目的是复制和恢复.
 
-# 使用场景
+## 使用场景
 
 * 最典型的场景就是通过 Mysql 主从之间通过 binlog 复制来实现横向扩展, 实现读写分离
   * 主库 Master 负责所有的更新操作
@@ -37,9 +37,9 @@ Mysql 5.0 以后, 支持通过 binary log (二进制日志) 以支持主从复�
 
 <!-- more -->
 
-# 配置
+## 配置
 
-## 基本设置
+### 基本设置
 
 > MySQL 5.7 镜像通过 `/etc/mysql/my.cnf` 指向 `/etc/mysql/mysql.cnf`, 实际上是包括了同目录下的 `/etc/mysql/conf.d/` 和 `/etc/mysql/mysql.conf.d/` 文件夹, 所以只需要在文件夹中添加个配置就可以了
 
@@ -57,68 +57,68 @@ log-bin=my-binlog-name
 
 在 mysql 的 percona 分支上, 还提供了 max_binlog_files 配置项, 用于设置可以保留的 binlog 文件数量, 以便我们更精确的控制 binlog 文件占用的磁盘空间. 这是一个非常有用的配置, 笔者曾经遇到一个库, 大约 10 分钟就会产生一个 binlog 文件, 也就是 1G, 按照这种增长速度, 1 天下来产生的 binlog 文件, 就会占用大概 144G 左右的空间, 磁盘空间可能很快就会被使用完. 通过此配置, 我们可以显示的控制 binlog 文件的数量, 例如指定 50, binlog 文件最多只会占用 50G 左右的磁盘空间. 在更高版本的 mysql 中, 支持按照秒级精度, 来控制 binlog 文件的保留时间.
 
-## 常用命令
+### 常用命令
 
 ```sql
-# 是否启用 binlog 日志
+## 是否启用 binlog 日志
 show variables like 'log_bin';
 
-# 查看详细的日志配置信息
+## 查看详细的日志配置信息
 show global variables like '%log%';
 
-# mysql 数据存储目录
+## mysql 数据存储目录
 show variables like '%dir%';
 
-# 查看 binlog 的目录
+## 查看 binlog 的目录
 show global variables like "%log_bin%";
 
-# 查看当前服务器使用的 biglog 文件及大小
+## 查看当前服务器使用的 biglog 文件及大小
 show binary logs;
 
-# 查看主服务器使用的 biglog 文件及大小
+## 查看主服务器使用的 biglog 文件及大小
 
-# 查看最新一个 binlog 日志文件名称和 Position
+## 查看最新一个 binlog 日志文件名称和 Position
 show master status;
 
-# 事件查询命令
-# IN 'log_name' : 指定要查询的 binlog 文件名(不指定就是第一个 binlog 文件)
-# FROM pos : 指定从哪个 pos 起始点开始查起(不指定就是从整个文件首个 pos 点开始算)
-# LIMIT [offset,] : 偏移量(不指定就是 0)
-# row_count : 查询总条数(不指定就是所有行)
+## 事件查询命令
+## IN 'log_name' : 指定要查询的 binlog 文件名(不指定就是第一个 binlog 文件)
+## FROM pos : 指定从哪个 pos 起始点开始查起(不指定就是从整个文件首个 pos 点开始算)
+## LIMIT [offset,] : 偏移量(不指定就是 0)
+## row_count : 查询总条数(不指定就是所有行)
 show binlog events [IN 'log_name'] [FROM pos] [LIMIT [offset,] row_count];
 
-# 查看 binlog 内容
+## 查看 binlog 内容
 show binlog events;
 
-# 查看具体一个 binlog 文件的内容  (in 后面为 binlog 的文件名)
+## 查看具体一个 binlog 文件的内容  (in 后面为 binlog 的文件名)
 show binlog events in 'master.000003';
 
-# 设置 binlog 文件保存事件, 过期删除, 单位天
+## 设置 binlog 文件保存事件, 过期删除, 单位天
 set global expire_log_days=3;
 
-# 删除当前的 binlog 文件
+## 删除当前的 binlog 文件
 reset master;
 
-# 删除 slave 的中继日志
+## 删除 slave 的中继日志
 reset slave;
 
-# 删除指定日期前的日志索引中 binlog 日志文件
+## 删除指定日期前的日志索引中 binlog 日志文件
 purge master logs before '2019-03-09 14:00:00';
 
-# 删除指定日志文件
+## 删除指定日志文件
 purge master logs to 'master.000003';
 ```
 
-## mysqlbinlog 命令
+### mysqlbinlog 命令
 
 ```sh
-# mysqlbinlog 的执行格式
+## mysqlbinlog 的执行格式
 mysqlbinlog [options] log_file ...
 
-# 查看 bin-log 二进制文件 (shell 方式)
+## 查看 bin-log 二进制文件 (shell 方式)
 mysqlbinlog -v --base64-output=decode-rows /var/lib/mysql/master.000003
 
-# 查看 bin-log 二进制文件 (带查询条件)
+## 查看 bin-log 二进制文件 (带查询条件)
 mysqlbinlog -v --base64-output=decode-rows /var/lib/mysql/master.000003 \
   --start-datetime="2019-03-01 00:00:00"  \
   --stop-datetime="2019-03-10 00:00:00"   \
@@ -126,7 +126,7 @@ mysqlbinlog -v --base64-output=decode-rows /var/lib/mysql/master.000003 \
   --stop-position="20000"
 ```
 
-## sync_binlog 说明
+### sync_binlog 说明
 
 对支持事务的引擎如 InnoDB 而言, 必须要提交了事务才会记录 binlog. binlog 什么时候刷新到磁盘跟参数 sync_binlog 相关.
 
@@ -136,9 +136,9 @@ mysqlbinlog -v --base64-output=decode-rows /var/lib/mysql/master.000003 \
 
 在 MySQL 5.7.7 之前, 默认值 sync_binlog 是 0, MySQL 5.7.7 和更高版本使用默认值 1, 这是最安全的选择
 
-# 解析
+## 解析
 
-## binlog 文件
+### binlog 文件
 
 binlog 日志包括两类文件:
 
@@ -160,7 +160,7 @@ binlog 是一个二进制文件集合, 每个 binlog 文件以一个 4 字节的
 * 使用 flush logs 命令;
 * 当 binlog 文件大小超过 max_binlog_size 变量的值时;
 
-## binlog 模式
+### binlog 模式
 
 记录在二进制日志中的事件的格式取决于二进制记录格式. 支持三种格式类型:
 
@@ -175,25 +175,25 @@ binlog 是一个二进制文件集合, 每个 binlog 文件以一个 4 字节的
 
 在 MySQL 5.7.7 之前, 默认的格式是 STATEMENT, 在 MySQL 5.7.7 及更高版本中, 默认值是 ROW. 日志格式通过 binlog-format 指定, 如 binlog-format=STATEMENT, binlog-format=ROW, binlog-format=MIXED.
 
-## 格式
+### 格式
 
 ```sql
-# at 56154447
-#200109  9:19:31 server id 1921  end_log_pos 56154478 CRC32 0x4b37d090 	Xid = 196250
+## at 56154447
+#200109  9:19:31 server id 1921  end_log_pos 56154478 CRC32 0x4b37d090   Xid = 196250
 COMMIT/*!*/;
-# at 56154478
-#200109  9:28:54 server id 1921  end_log_pos 56154543 CRC32 0x81f576af 	Anonymous_GTID	last_committed=275	sequence_number=276	rbr_only=yes
+## at 56154478
+#200109  9:28:54 server id 1921  end_log_pos 56154543 CRC32 0x81f576af   Anonymous_GTID  last_committed=275  sequence_number=276  rbr_only=yes
 /*!50718 SET TRANSACTION ISOLATION LEVEL READ COMMITTED*//*!*/;
 SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
-# at 56154543
-#200109  9:28:54 server id 1921  end_log_pos 56154615 CRC32 0x71663570 	Query	thread_id=25	exec_time=0	error_code=0
+## at 56154543
+#200109  9:28:54 server id 1921  end_log_pos 56154615 CRC32 0x71663570   Query  thread_id=25  exec_time=0  error_code=0
 SET TIMESTAMP=1578562134/*!*/;
 BEGIN
 /*!*/;
-# at 56154615
-#200109  9:28:54 server id 1921  end_log_pos 56154704 CRC32 0x7069bc01 	Table_map: `test`.`mc_org_area` mapped to number 113
-# at 56154704
-#200109  9:28:54 server id 1921  end_log_pos 56154962 CRC32 0x05b35d8b 	Update_rows: table id 113 flags: STMT_END_F
+## at 56154615
+#200109  9:28:54 server id 1921  end_log_pos 56154704 CRC32 0x7069bc01   Table_map: `test`.`mc_org_area` mapped to number 113
+## at 56154704
+#200109  9:28:54 server id 1921  end_log_pos 56154962 CRC32 0x05b35d8b   Update_rows: table id 113 flags: STMT_END_F
 ### UPDATE `test`.`mc_org_area`
 ### WHERE
 ###   @1='aO4DozlHLxx9uAU7Rwt'
@@ -234,7 +234,7 @@ BEGIN
 * `Query`: 事件名称
 * `Table_map`: 当前的库表名
 
-## 事件类型
+### 事件类型
 
 binlog 事件的结构主要有 3 个版本:
 
@@ -275,8 +275,7 @@ binlog 事件的结构主要有 3 个版本:
 | INCIDENT_EVENT           | 主服务器发生了不正常的事件, 通知从服务器并告知可能会导致数据处于不一致的状态                                                                                                                                                                          |
 | HEARTBEAT_LOG_EVENT      | 主服务器告诉从服务器, 主服务器还活着, 不写入到日志文件中                                                                                                                                                                                              |
 
-# 参考文档
+## 参考文档
 
 * [MySQL Binlog 介绍](https://laijianfeng.org/2019/03/MySQL-Binlog-%E4%BB%8B%E7%BB%8D/)
 * [Mysql binlog 应用场景与原理深度剖析](https://www.cnblogs.com/caicz/p/11009400.html)
-*

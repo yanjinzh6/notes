@@ -7,7 +7,7 @@ categories:
 permalink: linux-tar-command
 ---
 
-# 简介
+## 简介
 
 tar 命令主要提供打包命令
 
@@ -16,29 +16,29 @@ tar 命令主要提供打包命令
 
 由于 Linux 中很多压缩程序只能针对一个文件进行压缩, 所以压缩一堆文件时, 需要先将文件打包, 然后使用压缩程序进行压缩
 
-# 常用命令
+## 常用命令
 
 ```sh
-# 将文件全部打包成 tar 包
+## 将文件全部打包成 tar 包
 tar -cvf FILENAME.tar ./
-# 打包后, 以 gzip 压缩
+## 打包后, 以 gzip 压缩
 tar -zcvf FILENAME.tar.gz ./
-# 打包后, 以 bzip2 压缩
+## 打包后, 以 bzip2 压缩
 tar -jcvf FILENAME.tar.bz2 ./
-# 查看 tar 包内文件
+## 查看 tar 包内文件
 tar -tvf FILENAME.tar ./
-# 解压
+## 解压
 tar -zxvf FILENAME.tar.gz [可以指定仅解压的文件列表] [-C 指定解压目录]
-# 筛选文件夹文件
+## 筛选文件夹文件
 tar -N [压缩比 yyyy/MM/DD 日期新的文件] --exclude [排除的文件或目录, 支持正则] -zcvf FILENAME.tar.gz ./
 ```
 
 <!-- more -->
 
-# 参数
+## 参数
 
 ```sh
-# 必要参数有如下:
+## 必要参数有如下:
 
 -A 新增压缩文件到已存在的压缩
 
@@ -72,7 +72,7 @@ tar -N [压缩比 yyyy/MM/DD 日期新的文件] --exclude [排除的文件或�
 
 -W 确认压缩文件的正确性
 
-# 可选参数如下:
+## 可选参数如下:
 
 -b 设置区块数目
 
@@ -85,7 +85,7 @@ tar -N [压缩比 yyyy/MM/DD 日期新的文件] --exclude [排除的文件或�
 --version 显示版本信息
 ```
 
-# 使用命令
+## 使用命令
 
 - tar
   - 解包: tar xvf FileName.tar
@@ -124,6 +124,6 @@ tar -N [压缩比 yyyy/MM/DD 日期新的文件] --exclude [排除的文件或�
   - 解压: rar x FileName.rar
   - 压缩: rar a FileName.rar DirName
 
-# 引用
+## 引用
 
 [每天一个linux命令 (28) : tar命令](https://www.cnblogs.com/peida/archive/2012/11/30/2795656.html)

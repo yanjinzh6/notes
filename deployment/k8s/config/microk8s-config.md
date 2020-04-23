@@ -8,13 +8,13 @@ permalink: microk8s-config
 photo:
 ---
 
-# 安装
+## 安装
 
 安装 Ubuntu service 18.04 的时候已经有 snap 的安装选项, 直接选择了 microk8s, 没想到现在部署一套 kubernetes 本地的集群已经这么方便了, 以前的 kubeadm 已经算是很简配了
 
 <!-- more -->
 
-## snap 安装 microk8s
+### snap 安装 microk8s
 
 `snap` 是 **canonical** 公司给出的更高级的包管理的解决方案, 可通过下面命令简单安装
 
@@ -23,7 +23,7 @@ snap install microk8s --classic --channel=1.13/stable
 Download snap "microk8s" (581) from channel "1.13/stable"
 ```
 
-## snap 代理配置
+### snap 代理配置
 
 安装过程比较缓慢, 所以需要进行设置, 由于 snap 不会读取系统环境配置, 所以必须修改配置文件
 
@@ -78,7 +78,7 @@ systemctl daemon-reload
 systemctl restart snap
 ```
 
-## microk8s 配置
+### microk8s 配置
 
 ```sh
 ➜  WorkSpace snap list
@@ -154,17 +154,17 @@ GLOBAL OPTIONS:
 ```sh
 ➜  WorkSpace vi /var/snap/microk8s/current/args/containerd-env
 
-# 添加配置
+## 添加配置
 HTTP_PROXY=socks5://127.0.0.1:1080
 HTTPS_PROXY=socks5://127.0.0.1:1080
 NO_PROXY=kubernetes.docker.internal,gateway.docker.internal,host.docker.internallocalhost,127.0.0.0/8,10.0.0.0/8,172.0.0.0/8,172.16.0.0/16,192.168.0.0/16,https://mirror.ccs.tencentyun.com,https://docker.mirrors.ustc.edu.cn/
 
-# 重启
+## 重启
 systemctl daemon-reload
 systemctl restart snap.microk8s.daemon-containerd.service
 ```
 
-## 开启插件
+### 开启插件
 
 microk8s 自带很多插件, 我们需要开启相应的配置
 
@@ -205,32 +205,32 @@ coredns-7b67f9f8c-9b8nz                 1/1     Running   0          12h
 hostpath-provisioner-6d744c4f7c-g85m2   1/1     Running   11         273d
 ```
 
-# dashboard
+## dashboard
 
 `Kubernetes Dashboard` 是 Kubernetes 集群的基于 Web 的通用 UI. 它允许用户管理在群集中运行的应用程序并对其进行故障排除, 以及管理群集本身
 
 默认情况下, dashboard 部署完会自动生成一个证书, 但是这个证书貌似不是很好使, 一般浏览器不放行, 只有火狐浏览器能忽略风险继续访问, 因此需要用自己的证书替换, 只需要在启用 dashboard 前, 在与 dashboard 相同命名空间下创建名为
 `kubernetes-dashboard-certs` 的密钥
 
-## 生成证书
+### 生成证书
 
 可以用 [Let’s Encrypt](https://letsencrypt.org/) 生成证书, 或者使用自签名证书, 参考 [GitHub 文档](https://github.com/kubernetes/dashboard/blob/master/docs/user/certificate-management.md)
 
 以下使用 openssl 生成证书, 当提示输入密码时直接回车跳过即可
 
 ```sh
-# 生成dashboard.key私钥和dashboard.csr文件
+## 生成dashboard.key私钥和dashboard.csr文件
 openssl genrsa -des3 -passout pass:123456 -out dashboard.pass.key 2048
 openssl rsa -passin pass:123456 -in dashboard.pass.key -out dashboard.key
 rm dashboard.pass.key
 openssl req -new -key dashboard.key -out dashboard.csr
-# SSL证书
+## SSL证书
 openssl x509 -req -sha256 -days 365 -in dashboard.csr -signkey dashboard.key -out dashboard.crt
 rm dashboard.csr
 mkdir certs && mv dashboard.key dashboard.crt certs
 ```
 
-## 创建密钥
+### 创建密钥
 
 自定义证书必须存储在与 `Kubernetes Dashboard` 相同的命名空间中的 `kubernetes-dashboard-certs` 密钥中. 将 `dashboard.crt` 和 `dashboard.key` 文件存储在 `certs` 目录下, 然后用这些文件的内容创建密钥
 参考 [GitHub 文档](https://github.com/kubernetes/dashboard/blob/master/docs/user/installation.md#recommended-setup)
@@ -239,7 +239,7 @@ mkdir certs && mv dashboard.key dashboard.crt certs
 microk8s.kubectl create secret generic kubernetes-dashboard-certs --from-file=./certs -n kube-system
 ```
 
-## 部署并访问
+### 部署并访问
 
 启用插件, `microk8s.enable dns ingress dashboard`
 
@@ -253,7 +253,7 @@ microk8s.kubectl create secret generic kubernetes-dashboard-certs --from-file=./
 microk8s.kubectl -n kube-system describe secret $(microk8s.kubectl -n kube-system get secret | grep default-token | cut -d " " -f1) | grep token: | awk '{print $2;}'
 ```
 
-# 引用
+## 引用
 
 - [通过 MicroK8s 搭建你的 K8s 环境](https://juejin.im/post/5d7456d05188250a98581fbf)
 - [使用 microk8s 安装单节点 k8s 集群](https://www.imooc.com/article/291860)

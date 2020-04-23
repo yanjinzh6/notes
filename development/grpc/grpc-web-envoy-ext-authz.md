@@ -7,17 +7,17 @@ categories:
 permalink: grpc-web-envoy-ext-authz
 ---
 
-# 简介
+## 简介
 
 使用 grpc-web 的情况下, 前端代码变成了 `grpcClient.doGrpcFunc`, 与之前的 fetch 请求的区别就是 grpc-web 使用 http2 metadata 的方式, 然后 envoy 又会帮忙设置成 http headers, 所以这里就简单实现一个设置认证并且添加一个 `http_filters` 来处理认证状态的例子
 
 <!-- more -->
 
-# 配置
+## 配置
 
 这里主要的配置使用了 [envoy front-proxy 项目](https://github.com/envoyproxy/envoy/tree/master/examples/front-proxy)
 
-## envoy 配置
+### envoy 配置
 
 首先配置了 `envoy.http_connection_manager` filter, 通过路由, 将所有的请求都转发到 `cluster: echo_service`, 当需要自定义 http header 的时候需要在 `cors` 配置上, 然后通过自定义一个 `http_filters` 来处理认证
 
@@ -93,7 +93,7 @@ static_resources:
         port_value: 6060
 ```
 
-## helloworld.proto
+### helloworld.proto
 
 ```proto
 syntax = "proto3";
@@ -114,7 +114,7 @@ message HelloReply {
 }
 ```
 
-## 客户端
+### 客户端
 
 通过调用 `sayHello` 并且设置 `{ Authorization: 'test' }` 模拟接口认证
 
@@ -134,7 +134,7 @@ client.sayHello(request, { Authorization: 'test' }, (err, response) => {
 });
 ```
 
-## 认证服务端
+### 认证服务端
 
 ```js
 const express = require('express')
@@ -157,7 +157,7 @@ app.use((req, res, next) => {
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 ```
 
-## 应答服务端
+### 应答服务端
 
 ```js
 var PROTO_PATH = __dirname + '/helloworld.proto';
@@ -207,7 +207,7 @@ if (require.main === module) {
 exports.getServer = getServer;
 ```
 
-# 测试
+## 测试
 
 ```html
 <!DOCTYPE html>
@@ -272,6 +272,6 @@ ServerUnaryCall {
   request: { name: 'World' } }
 ```
 
-# 小结
+## 小结
 
 这只是一个简单的例子, 认证和授权一般都有很多成熟的服务, 后面需要继续探讨怎么进行无耦合的使用各种成熟的服务

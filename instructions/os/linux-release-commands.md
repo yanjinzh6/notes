@@ -24,12 +24,12 @@ Linux 的发行版很多, 据某个图片所示, 从 Debian 中分了 N 多分�
 
 <!-- more -->
 
-# `lsb_release` 命令
+## `lsb_release` 命令
 
 LSB (Linux 标准库 Linux Standard Base) 能够打印发行版的具体信息, 包括发行版名称, 版本号, 代号等.
 
 ```sh
-# lsb_release -a
+## lsb_release -a
 No LSB modules are available.
 Distributor ID: Ubuntu
 Description: Ubuntu 16.04.3 LTS
@@ -37,21 +37,21 @@ Release: 16.04
 Codename: xenial
 ```
 
-# `/etc/*-release` 文件
+## `/etc/*-release` 文件
 
 release 文件通常被视为操作系统的标识. 在 `/etc` 目录下放置了很多记录着发行版各种信息的文件, 每个发行版都各自有一套这样记录着相关信息的文件. 下面是一组在 Ubuntu/Debian 系统上显示出来的文件内容.
 
 ```sh
-# cat /etc/issue
+## cat /etc/issue
 Ubuntu 16.04.3 LTS \n \l
-# cat /etc/issue.net
+## cat /etc/issue.net
 Ubuntu 16.04.3 LTS
-# cat /etc/lsb-release
+## cat /etc/lsb-release
 DISTRIB_ID=Ubuntu
 DISTRIB_RELEASE=16.04
 DISTRIB_CODENAME=xenial
 DISTRIB_DESCRIPTION="Ubuntu 16.04.3 LTS"
-# cat /etc/os-release
+## cat /etc/os-release
 NAME="Ubuntu"
 VERSION="16.04.3 LTS (Xenial Xerus)"
 ID=ubuntu
@@ -63,18 +63,18 @@ SUPPORT_URL="http://help.ubuntu.com/"
 BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
 VERSION_CODENAME=xenial
 UBUNTU_CODENAME=xenial
-# cat /etc/debian_version
+## cat /etc/debian_version
 9.3
 ```
 
 下面这一组是在 RHEL/CentOS/Fedora 系统上显示出来的文件内容. 其中 `/etc/redhat-release` 和 `/etc/system-release` 文件是指向 `/etc/[发行版名称]-release` 文件的一个连接.
 
 ```sh
-# cat /etc/centos-release
+## cat /etc/centos-release
 CentOS release 6.9 (Final)
-# cat /etc/fedora-release
+## cat /etc/fedora-release
 Fedora release 27 (Twenty Seven)
-# cat /etc/os-release
+## cat /etc/os-release
 NAME=Fedora
 VERSION="27 (Twenty Seven)"
 ID=fedora
@@ -90,36 +90,36 @@ REDHAT_BUGZILLA_PRODUCT_VERSION=27
 REDHAT_SUPPORT_PRODUCT="Fedora"
 REDHAT_SUPPORT_PRODUCT_VERSION=27
 PRIVACY_POLICY_URL="https://fedoraproject.org/wiki/Legal:PrivacyPolicy"
-# cat /etc/redhat-release
+## cat /etc/redhat-release
 Fedora release 27 (Twenty Seven)
-# cat /etc/system-release
+## cat /etc/system-release
 Fedora release 27 (Twenty Seven)
 ```
 
-# `uname` 命令
+## `uname` 命令
 
 uname (unix name 的意思)  是一个打印系统信息的工具, 包括内核名称, 版本号, 系统详细信息以及所运行的操作系统等等.
 
 ```sh
-# uname -a
+## uname -a
 Linux localhost.localdomain 4.12.14-300.fc26.x86_64 #1 SMP Wed Sep 20 16:28:07 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux
 ```
 
-# `/proc/version` 文件
+## `/proc/version` 文件
 
 这个文件记录了 Linux 内核的版本, 用于编译内核的 gcc 的版本, 内核编译的时间, 以及内核编译者的用户名.
 
 ```sh
-# cat /proc/version
+## cat /proc/version
 Linux version 4.12.14-300.fc26.x86_64 ([email protected]) (gcc version 7.2.1 20170915 (Red Hat 7.2.1-2) (GCC) ) #1 SMP Wed Sep 20 16:28:07 UTC 2017
 ```
 
-# `dmesg` 命令
+## `dmesg` 命令
 
 dmesg (展示信息 display message 或驱动程序信息 driver message) 是大多数类 Unix 操作系统上的一个命令, 用于打印内核的消息缓冲区的信息.
 
 ```sh
-# dmesg | grep "Linux"
+## dmesg | grep "Linux"
 [ 0.000000] Linux version 4.12.14-300.fc26.x86_64 ([email protected]) (gcc version 7.2.1 20170915 (Red Hat 7.2.1-2) (GCC) ) #1 SMP Wed Sep 20 16:28:07 UTC 2017
 [ 0.001000] SELinux: Initializing.
 [ 0.001000] SELinux: Starting in permissive mode
@@ -131,12 +131,12 @@ dmesg (展示信息 display message 或驱动程序信息 driver message) 是大
 [ 2.564584] SELinux: Unregistering netfilter hooks
 ```
 
-# `YUM` 或 `DNF` 命令
+## `YUM` 或 `DNF` 命令
 
 Yum (Yellowdog 更新器修改版Yellowdog Updater Modified) 是 Linux 操作系统上的一个包管理工具, 而 yum 命令被用于一些基于 RedHat 的 Linux 发行版上安装, 更新, 查找, 删除软件包.
 
 ```sh
-# yum info nano
+## yum info nano
 Loaded plugins: fastestmirror, ovl
 Loading mirror speeds from cached hostfile
  * base: centos.zswap.net
@@ -158,7 +158,7 @@ Description : GNU nano is a small and friendly text editor.
 下面的 yum repolist 命令执行后显示了 yum 的基础源仓库, 额外源仓库, 更新源仓库都来自 CentOS 7 仓库.
 
 ```sh
-# yum repolist
+## yum repolist
 Loaded plugins: fastestmirror, ovl
 Loading mirror speeds from cached hostfile
  * base: centos.zswap.net
@@ -172,7 +172,7 @@ repolist: 11908
 ```
 
 ```sh
-# dnf info nano
+## dnf info nano
 Last metadata expiration check: 0:01:25 ago on Thu Feb 15 01:59:31 2018.
 Installed Packages
 Name : nano
@@ -189,21 +189,21 @@ License : GPLv3+
 Description : GNU nano is a small and friendly text editor.
 ```
 
-# `RPM` 命令
+## `RPM` 命令
 
 RPM (红帽包管理器 RedHat Package Manager) 是在 CentOS, Oracle Linux, Fedora 这些基于 RedHat 的操作系统上的一个强大的命令行包管理工具, 同样也可以帮助我们查看系统的版本信息.
 
 ```sh
-# rpm -q nano
+## rpm -q nano
 nano-2.8.7-1.fc27.x86_64
 ```
 
-# `APT-GET` 命令
+## `APT-GET` 命令
 
 Apt-Get (高级打包工具 Advanced Packaging Tool) 是一个强大的命令行工具, 可以自动下载安装新软件包, 更新已有的软件包, 更新软件包列表索引, 甚至更新整个 Debian 系统.
 
 ```sh
-# apt-cache policy nano
+## apt-cache policy nano
 nano:
  Installed: 2.5.3-2ubuntu2
  Candidate: 2.5.3-2ubuntu2
@@ -215,7 +215,7 @@ nano:
  500 http://nova.clouds.archive.ubuntu.com/ubuntu xenial/main amd64 Packages
 ```
 
-# 引用
+## 引用
 
 - [查看 Linux 发行版名称和版本号的 8 种方法](https://linux.cn/article-9586-1.html)
 - [6 种查看系统 Linux 内核的方法](https://www.2daygeek.com/check-find-determine-running-installed-linux-kernel-version/)

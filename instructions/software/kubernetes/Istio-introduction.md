@@ -8,16 +8,17 @@ permalink: Istio-introduction
 photo:
 ---
 
-# 简介
+## 简介
 
 [Istio](https://cloud.google.com/istio/?hl=zh-cn) 是一个开源的独立服务网格，可为您成功运行分布式微服务架构提供所需的基础。随着各组织越来越多地采用云平台，开发者必须使用微服务设计架构以实现可移植性，而运营者必须管理包含混合和多云部署的大型分布式部署。Istio 采用一种一致的方式来保护, 连接和监控微服务，降低了管理微服务部署的复杂性。
 
 <!-- more -->
 
-# 安装
+## 安装
+
 Istio 安装在自己的 istio-system 命名空间中, 可以管理来自所有其他命名空间的服务
 
-## 下载
+### 下载
 
 转到 [Istio 版本页面](https://github.com/istio/istio/releases)下载
 或者使用命令下载
@@ -29,7 +30,7 @@ curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.1.0 sh -
 移至 Istio 包目录
 
 ```sh
-$ cd istio-1.1.0
+cd istio-1.1.0
 ```
 
 安装目录包含:
@@ -42,74 +43,74 @@ $ cd istio-1.1.0
 将 bin 目录添加到系统 \$PATH 中
 
 ```sh
-$ export PATH=$PWD/bin:$PATH
+export PATH=$PWD/bin:$PATH
 ```
 
-## 部署
+### 部署
 
 [进入 Istio 包目录](https://istio.io/docs/setup/kubernetes/install/helm/)
 
-### 如果您的群集未部署 Tiller 且您不想安装它
+#### 如果您的群集未部署 Tiller 且您不想安装它
 
 ```sh
-# 为 istio 组件创建名称空间
+## 为 istio 组件创建名称空间
 $ kubectl create namespace istio-system
-# 使用 kubectl apply 安装所有 Istio 自定义资源定义 CRD
+## 使用 kubectl apply 安装所有 Istio 自定义资源定义 CRD
 helm template install/kubernetes/helm/istio-init --name istio-init --namespace istio-system | kubectl apply -f -
-# 使用命令验证是否已将所有 Istio CRD 提交到 Kubernetes api-server
+## 使用命令验证是否已将所有 Istio CRD 提交到 Kubernetes api-server
 $ kubectl get crds | grep 'istio.io\|certmanager.k8s.io' | wc -l
 53
-# 选择配置文件(https://istio.io/docs/setup/kubernetes/additional-setup/config-profiles/), 然后渲染并应用与您选择的配置文件对应的Istio核心组件, 建议生产部署使用默认配置文件
+## 选择配置文件(https://istio.io/docs/setup/kubernetes/additional-setup/config-profiles/), 然后渲染并应用与您选择的配置文件对应的Istio核心组件, 建议生产部署使用默认配置文件
 $ helm template install/kubernetes/helm/istio --name istio --namespace istio-system | kubectl apply -f -
 ```
 
-### 使用 Helm 和 Tiller 安装
+#### 使用 Helm 和 Tiller 安装
 
 ```sh
-# 为 Tiller 定义角色
+## 为 Tiller 定义角色
 $ kubectl apply -f install/kubernetes/helm/helm-service-account.yaml
-# 使用 service-account 安装Tiller
+## 使用 service-account 安装Tiller
 $ helm init --service-account tiller
-# 安装 istio chart 以引导所有 Istio 的 CRD
+## 安装 istio chart 以引导所有 Istio 的 CRD
 $ helm install install/kubernetes/helm/istio-init --name istio-init --namespace istio-system
-# 使用命令验证是否已将所有 Istio CRD 提交到 Kubernetes api-server
+## 使用命令验证是否已将所有 Istio CRD 提交到 Kubernetes api-server
 $ kubectl get crds | grep 'istio.io\|certmanager.k8s.io' | wc -l
 53
-# 选择配置文件(https://istio.io/docs/setup/kubernetes/additional-setup/config-profiles/), 然后渲染并应用与您选择的配置文件对应的Istio核心组件, 建议生产部署使用默认配置文件
+## 选择配置文件(https://istio.io/docs/setup/kubernetes/additional-setup/config-profiles/), 然后渲染并应用与您选择的配置文件对应的Istio核心组件, 建议生产部署使用默认配置文件
 $ helm template install/kubernetes/helm/istio --name istio --namespace istio-system | kubectl apply -f -
 ```
 
-# 验证安装
+## 验证安装
 
 ```sh
-# 参考配置文件中的组件表, 验证是否已部署与所选配置文件对应的 Kubernetes 服务
+## 参考配置文件中的组件表, 验证是否已部署与所选配置文件对应的 Kubernetes 服务
 $ kubectl get svc -n istio-system
 $ kubectl get pods -n istio-system
 ```
 
-# 卸载
+## 卸载
 
 ```sh
-# without Tiller
+## without Tiller
 $ helm template install/kubernetes/helm/istio --name istio --namespace istio-system | kubectl delete -f -
 $ kubectl delete namespace istio-system
-# with Tiller
+## with Tiller
 $ helm delete --purge istio
 $ helm delete --purge istio-init
 ```
 
-## 删除 CRD 和 Istio 配置
+### 删除 CRD 和 Istio 配置
 
 可以使用 kubectl 简单地删除 CRD
 
 ```sh
-# 永久删除 Istio 的 CR D和整个 Istio 配置
+## 永久删除 Istio 的 CR D和整个 Istio 配置
 $ kubectl delete -f install/kubernetes/helm/istio-init/files
 ```
 
-# 使用
+## 使用
 
-## 前提
+### 前提
 
 要成为 Istio 服务网格的一部分, Kubernetes 集群中的 pod 和服务必须满足以下要求:
 
@@ -137,36 +138,36 @@ $ kubectl delete -f install/kubernetes/helm/istio-init/files
 
 - NET_ADMIN 功能: 如果您的群集中实施了 Pod 安全策略, 除非您使用 Istio CNI 插件, 您的 pod 必须具有 NET_ADMIN 功能. 请参阅必需的 Pod 功能.
 
-## 使用 Helm 更改 Istio 设置
+### 使用 Helm 更改 Istio 设置
 
 Helm 默认安装插件配置
 
 ```yaml
-#
-# Gateways Configuration, refer to the charts/gateways/values.yaml
-# for detailed configuration
-#
+##
+## Gateways Configuration, refer to the charts/gateways/values.yaml
+## for detailed configuration
+##
 gateways:
   enabled: true
 
-#
-# sidecar-injector webhook configuration, refer to the
-# charts/sidecarInjectorWebhook/values.yaml for detailed configuration
-#
+##
+## sidecar-injector webhook configuration, refer to the
+## charts/sidecarInjectorWebhook/values.yaml for detailed configuration
+##
 sidecarInjectorWebhook:
   enabled: true
 
-#
-# galley configuration, refer to charts/galley/values.yaml
-# for detailed configuration
-#
+##
+## galley configuration, refer to charts/galley/values.yaml
+## for detailed configuration
+##
 galley:
   enabled: true
 
-#
-# mixer configuration
-#
-# @see charts/mixer/values.yaml, it takes precedence
+##
+## mixer configuration
+##
+## @see charts/mixer/values.yaml, it takes precedence
 mixer:
   enabled: true
   policy:
@@ -175,66 +176,66 @@ mixer:
 
   telemetry:
     enabled: true
-#
-# pilot configuration
-#
-# @see charts/pilot/values.yaml
+##
+## pilot configuration
+##
+## @see charts/pilot/values.yaml
 pilot:
   enabled: true
 
-#
-# security configuration
-#
+##
+## security configuration
+##
 security:
   enabled: true
 
-#
-# nodeagent configuration
-#
+##
+## nodeagent configuration
+##
 nodeagent:
   enabled: false
 
-#
-# addon grafana configuration
-#
+##
+## addon grafana configuration
+##
 grafana:
   enabled: false
 
-#
-# addon prometheus configuration
-#
+##
+## addon prometheus configuration
+##
 prometheus:
   enabled: true
 
-#
-# addon servicegraph configuration
-#
+##
+## addon servicegraph configuration
+##
 servicegraph:
   enabled: false
 
-#
-# addon jaeger tracing configuration
-#
+##
+## addon jaeger tracing configuration
+##
 tracing:
   enabled: false
 
-#
-# addon kiali tracing configuration
-#
+##
+## addon kiali tracing configuration
+##
 kiali:
   enabled: false
 
-#
-# Istio CNI plugin enabled
-#   This must be enabled to use the CNI plugin in Istio.  The CNI plugin is installed separately.
-#   If true, the privileged initContainer istio-init is not needed to perform the traffic redirect
-#   settings for the istio-proxy.
-#
+##
+## Istio CNI plugin enabled
+##   This must be enabled to use the CNI plugin in Istio.  The CNI plugin is installed separately.
+##   If true, the privileged initContainer istio-init is not needed to perform the traffic redirect
+##   settings for the istio-proxy.
+##
 istio_cni:
   enabled: false
 
-# addon Istio CoreDNS configuration
-#
+## addon Istio CoreDNS configuration
+##
 istiocoredns:
   enabled: false
 ```
@@ -242,6 +243,6 @@ istiocoredns:
 可以通过添加一个或多个 <code>--set <key>=<value></code> 来自定义安装选项
 
 ```sh
-# 通过 --set grafana.enabled=true 选项启用 Grafana 组件
+## 通过 --set grafana.enabled=true 选项启用 Grafana 组件
 helm install install/kubernetes/helm/istio --name istio --namespace istio-system --set grafana.enabled=true
 ```

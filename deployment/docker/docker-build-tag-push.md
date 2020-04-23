@@ -8,7 +8,7 @@ permalink: docker-build-tag-push
 photo:
 ---
 
-# 简介
+## 简介
 
 > 这篇文章主要介绍了在持续继承中会用到构建镜像的基础命令
 
@@ -27,7 +27,7 @@ photo:
 
 <!-- more -->
 
-# docker build
+## docker build
 
 `docker build` 命令用于使用 Dockerfile 创建镜像
 
@@ -59,7 +59,7 @@ OPTIONS说明
   --network: 默认 default. 在构建期间设置RUN指令的网络模式
 ```
 
-# docker tag
+## docker tag
 
 `docker tag` : 标记本地镜像, 将其归入某一仓库
 
@@ -67,7 +67,7 @@ OPTIONS说明
 docker tag [OPTIONS] IMAGE[:TAG] [REGISTRYHOST/][USERNAME/]NAME[:TAG]
 ```
 
-# docker push
+## docker push
 
 `docker push` : 将本地的镜像上传到镜像仓库, 要先登陆到镜像仓库
 
@@ -79,6 +79,6 @@ OPTIONS说明
   --disable-content-trust : 忽略镜像的校验, 默认开启
 ```
 
-# 小结
+## 小结
 
 比较简单的构建过程, 可以很好的集成到 ci 中, 也可以从另一个思路走, 通过 `docker save`, `docker load` 来保存和导入镜像

@@ -7,26 +7,26 @@ categories:
 permalink: lscp-command
 ---
 
-# 简介
+## 简介
 
 scp 是 secure copy 的简写, 用于在 Linux 下进行远程拷贝文件的命令, 和它类似的命令有 cp, 不过 cp 只是在本机进行拷贝不能跨服务器, 而且 scp 传输是加密的. 可能会稍微影响一下速度. 当你服务器硬盘变为只读 read only system 时, 用 scp 可以帮你把文件移出来. 另外, scp 还非常不占资源, 不会提高多少系统负荷, 在这一点上, rsync 就远远不及它了. 虽然 rsync 比 scp 会快一点, 但当小文件众多的情况下, rsync 会导致硬盘 I/O 非常高, 而 scp 基本不影响系统正常使用.
 
-# 常用
+## 常用
 
 ```sh
-# 从本地服务器复制到远程服务器
+## 从本地服务器复制到远程服务器
 scp local_file remote_username@remote_ip:remote_folder
-# 使用 -r 支持复制目录
+## 使用 -r 支持复制目录
 scp -r local_folder remote_username@remote_ip:remote_folder
-# 反过来支持从远程复制到本地
+## 反过来支持从远程复制到本地
 scp -r remote_username@remote_ip:remote_folder local_folder
-# 当目录存在时, 会出现目录下的文件不会被覆盖, 这时候需要直接复制目录所有的内容
+## 当目录存在时, 会出现目录下的文件不会被覆盖, 这时候需要直接复制目录所有的内容
 scp -r remote_username@remote_ip:remote_folder/. local_folder/
 ```
 
 <!-- more -->
 
-# 命令格式
+## 命令格式
 
 ```sh
 scp [参数] [原路径] [目标路径]
@@ -50,6 +50,6 @@ scp [参数] [原路径] [目标路径]
 -S program 指定加密传输时所使用的程序. 此程序必须能够理解 ssh(1)的选项.
 ```
 
-# 引用
+## 引用
 
 - [每天一个 linux 命令 (60): scp命令](https://www.cnblogs.com/peida/archive/2013/03/15/2960802.HTML)

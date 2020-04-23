@@ -8,7 +8,7 @@ permalink: jenkins-kubernetes-plugin
 photo:
 ---
 
-# 介绍
+## 介绍
 
 基于 Kubernete 的 CI/CD, 可以使用的工具有很多, 比如 Jenkins, Gitlab CI 和新兴的 drone
 
@@ -33,7 +33,7 @@ Kubernetes 搭建 Jenkins 集群的好处:
 
 <!-- more -->
 
-# 安装
+## 安装
 
 参考官方提供的 [yaml 文件](https://github.com/jenkinsci/kubernetes-plugin/tree/master/src/main/kubernetes), 这里官网使用的是比较规范的 StatefulSet (有状态集群服务) 方式进行部署, 并配置了 Ingress 和 RBAC 账户权限信息.
 
@@ -50,7 +50,7 @@ volumes:
 通过 ingress 来暴露 Jenkins 服务并强制 https 访问
 
 ```yml
-# jenkins
+## jenkins
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -184,9 +184,9 @@ NAME                      READY   STATUS    RESTARTS   AGE     IP            NOD
 jenkins-56dc668d6-nkhsg   1/1     Running   0          4m24s   10.244.1.25   yanjin-ubuntu-node   <none>           <none>
 ```
 
-# 配置
+## 配置
 
-## kubernetes plugin 配置
+### kubernetes plugin 配置
 
 配置 Jenkins, 让他能够动态的生成 Slave 的 Pod
 
@@ -197,29 +197,27 @@ jenkins-56dc668d6-nkhsg   1/1     Running   0          4m24s   10.244.1.25   yan
 
 1. 需要安装 kubernetes plugin, 点击 Manage Jenkins -> Manage Plugins -> Available -> Kubernetes 勾选安装即可
 2. 安装完毕后, 点击 Manage Jenkins —> Configure System —> (拖到最下方)Add a new cloud —> 选择 Kubernetes, 然后填写 Kubernetes 和 Jenkins 配置信息
-
-- Name 处默认为 kubernetes, 也可以修改为其他名称, 如果这里修改了, 下边在执行 Job 时指定 `podTemplate()` 参数 cloud 为其对应名称, 否则会找不到, cloud 默认值取: kubernetes
-- Kubernetes URL 处默认 `https://kubernetes.default.svc.cluster.local` 完整 DNS 记录, 也可以简单填写 `https://kubernetes.default`, 这是 Kubernetes Service 对应的 DNS 记录, 通过该 DNS 记录可以解析成该 Service 的 Cluster IP, 命名方式要符合 `<svc_name>.<namespace_name>.svc.cluster.local`, 或者直接填写外部 Kubernetes 的地址 `https://<ClusterIP>:<Ports>`
-- Jenkins URL 处填写 `http://jenkins.k8s-ops.svc.cluster.local:80`, 使用 Jenkins Service 对应的 DNS 记录, 不过要指定服务暴漏的端口. 同时也可以用 `http://<ClusterIP>:<Node_Port>` 方式
-- 配置 Pod Template, 其实就是配置 Jenkins Slave 运行的 Pod 模板, 命名空间我们同样是用 k8s-ops, 这里的 Labels 名在配置非 pipeline 类型 Job 时, 用来指定任务运行的节点, 然后我们这里使用的是 `cnych/jenkins:jnlp` 这个镜像, 这个镜像是在官方的 jnlp 镜像基础上定制的, 加入了 kubectl 等一些实用的工具, Containers 下的 Name 字段的名字, 这里要注意的是, 如果 Name 配置为 jnlp, 那么 Kubernetes 会用下边指定的 Docker Image 代替默认的 `jenkinsci/jnlp-slave` 镜像, 否则, Kubernetes plugin 还是会用默认的 `jenkinsci/jnlp-slave` 镜像与 Jenkins Server 建立连接, 即使我们指定其他 Docker Image. 这里我随便配置为 jnlp-slave, 意思就是使用默认的 `jenkinsci/jnlp-slave` 镜像来运行
-
+   - Name 处默认为 kubernetes, 也可以修改为其他名称, 如果这里修改了, 下边在执行 Job 时指定 `podTemplate()` 参数 cloud 为其对应名称, 否则会找不到, cloud 默认值取: kubernetes
+   - Kubernetes URL 处默认 `https://kubernetes.default.svc.cluster.local` 完整 DNS 记录, 也可以简单填写 `https://kubernetes.default`, 这是 Kubernetes Service 对应的 DNS 记录, 通过该 DNS 记录可以解析成该 Service 的 Cluster IP, 命名方式要符合 `<svc_name>.<namespace_name>.svc.cluster.local`, 或者直接填写外部 Kubernetes 的地址 `https://<ClusterIP>:<Ports>`
+   - Jenkins URL 处填写 `http://jenkins.k8s-ops.svc.cluster.local:80`, 使用 Jenkins Service 对应的 DNS 记录, 不过要指定服务暴漏的端口. 同时也可以用 `http://<ClusterIP>:<Node_Port>` 方式
+   - 配置 Pod Template, 其实就是配置 Jenkins Slave 运行的 Pod 模板, 命名空间我们同样是用 k8s-ops, 这里的 Labels 名在配置非 pipeline 类型 Job 时, 用来指定任务运行的节点, 然后我们这里使用的是 `cnych/jenkins:jnlp` 这个镜像, 这个镜像是在官方的 jnlp 镜像基础上定制的, 加入了 kubectl 等一些实用的工具, Containers 下的 Name 字段的名字, 这里要注意的是, 如果 Name 配置为 jnlp, 那么 Kubernetes 会用下边指定的 Docker Image 代替默认的 `jenkinsci/jnlp-slave` 镜像, 否则, Kubernetes plugin 还是会用默认的 `jenkinsci/jnlp-slave` 镜像与 Jenkins Server 建立连接, 即使我们指定其他 Docker Image. 这里我随便配置为 jnlp-slave, 意思就是使用默认的 `jenkinsci/jnlp-slave` 镜像来运行
 3. 配置完毕, 可以点击 "Test Connection" 按钮测试是否能够连接的到 Kubernetes, 如果显示 Connection test successful 则表示连接成功, 配置没有问题.
 
-## Istio 配置
+### Istio 配置
 
-### 新建 k8s 命名空间
+#### 新建 k8s 命名空间
 
 设置 label 自动注入 sidecar
 
-### 重新部署
+#### 重新部署
 
 需要规范端口名称
 
-### 配置外网连接
+#### 配置外网连接
 
-## 问题
+### 问题
 
-由于官方的插件站点访问问题明显, 所以使用国内源 http://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/current/update-center.json
+由于官方的插件站点访问问题明显, 所以使用[国内源](http://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/current/update-center.json)
 
 ```sh
 kubectl exec -it jenkins-56588c954c-9dvpn -c jenkins -n jenkins-ops /bin/bash
@@ -239,11 +237,11 @@ ERROR: Signature verification failed in downloadable
 
 没有使用 istio 时好像不会有这种情况
 
-# 测试
+## 测试
 
 配置 Job 测试一下是否会根据配置的 Label 动态创建一个运行在 Docker Container 中的 Jenkins Slave 并注册到 Master 上, 而且运行完 Job 后, Slave 会被注销并且 Docker Container 也会自动删除
 
-## pipeline 类型支持
+### pipeline 类型支持
 
 创建一个 Pipeline 类型 Job , 然后在 Pipeline 脚本处填写一个简单的测试脚本
 
@@ -264,7 +262,7 @@ podTemplate(label: label, cloud: 'kubernetes') {
 在 Slave 中构建任务
 
 ```
-# label: 添加 Slave Pod 中配置的 label
+## label: 添加 Slave Pod 中配置的 label
 node(label) {
     stage('Clone') {
       echo "1.Clone Stage"
@@ -290,7 +288,7 @@ jenkins-7c85b6f4bd-rfqgv   1/1       Running   4          6d
 jnlp-0hrrz                 1/1       Running   0          23s
 ```
 
-## Container Group 类型支持
+### Container Group 类型支持
 
 创建一个 Pipeline 类型 Job, 然后在 Pipeline 脚本处填写一个简单的测试脚本
 
@@ -315,13 +313,13 @@ podTemplate(label: label, cloud: 'kubernetes', containers: [
 
 注意: 这里我们使用的 containers 定义了一个 containerTemplate 模板, 指定名称为 maven 和使用的 Image, 下边在执行 Stage 时, 使用 <code>container('maven'){...} </code>就可以指定在该容器模板里边执行相关操作了. 比如, 该示例会在 jenkins-slave 中执行 git clone 操作, 然后进入到 maven 容器内执行 <code>mvn -B clean install </code>编译操作. 这种操作的好处就是, 我们只需要根据代码类型分别制作好对应的编译环境镜像, 通过指定不同的 container 来分别完成对应代码类型的编译操作. 模板详细的各个参数配置可以参照 [Pod and container template configuration](https://github.com/jenkinsci/kubernetes-plugin/blob/master/README.md#pod-and-container-template-configuration).
 
-## 非 Pipeline 类型支持
+### 非 Pipeline 类型支持
 
 新建一个自由风格的 Job, 配置 "Restrict where this project can be run" 勾选, 在 "Label Expression" 后边输出我们上边创建模板是指定的 Labels 名称, 意思是指定该 Job 匹配 Labels 标签的 Slave 上运行
 
-# 自定义 jenkins-slave 镜像
+## 自定义 jenkins-slave 镜像
 
-# 部署 Kubernetes 应用
+## 部署 Kubernetes 应用
 
 1. 编写代码
 2. 测试
@@ -332,7 +330,7 @@ podTemplate(label: label, cloud: 'kubernetes', containers: [
 7. 更改 YAML 文件中 Docker 镜像 TAG
 8. 利用 kubectl 工具部署应用
 
-## clone 代码
+### clone 代码
 
 ```
 stage('Clone') {
@@ -341,7 +339,7 @@ stage('Clone') {
 }
 ```
 
-## 测试
+### 测试 stage
 
 ```
 stage('Test') {
@@ -349,7 +347,7 @@ stage('Test') {
 }
 ```
 
-## 构建镜像
+### 构建镜像
 
 ```
 stage('Build') {
@@ -375,7 +373,7 @@ stage('Build') {
 }
 ```
 
-## 推送镜像
+### 推送镜像
 
 通过 Credentials -> Stores scoped to Jenkins 下面的 Jenkins -> Global credentials (unrestricted) -> 左侧的 Add Credentials: 添加一个 Username with password 类型的认证信息
 
@@ -424,19 +422,19 @@ stage('Push') {
 }
 ```
 
-## 更改 YAML, 更新 Kubernetes 系统中应用的镜像版本
+### 更改 YAML, 更新 Kubernetes 系统中应用的镜像版本
 
 使用一个 sed 命令
 
 ```
-# sed 命令就是将 k8s.yaml 文件中的 标识给替换成变量 build_tag 的值
+## sed 命令就是将 k8s.yaml 文件中的 标识给替换成变量 build_tag 的值
 stage('YAML') {
     echo "5. Change YAML File Stage"
     sh "sed -i 's/<BUILD_TAG>/${build_tag}/' k8s.yaml"
 }
 ```
 
-## 部署
+### 部署
 
 ```
 stage('Deploy') {
@@ -445,19 +443,19 @@ stage('Deploy') {
 }
 ```
 
-# 提供一个 shell 脚本, 实现一个 CI/CD 流程
+## 提供一个 shell 脚本, 实现一个 CI/CD 流程
 
 ```sh
-#!/bin/bash
-# Filename: k8s-deploy_v0.1.sh
-# Description: jenkins CI/CD 持续发布脚本
-# Author:  yi.hu
-# Email: 345270016@qq.com
-# Revision: 1.0
-# Date: 2018-08-10
-# Note: prd
+##!/bin/bash
+## Filename: k8s-deploy_v0.1.sh
+## Description: jenkins CI/CD 持续发布脚本
+## Author:  yi.hu
+## Email: 345270016@qq.com
+## Revision: 1.0
+## Date: 2018-08-10
+## Note: prd
 
-# zookeeper基础服务,依照环境实际地址配置
+## zookeeper基础服务,依照环境实际地址配置
 init() {
     local lowerEnv="$(echo ${AppEnv} | tr '[:upper:]' 'lower')"
     case "${lowerEnv}" in
@@ -477,17 +475,17 @@ init() {
 }
 
 
-# 初始化变量
+## 初始化变量
 AppId=$(echo ${AppOrg}_${AppEnv}_${AppName} |sed 's/[^a-zA-Z0-9_-]//g' | tr "[:lower:]" "[:upper:]")
 CFG_LABEL=${CfgLabelBaseNode}/${AppId}
 CFG_ADDR=${CFG_ADDR}
 
-# 登录harbor 仓库
+## 登录harbor 仓库
 docker_login () {
     docker login ${DOCKER_REGISTRY} -u${User} -p${PassWord}
 
 }
-# 编译代码, 制作镜像
+## 编译代码, 制作镜像
 build() {
 echo $ACTION
     if [ "x${ACTION}" == "xDEPLOY" ] || [ "x${ACTION}" == "xPRE_DEPLOY" ]; then
@@ -553,7 +551,7 @@ EOF
     fi
 }
 
-# 发布, 预发布, 停止, 重启
+## 发布, 预发布, 停止, 重启
 deploy() {
     if [ "x${ACTION}" == "xSTOP" ]; then
         # 停止当前实例
@@ -567,18 +565,18 @@ deploy() {
     fi
 }
 
-# 函数执行
+## 函数执行
 init
 docker_login
 build
 
 
 cat > ${WORKSPACE}/${AppName}-deploy.yaml <<- EOF
-#####################################################
-#
-#          ${ACTION} Deployment
-#
-#####################################################
+######################################################
+##
+##          ${ACTION} Deployment
+##
+######################################################
 apiVersion: apps/v1beta2 # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
 metadata:
@@ -675,16 +673,16 @@ data:
 
 EOF
 
-# 执行部署
+## 执行部署
 
 deploy
 
-# 打印配置
+## 打印配置
 
 cat ${WORKSPACE}/${AppName}-deploy.yaml
 ```
 
-# 参考
+## 参考
 
 - [Set Up A CI/CD Pipeline With Kubernetes](https://www.linux.com/tutorials/set-cicd-pipeline-kubernetes-part-1-overview/)
 - [jenkins-kubernetes-plugin](https://gitee.com/surenpi/kubernetes-plugin)

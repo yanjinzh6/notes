@@ -7,7 +7,7 @@ categories:
 permalink: jie-jue-cha-ru-tu-pian-de-wen-ti
 ---
 
-# 起因
+## 起因
 
 手动从 GitHub 中迁移过来就碰到点小问题.
 
@@ -19,14 +19,14 @@ permalink: jie-jue-cha-ru-tu-pian-de-wen-ti
 
 <!-- more -->
 
-# 了解
+## 了解
 
-## hexo 官方推荐
+### hexo 官方推荐
 
 通过修改配置文件开启文章资源文件夹的功能
 
 ```yml
-# _config.yml
+## _config.yml
 post_asset_folder: true
 ```
 
@@ -44,7 +44,7 @@ eg:
 {% asset_img example.jpg This is an example image %}
 ```
 
-## hexo asset image 插件
+### hexo asset image 插件
 
 网络上提示使用 [hexo-asset-image]([https://link](https://www.npmjs.com/package/hexo-asset-image)) 插件
 
@@ -52,7 +52,7 @@ eg:
 
 然而看到更新时间是 2018 年的, 粗略看了下实现, 也没对编辑器本地预览这种做处理
 
-## 测试
+### 测试
 
 经过测试, hexo 的生成方式是这样的, 结构如下的目录
 
@@ -83,9 +83,9 @@ public
 
 所以解决的方式就是重写一个插件, 将文章里面渲染的方式修改为使用当前文件夹下面的图片即可
 
-# 解决
+## 解决
 
-## 生命在于折腾
+### 生命在于折腾
 
 1. 确定需求, 生成插件目录, 必须是 hexo- 开头的
 2. 实现渲染方式正确渲染图片
@@ -94,7 +94,7 @@ public
 5. 详情参考 [插件](https://hexo.io/zh-cn/docs/plugins)
 6. ...
 
-## 而我...
+### 而我***
 
 只能通过简单无脑的修改生成后的 html 来实现, 由于采用脚本来实现同步到静态站点, 刚好也可以一并处理
 
@@ -134,6 +134,6 @@ function replaceImageUrl(fileName, parentFolder) {
 
 对于几个文件夹和文本处理确实方便也挺快的, 使用同步方法主要是避免多异步操作
 
-# 验证
+## 验证
 
 只是单纯手工检查一下.

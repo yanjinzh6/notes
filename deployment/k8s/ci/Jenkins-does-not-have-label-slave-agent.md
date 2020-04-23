@@ -8,13 +8,13 @@ permalink: Jenkins-does-not-have-label-slave-agent
 photo:
 ---
 
-# 过程
+## 过程
 
 最近没搭理 VPS 上的 minik8s 节点了, 后面升级的时候看了一下日志, 发现一大堆的错误. 其中大量出现创建 slave 的时候报错 `java.net.ProtocolException: Expected HTTP 101 response but was '403 Forbidden'`, 第一次看到 `403` 状态码的时候就觉得是不是新版本的权限配置更改了, 但是看了官网的 [service-account.yml](https://github.com/jenkinsci/kubernetes-plugin/blob/master/src/main/kubernetes/service-account.yml) 发现并没有问题, 再看后面插件的错误 `at io.fabric8.kubernetes.client.dsl.internal.WatchConnectionManager$1.onFailure(WatchConnectionManager.java:198)`, 经过查询, 这应该是插件的问题 [RP](https://github.com/jenkinsci/kubernetes-plugin/pull/582).
 
 <!-- more -->
 
-# 日志
+## 日志
 
 ```sh
 Jan 02, 2020 1:42:16 PM hudson.slaves.NodeProvisioner$2 run
@@ -66,7 +66,7 @@ Jan 02, 2020 1:42:26 PM hudson.slaves.NodeProvisioner$StandardStrategyImpl apply
 INFO: Started provisioning Kubernetes Pod Template from kubernetes with 1 executors. Remaining excess workload: 0
 ```
 
-# 版本
+## 版本
 
 VPS 机器上的版本应该更新过了.
 
@@ -76,13 +76,13 @@ Client Version: version.Info{Major:"1", Minor:"17", GitVersion:"v1.17.0", GitCom
 Server Version: version.Info{Major:"1", Minor:"17", GitVersion:"v1.17.0", GitCommit:"70132b0f130acc0bed193d9ba59dd186f0e634cf", GitTreeState:"clean", BuildDate:"2019-12-07T21:12:17Z", GoVersion:"go1.13.4", Compiler:"gc", Platform:"linux/amd64"}
 ```
 
-# 插件
+## 插件
 
 通过 Jenkins 自动将插件升级到 `1.16.7` 通过手动点立即获取可以看到当前最新版本为 [1.22.3](https://plugins.jenkins.io/kubernetes), 更新过程十分缓慢, 怀疑是[源地址](https://updates.jenkins.io/update-center.json)在 q 外的原因.
 
 更新完成后发现插件部分配置改动了, 但是之前的配置还是生效的, 测试了可以正常连接.
 
-# 新问题
+## 新问题
 
 ```sh
 Jan 02, 2020 4:35:58 PM INFO hudson.slaves.NodeProvisioner lambda$update$6
@@ -126,14 +126,14 @@ java -jar slave.jar [options...] <secret key> <slave name>
 Jan 02, 2020 4:36:01 PM WARNING org.csanchez.jenkins.plugins.kubernetes.KubernetesLauncher launch
 Error in provisioning; agent=KubernetesSlave name: jnlp-slave-jd2cv, template=PodTemplate{inheritFrom='', name='jnlp-slave', namespace='', hostNetwork=false, label='slave-agent', serviceAccount='jenkins', nodeSelector='', nodeUsageMode=EXCLUSIVE, workspaceVolume=EmptyDirWorkspaceVolume [memory=false], volumes=[HostPathVolume [mountPath=/var/run/docker.sock, hostPath=/var/run/docker.sock]], containers=[ContainerTemplate{name='jnlp', image='cnych/jenkins:jnlp', workingDir='/home/jenkins/agent', command='', args='', ttyEnabled=true, resourceRequestCpu='', resourceRequestMemory='', resourceLimitCpu='', resourceLimitMemory='', livenessProbe=org.csanchez.jenkins.plugins.kubernetes.ContainerLivenessProbe@70d7620c}]}
 java.lang.IllegalStateException: Agent is not connected after 1 seconds, status: Succeeded
-	at org.csanchez.jenkins.plugins.kubernetes.KubernetesLauncher.launch(KubernetesLauncher.java:191)
-	at hudson.slaves.SlaveComputer.lambda$_connect$0(SlaveComputer.java:290)
-	at jenkins.util.ContextResettingExecutorService$2.call(ContextResettingExecutorService.java:46)
-	at jenkins.security.ImpersonatingExecutorService$2.call(ImpersonatingExecutorService.java:71)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
+  at org.csanchez.jenkins.plugins.kubernetes.KubernetesLauncher.launch(KubernetesLauncher.java:191)
+  at hudson.slaves.SlaveComputer.lambda$_connect$0(SlaveComputer.java:290)
+  at jenkins.util.ContextResettingExecutorService$2.call(ContextResettingExecutorService.java:46)
+  at jenkins.security.ImpersonatingExecutorService$2.call(ImpersonatingExecutorService.java:71)
+  at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+  at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+  at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+  at java.lang.Thread.run(Thread.java:748)
 
 Jan 02, 2020 4:36:01 PM INFO org.csanchez.jenkins.plugins.kubernetes.KubernetesSlave _terminate
 Terminating Kubernetes instance for agent jnlp-slave-jd2cv

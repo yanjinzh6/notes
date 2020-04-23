@@ -7,7 +7,7 @@ categories:
 permalink: proxy-object
 ---
 
-# 简介
+## 简介
 
 [Proxy](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy) 对象用于定义基本操作的自定义行为 (如属性查找, 赋值, 枚举, 函数调用等)
 
@@ -15,18 +15,18 @@ permalink: proxy-object
 
 <!-- more -->
 
-# 语法
+## 语法
 
 ```js
 let p = new Proxy(target, handler)
 ```
 
-## 参数
+### 参数
 
 - `target`: 用 `Proxy` 包装的目标对象 (可以是任何类型的对象, 包括原生数组, 函数, 甚至另一个代理)
 - `handler`: 一个对象, 其属性是当执行一个操作时定义代理的行为的函数
 
-# 示例
+## 示例
 
 对于一些旧模块, 经常会存在一大堆有规律的回调方法
 
@@ -64,7 +64,7 @@ oldModule.func({ isSuccess: true, success: data => log.log(data), error: err => 
 oldModule.func2({ isSuccess: false, success: data => log.log(data), error: err => log.error(err) })
 ```
 
-## 简单 Promise
+### 简单 Promise
 
 最简单的就是通过返回一个 `Promise` 对象即可
 
@@ -95,7 +95,7 @@ proxyTest()
 
 这样虽然可以实现, 但基本上是一个个方法去改造, 失去了美观和 IDE 支持
 
-## 通过代理
+### 通过代理
 
 Proxy 的 [handler](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy/handler) 对象是一个占位符对象, 它包含了用于 Proxy 的陷阱 (Trap) 函数, 这里使用 `get` 方法, 在读取代理对象的某个属性时触, 可以获取到被代理的对象和当前属性名, 其他方法可以通过官方文档了解更多方法
 

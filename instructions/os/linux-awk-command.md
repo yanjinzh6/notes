@@ -7,48 +7,48 @@ categories:
 permalink: linux-awk-command
 ---
 
-# 简介
+## 简介
 
 `awk` 是一种编程语言, 用于在 `linux/unix` 下对文本和数据进行处理. 数据可以来自标准输入 (stdin), 一个或多个文件, 或其它命令的输出. 它支持用户自定义函数和动态正则表达式等先进功能, 是 `linux/unix` 下的一个强大编程工具. 它在命令行中使用, 但更多是作为脚本来使用. `awk` 有很多内建的功能, 比如数组, 函数等, 这是它和C语言的相同之处, 灵活性是awk最大的优势.
 
-# 常用
+## 常用
 
 > 这篇文章仅介绍 `awk` 命令的简单应用
 
 ```sh
-# 打印 PID
+## 打印 PID
 ~ ps -ef | awk 'NR != 1 {print $2}'
 1
 2
 
-# 指定分隔符
+## 指定分隔符
 ~ awk 'BEGIN{FS=":"} {print $1}' /etc/passwd
 ~ awk -F ':' '{print $1}' /etc/passwd
 ~ awk -F '[;:]' '{print $1}' /etc/passwd
 
-# 使用重定向拆分文件
+## 使用重定向拆分文件
 ~ ps -ef | awk 'NR != 1 {print > $1}'
 ~ ps -ef | awk 'NR != 1 {print $2,$3 > $1}'
 ~ ps -ef | awk 'NR != 1 {if ($1 ~ /root/) print > "1.txt"; else if($1 ~ /\d/) print > "2.txt"; else print > "3.txt"}'
 
-# 统计文件大小
+## 统计文件大小
 ~ ls -l *.txt | awk '{sum += $5} END {print sum}'
 
-# 按某一列计数
+## 按某一列计数
 ~ ps -ef | awk 'NR!=1 {a[$1]++;} END {for (i in a) print i ", " a[i];}'
 www-data, 4
 syslog, 1
 
-# 统计每个用户的进程的占了多少内存
+## 统计每个用户的进程的占了多少内存
 ~ ps aux | awk 'NR!=1 {a[$1]+=$6;} END { for(i in a) print i ", " a[i]"KB";}'
 
-# 从 file 文件中找出长度大于 80 的行
+## 从 file 文件中找出长度大于 80 的行
 ~ awk 'length>80' file
 
-# 按连接数查看客户端 IP
+## 按连接数查看客户端 IP
 ~ netstat -ntu | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -nr
 
-# 九九乘法表
+## 九九乘法表
 ~ seq 9 | sed 'H;g' | awk -v RS='' '{for(i=1;i<=NF;i++)printf("%dx%d=%d%s", i, NR, i*NR, i==NR?"\n":"\t")}'
 1x1=1
 1x2=2   2x2=4
@@ -60,21 +60,21 @@ syslog, 1
 1x8=8   2x8=16  3x8=24  4x8=32  5x8=40  6x8=48  7x8=56  8x8=64
 1x9=9   2x9=18  3x9=27  4x9=36  5x9=45  6x9=54  7x9=63  8x9=72  9x9=81
 
-# 使用 $ 将返回结果作为变量
-# 结束所有 java 进程
+## 使用 $ 将返回结果作为变量
+## 结束所有 java 进程
 ~ kill -9 $(ps -ef | grep java | awk '{print $2}')
 ```
 
 <!-- more -->
 
-# 基本用法
+## 基本用法
 
 ```sh
-# 格式
+## 格式
 ~ awk [-F 分隔符] '{commands}' file(s)
 ```
 
-**多个分隔符可以使用 [] 隔开**
+注意: **多个分隔符可以使用 [] 隔开**
 
 ```sh
 ~ echo 'this is a test \r\nthat was a test2' | awk '{print $0}'
@@ -98,7 +98,7 @@ that test
 
 这里的 `$1` 表示输出内容的第一列, `$4` 表示输出内容的第四列
 
-# 内置变量
+## 内置变量
 
 | 变量        | 功能                                                       |
 | ----------- | ---------------------------------------------------------- |
@@ -125,12 +125,12 @@ that test
 | SUBSEP      | 数组下标分隔符(默认值是/034)                               |
 
 ```sh
-# 例子
+## 例子
 ~ awk -F ':' 'NR == 1 {print "filename:" FILENAME ",linenumber:" NR ",columns:" NF ",linecontent:"$0}' /etc/passwd
 filename:/etc/passwd,linenumber:1,columns:7,linecontent:root:x:0:0:root:/root:/usr/bin/zsh
 ```
 
-# 常用函数
+## 常用函数
 
 | 函数      | 功能            |
 | --------- | --------------- |
@@ -144,13 +144,13 @@ filename:/etc/passwd,linenumber:1,columns:7,linecontent:root:x:0:0:root:/root:/u
 | rand()    | 随机数.         |
 
 ```sh
-# 例子
+## 例子
 ~ echo 'this is a test \r\nthat was a test2' | awk '{print toupper($1)}'
 THIS
 THAT
 ```
 
-# 条件
+## 条件
 
 | 运算符                  | 功能                             |
 | ----------------------- | -------------------------------- |
@@ -170,44 +170,44 @@ THAT
 | in                      | 数组成员                         |
 
 ```sh
-# 格式
+## 格式
 ~ awk 'conditions {commands}' file(s)
 ```
 
 ```sh
-# 运算符
+## 运算符
 ~ echo 'this is a test \r\nthat was a test2' | awk '$1 == "this" {print $1}'
 this
 
-# 正则表达式
+## 正则表达式
 ~ echo 'this is a test \r\nthat was a test2' | awk '/a/ {print $1}'
 this
 that
 
-# 模式
+## 模式
 ~ echo 'this is a test \r\nthat was a test2' | awk '$1 ~ /a/ {print $1}'
 that
 ~ echo 'this is a test \r\nthat was a test2' | awk '$4 ~ /2/ {print $1}'
 that
 
-# 模式取反
+## 模式取反
 ~ echo 'this is a test \r\nthat was a test2' | awk '$1 !~ /a/ {print $1}'
 this
 
-# 大于第一行
+## 大于第一行
 ~ echo 'this is a test \r\nthat was a test2' | awk 'NR > 1 {print $1}'
 that
 ```
 
 ```sh
-# if 条件
+## if 条件
 ~ awk -F ':' '{if ($1 == "root") print $1; else print "---"}' /etc/passwd
 root
 ---
 ---
 ```
 
-# 脚本
+## 脚本
 
 - `BEGIN{ 这里面放的是执行前的语句 }`
 - `END {这里面放的是处理完所有的行后要执行的语句 }`
@@ -223,8 +223,8 @@ Mike    2537 87 97 95
 Bob     2415 40 57 62
 
 $ cat cal.awk
-#!/bin/awk -f
-#运行前
+##!/bin/awk -f
+##运行前
 BEGIN {
     math = 0
     english = 0
@@ -233,14 +233,14 @@ BEGIN {
     printf "NAME    NO.   MATH  ENGLISH  COMPUTER   TOTAL\n"
     printf "---------------------------------------------\n"
 }
-#运行中
+##运行中
 {
     math+=$3
     english+=$4
     computer+=$5
     printf "%-6s %-6s %4d %8d %8d %8d\n", $1, $2, $3,$4,$5, $3+$4+$5
 }
-#运行后
+##运行后
 END {
     printf "---------------------------------------------\n"
     printf "  TOTAL:%10d %8d %8d \n", math, english, computer
@@ -260,7 +260,7 @@ Bob    2415     40       57       62      159
 AVERAGE:     63.80    78.60    70.00
 ```
 
-# 环境变量
+## 环境变量
 
 ```sh
 $ x=5
@@ -279,7 +279,7 @@ Mike    2537    87      102     105
 Bob     2415    40      62      72
 ```
 
-# 引用
+## 引用
 
 - [The GNU Awk User’s Guide](http://www.gnu.org/software/gawk/manual/gawk.html)
 - [awk 入门教程](http://www.ruanyifeng.com/blog/2018/11/awk.html)

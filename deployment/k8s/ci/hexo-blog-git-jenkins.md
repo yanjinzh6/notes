@@ -8,7 +8,7 @@ permalink: hexo-blog-git-jenkins
 photo:
 ---
 
-# 起因
+## 起因
 
 自己整 VPS 搭的一套 CI 还是需要用的，所以有任何项目还是得想方法用用。虽然每次维护都比较麻烦，毕竟国内的 VPS 要访问 GitHub 还是挺慢的，访问 Jenkins 服务器也超级慢，升级插件需要漫长的等待，就更不用说 docker hub 了，只能加多些跳板。
 
@@ -18,7 +18,7 @@ photo:
 
 <!-- more -->
 
-# 尝试打包镜像
+## 尝试打包镜像
 
 最简单的当然就是使用官方的镜像作为来源咯 :joy:，简单实惠人人喜欢，特别是都有基于 `alpine` 的镜像那就是非常容易下载了。
 
@@ -129,7 +129,7 @@ RUN apk --update add git less openssh && \
 
 通过 `docker tag yanjinzh6/jnlp-slave-hexo:1 127.0.0.1:32000/yanjinzh6/jnlp-slave-hexo:1`, `docker push 127.0.0.1:32000/yanjinzh6/jnlp-slave-hexo:1` 将镜像推送到本地的注册中心去供 Jenkins 使用。
 
-# 配置
+## 配置
 
 个人比较喜欢工作流的项目，感觉就是使用了 Jenkins 包装好的 API 兼容性更好了，当实际上学习成本也比较高，例如当前，需要 clone 多个 git 仓库就碰上不方便的地方了，由于 Jenkins 有 workspace 的概念，所以很多插件的工作模式都是基于当前 workspace 的。
 
@@ -162,6 +162,6 @@ node('slave-agent') {
 }
 ```
 
-# 总结
+## 总结
 
 现在修改了 Jenkins k8s 插件的配置，使用新的自定义镜像肯定会导致其他项目失效，所以需要解决。还有需要处理站内连接的问题。

@@ -8,7 +8,7 @@ permalink: Deployment-spec-selector-param
 photo:
 ---
 
-# 错误
+## 错误
 
 好几个月前部署的 Jenkins 后便再也没有改动配置文件了,今天提示 Jenkins 版本落后才发现配置文件配的是不拉取镜像的,所有修改成 `imagePullPolicy: Always` 准备更新镜像便发现问题.
 
@@ -19,7 +19,7 @@ error: error validating "jenkins.yml": error validating data: ValidationError(De
 
 <!-- more -->
 
-# 版本
+## 版本
 
 ```sh
 ➜  jenkins kbc version
@@ -27,7 +27,7 @@ Client Version: version.Info{Major:"1", Minor:"17", GitVersion:"v1.17.0", GitCom
 Server Version: version.Info{Major:"1", Minor:"17", GitVersion:"v1.17.0", GitCommit:"70132b0f130acc0bed193d9ba59dd186f0e634cf", GitTreeState:"clean", BuildDate:"2019-12-07T21:12:17Z", GoVersion:"go1.13.4", Compiler:"gc", Platform:"linux/amd64"}
 ```
 
-# 原因
+## 原因
 
 查看[官方文档](https://kubernetes.io/zh/docs/concepts/workloads/controllers/deployment/)发现里面有个注意需要配置.
 
@@ -65,7 +65,7 @@ spec:
 
 这里的 selector 匹配的是 template 中配置的 labels, 另外很多配置中都在不同的层级中存在大量相同的 labels, 有时候确实很难看清楚, 还是应该定义好名称规范.
 
-# 总结
+## 总结
 
 * Deployment 必须配置 selector
 * 定义 template 时必须定义 labels

@@ -7,9 +7,9 @@ categories:
 permalink: java-nio
 ---
 
-# NIO
+## NIO
 
-## NIO 的新特性
+### NIO 的新特性
 
 java 中的 IO 和 NIO 的区别主要有 3 点:
 
@@ -21,7 +21,7 @@ NIO 在基础的 IO 流上发展出新的特点, 分别是: 内存映射技术, 
 
 <!-- more -->
 
-### 内存映射
+#### 内存映射
 
 这个功能主要是为了提高大文件的读写速度而设计的. 内存映射文件(memory-mappedfile)能让你创建和修改那些大到无法读入内存的文件.
 
@@ -30,17 +30,17 @@ NIO 中内存映射主要用到以下两个类:
 - java.nio.MappedByteBuffer
 - java.nio.channels.FileChannel
 
-### 字符及编码
+#### 字符及编码
 
-#### 字符编码方案
+##### 字符编码方案
 
 编码方案定义了如何把字符编码的序列表达为字节序列. 字符编码的数值不需要与编码字节相同, 也不需要是一对一或一对多个的关系. 原则上, 把字符集编码和解码近似视为对象的序列化和反序列化.
 
-#### 字符集编码器和解码器
+##### 字符集编码器和解码器
 
 NIO 中提供了两个类 CharsetEncoder 和 CharsetDecoder 来实现编码转换方案.
 
-### 非阻塞 IO
+#### 非阻塞 IO
 
 一般来说 I/O 模型可以分为: 同步阻塞, 同步非阻塞, 异步阻塞, 异步非阻塞 四种 IO 模型.
 
@@ -58,31 +58,31 @@ Reactor 负责 IO 事件的响应, 一旦有事件发生, 便广播发送给相�
 多线程+ 阻塞 IO, 每个 socket 对应一个线程, 这样会造成很大的资源占用, 并且尤其是对于长连接来说, 线程的资源一直不会释放, 如果后面陆续有很多连接的话, 就会造成性能上的瓶颈.
 非阻塞 IO 不断地询问 socket 状态时通过用户线程去进行的, 而在多路复用 IO 中, 轮询每个 socket 状态是内核在进行的, 这个效率要比用户线程要高的多.
 
-### 文件锁定
+#### 文件锁定
 
 NIO 中的文件通道 (FileChannel) 在读写数据的时候主 要使用了阻塞模式, 它不能支持非阻塞模式的读写, 而且 FileChannel 的对象是不能够直接实例化的, 他的实例只能通过 getChannel()从一个打开的文件对象上边读取 (RandomAccessFile,  FileInputStream, FileOutputStream) , 并且通过调用 getChannel()方法返回一个 Channel 对象去连接同一个文件, 也就是针对同一个文件进行读写操作.
 
 文件锁的出现解决了很多 Java 应用程序和非 Java 程序之间共享文件数据的问题
 
-## 读数据和写数据方式
+### 读数据和写数据方式
 
 - 从通道进行数据读取 : 创建一个缓冲区, 然后请求通道读取数据.
 - 从通道进行数据写入 : 创建一个缓冲区, 填充数据, 并要求通道写入数据.
 
-## NIO 核心组件
+### NIO 核心组件
 
 - Channels
 - Buffers
 - Selectors
 
-### Buffer(缓冲区)
+#### Buffer(缓冲区)
 
-#### 介绍
+##### 介绍
 
 Java NIO Buffers 用于和 NIO Channel 交互. 从 Channel 中读取数据到 buffers 里, 从 Buffer 把数据写入到 Channels.
 Buffer 本质上就是一块内存区, 可以用来写入数据, 并在稍后读取出来. 这块内存被 NIO Buffer 包裹起来, 对外提供一系列的读写方便开发的接口.
 
-##### 读写数据
+###### 读写数据
 
 1. 把数据写入 buffer;
 1. 调用 flip;
@@ -93,20 +93,20 @@ Buffer 本质上就是一块内存区, 可以用来写入数据, 并在稍后读
 
 当读取完数据后, 需要清空 buffer, 以满足后续写入操作. 清空 buffer 有两种方式: 调用 clear() 或 compact() 方法. clear 会清空整个 buffer, compact 则只清空已读取的数据, 未被读取的数据会被移动到 buffer 的开始位置, 写入位置则近跟着未读数据之后.
 
-##### 属性
+###### 属性
 
 - capacity 容量
 - position 位置
 - limit 限制
 
-##### 常见方法
+###### 常见方法
 
 - Buffer clear()
 - Buffer flip()
 - Buffer rewind()
 - Buffer position(int newPosition)
 
-##### 使用方式/方法介绍
+###### 使用方式/方法介绍
 
 分配缓冲区 (Allocating a Buffer) :
 
@@ -116,12 +116,12 @@ ByteBuffer buf = ByteBuffer.allocate(28);//以ByteBuffer为例子
 
 写入数据到缓冲区 (Writing Data to a Buffer)
 
-###### 写数据到 Buffer 有两种方法
+####### 写数据到 Buffer 有两种方法
 
 1. 从 Channel 中写数据到 Buffer, int bytesRead = inChannel.read(buf); //read into buffer.
 2. 通过 put 写数据, buf.put(127);
 
-### Channel (通道)
+#### Channel (通道)
 
 1. Channel (通道) 介绍
 
@@ -142,7 +142,7 @@ ByteBuffer buf = ByteBuffer.allocate(28);//以ByteBuffer为例子
 - transferFrom() :transferFrom 方法把数据从通道源传输到 FileChannel
 - transferTo() :transferTo 方法把 FileChannel 数据传输到另一个 channel
 
-### Selector (选择器)
+#### Selector (选择器)
 
 1. Selector (选择器) 介绍
 
