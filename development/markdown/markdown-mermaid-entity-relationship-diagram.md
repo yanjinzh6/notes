@@ -39,7 +39,7 @@ erDiagram
 - `second-entity` 是另一个实体的名称
 - `relationship-label` 从第一个实体的角度描述了这种关系
 
-**必须包含所有部分**
+注意: **必须包含所有部分**
 
 ### 关系
 

@@ -1,6 +1,6 @@
 ---
 title: VSCode 快捷键
-date: 2020-1-30 21:00:00
+date: 2020-01-30 21:00:00
 tags: 'VSCode'
 categories:
   - ['使用说明', '软件']
