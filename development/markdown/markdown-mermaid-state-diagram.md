@@ -4,7 +4,7 @@ date: 2020-04-22 13:00:00
 tags: 'Markdown'
 categories:
   - ['开发', 'Markdown']
-permalink: markdown-mermaid- state-diagram
+permalink: markdown-mermaid-state-diagram
 ---
 
 ## 状态图
