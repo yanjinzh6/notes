@@ -195,7 +195,7 @@ classDiagram
 ```mermaid
 classDiagram
   class Shape
-  <escape><<interface>></escape> Shape
+  &lt;&lt;interface&gt;&gt; Shape
 ```
 
 也可以在定义类中使用
@@ -220,12 +220,12 @@ classDiagram
 ```mermaid
 classDiagram
   class Shape{
-    <escape><<interface>></escape>
+    &lt;&lt;interface&gt;&gt;
     noOfVertices
     draw()
   }
   class Color{
-    <escape><<enumeration>></escape>
+    &lt;&lt;enumeration&gt;&gt;
     RED
     BLUE
     GREEN
@@ -252,7 +252,7 @@ class Shape{
 classDiagram
 %% This whole line is a comment classDiagram class Shape <<interface>>
 class Shape{
-  <escape><<interface>></escape>
+  &lt;&lt;interface&gt;&gt;
   noOfVertices
   draw()
 }

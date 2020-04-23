@@ -170,15 +170,14 @@ stateDiagram
 ```
 
 <!-- **hexo-filter-mermaid-diagrams 插件不支持 <<>>** -->
-
 ```mermaid
 stateDiagram
-  state fork_state <escape><<fork>></escape>
+  state fork_state &lt;&lt;fork&gt;&gt;
     [*] --> fork_state
     fork_state --> State2
     fork_state --> State3
 
-    state join_state <escape><<join>></escape>
+    state join_state &lt;&lt;join&gt;&gt;
     State2 --> join_state
     State3 --> join_state
     join_state --> State4
