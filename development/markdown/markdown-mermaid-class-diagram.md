@@ -88,13 +88,13 @@ classDiagram
 
 | 类型 | 描述 |
 | -- | -- |
-| `<|--` | 继承 |
+| `<&#124;--` | 继承 |
 | `*--` | 组成 |
 | `o--` | 聚合 |
 | `-->` | 协会 |
 | `--` | 链接 (实线) |
 | `..>` | 相依性 |
-| `..|>` | 实现 |
+| `..&#124;>` | 实现 |
 | `..` | 链接 (虚线) |
 
 ```
@@ -184,6 +184,8 @@ classDiagram
 
 可以在定义类后使用
 
+<!-- **hexo-filter-mermaid-diagrams 插件不支持 <<>>** -->
+
 ```
 classDiagram
   class Shape
@@ -193,7 +195,7 @@ classDiagram
 ```mermaid
 classDiagram
   class Shape
-  <<interface>> Shape
+  <escape><<interface>></escape> Shape
 ```
 
 也可以在定义类中使用
@@ -218,12 +220,12 @@ classDiagram
 ```mermaid
 classDiagram
   class Shape{
-    <<interface>>
+    <escape><<interface>></escape>
     noOfVertices
     draw()
   }
   class Color{
-    <<enumeration>>
+    <escape><<enumeration>></escape>
     RED
     BLUE
     GREEN
@@ -250,7 +252,7 @@ class Shape{
 classDiagram
 %% This whole line is a comment classDiagram class Shape <<interface>>
 class Shape{
-  <<interface>>
+  <escape><<interface>></escape>
   noOfVertices
   draw()
 }

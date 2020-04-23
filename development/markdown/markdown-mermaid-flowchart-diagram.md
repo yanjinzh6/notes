@@ -301,6 +301,14 @@ graph TD
   B-->E(A fa:fa-camera-retro perhaps?);
 ```
 
+```mermaid
+graph TD
+  B["fa:fa-twitter for peace"]
+  B-->C[fa:fa-ban forbidden]
+  B-->D(fa:fa-spinner);
+  B-->E(A fa:fa-camera-retro perhaps?);
+```
+
 ## 参考
 
 - [官方文档](http://mermaid-js.github.io/mermaid/)

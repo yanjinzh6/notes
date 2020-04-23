@@ -169,14 +169,16 @@ stateDiagram
     State4 --> [*]
 ```
 
+<!-- **hexo-filter-mermaid-diagrams 插件不支持 <<>>** -->
+
 ```mermaid
 stateDiagram
-  state fork_state <<fork>>
+  state fork_state <escape><<fork>></escape>
     [*] --> fork_state
     fork_state --> State2
     fork_state --> State3
 
-    state join_state <<join>>
+    state join_state <escape><<join>></escape>
     State2 --> join_state
     State3 --> join_state
     join_state --> State4
@@ -220,7 +222,7 @@ stateDiagram
 
 ### 并行
 
-通过 `--` 符合指定
+通过 `--` 符号指定
 
 ```
 stateDiagram

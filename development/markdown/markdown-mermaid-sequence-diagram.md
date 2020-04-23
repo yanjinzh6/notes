@@ -258,19 +258,29 @@ end
 
 ```
 sequenceDiagram
-  par [活动 1]
-    对象 --> 对象2
-  and [活动 2]
-    对象 --> 对象3
+  par Alice to Bob
+    Alice->>Bob: Go help John
+  and Alice to John
+    Alice->>John: I want this done today
+    par John to Charlie
+      John->>Charlie: Can we do this today?
+    and John to Diana
+      John->>Diana: Can you help us today?
+    end
   end
 ```
 
 ```mermaid
 sequenceDiagram
-  par [活动 1]
-    对象 --> 对象2
-  and [活动 2]
-    对象 --> 对象3
+  par Alice to Bob
+    Alice->>Bob: Go help John
+  and Alice to John
+    Alice->>John: I want this done today
+    par John to Charlie
+      John->>Charlie: Can we do this today?
+    and John to Diana
+      John->>Diana: Can you help us today?
+    end
   end
 ```
 
@@ -291,22 +301,38 @@ end
 
 ```
 sequenceDiagram
-  rect rgba(0, 0, 255, .1)
-    对象 --> 对象2
-    rect rgb(0, 255, 0)
-      对象 --> 对象3
-    end
+  participant Alice
+  participant John
+
+  rect rgb(191, 223, 255)
+  note right of Alice: Alice calls John.
+  Alice->>+John: Hello John, how are you?
+  rect rgb(200, 150, 255)
+  Alice->>+John: John, can you hear me?
+  John-->>-Alice: Hi Alice, I can hear you!
   end
+  John-->>-Alice: I feel great!
+  end
+  Alice ->>+ John: Did you want to go to the game tonight?
+  John -->>- Alice: Yeah! See you there.
 ```
 
 ```mermaid
 sequenceDiagram
-  rect rgba(0, 0, 255, .1)
-    对象 --> 对象2
-    rect rgb(0, 255, 0)
-      对象 --> 对象3
-    end
+  participant Alice
+  participant John
+
+  rect rgb(191, 223, 255)
+  note right of Alice: Alice calls John.
+  Alice->>+John: Hello John, how are you?
+  rect rgb(200, 150, 255)
+  Alice->>+John: John, can you hear me?
+  John-->>-Alice: Hi Alice, I can hear you!
   end
+  John-->>-Alice: I feel great!
+  end
+  Alice ->>+ John: Did you want to go to the game tonight?
+  John -->>- Alice: Yeah! See you there.
 ```
 
 ### 注释
