@@ -9,21 +9,21 @@ permalink: seata-at-mode
 
 ## 简介
 
-AT 模式是一种无侵入的分布式事务解决方案。在 AT 模式下，用户只需关注自己的“业务 SQL”，用户的 “业务 SQL” 作为一阶段，Seata 框架会自动生成事务的二阶段提交和回滚操作
+AT 模式是一种无侵入的分布式事务解决方案. 在 AT 模式下, 用户只需关注自己的“业务 SQL”, 用户的 “业务 SQL” 作为一阶段, Seata 框架会自动生成事务的二阶段提交和回滚操作
 
 ### 一阶段
 
-在一阶段，Seata 会拦截“业务 SQL”，首先解析 SQL 语义，找到“业务 SQL”要更新的业务数据，在业务数据被更新前，将其保存成“before image”，然后执行“业务 SQL”更新业务数据，在业务数据更新之后，再将其保存成“after image”，最后生成行锁。以上操作全部在一个数据库事务内完成，这样保证了一阶段操作的原子性。
+在一阶段, Seata 会拦截“业务 SQL”, 首先解析 SQL 语义, 找到“业务 SQL”要更新的业务数据, 在业务数据被更新前, 将其保存成“before image”, 然后执行“业务 SQL”更新业务数据, 在业务数据更新之后, 再将其保存成“after image”, 最后生成行锁. 以上操作全部在一个数据库事务内完成, 这样保证了一阶段操作的原子性.
 
 ### 二阶段提交
 
-二阶段如果是提交的话，因为“业务 SQL”在一阶段已经提交至数据库， 所以 Seata 框架只需将一阶段保存的快照数据和行锁删掉，完成数据清理即可。
+二阶段如果是提交的话, 因为“业务 SQL”在一阶段已经提交至数据库,  所以 Seata 框架只需将一阶段保存的快照数据和行锁删掉, 完成数据清理即可.
 
 ### 二阶段回滚
 
-二阶段如果是回滚的话，Seata 就需要回滚一阶段已经执行的“业务 SQL”，还原业务数据。回滚方式便是用“before image”还原业务数据；但在还原前要首先要校验脏写，对比“数据库当前业务数据”和 “after image”，如果两份数据完全一致就说明没有脏写，可以还原业务数据，如果不一致就说明有脏写，出现脏写就需要转人工处理。
+二阶段如果是回滚的话, Seata 就需要回滚一阶段已经执行的“业务 SQL”, 还原业务数据. 回滚方式便是用“before image”还原业务数据, 但在还原前要首先要校验脏写, 对比“数据库当前业务数据”和 “after image”, 如果两份数据完全一致就说明没有脏写, 可以还原业务数据, 如果不一致就说明有脏写, 出现脏写就需要转人工处理.
 
-AT 模式的一阶段、二阶段提交和回滚均由 Seata 框架自动生成，用户只需编写“业务 SQL”，便能轻松接入分布式事务，AT 模式是一种对业务无任何侵入的分布式事务解决方案
+AT 模式的一阶段、二阶段提交和回滚均由 Seata 框架自动生成, 用户只需编写“业务 SQL”, 便能轻松接入分布式事务, AT 模式是一种对业务无任何侵入的分布式事务解决方案
 
 <!-- more -->
 
@@ -31,7 +31,7 @@ AT 模式的一阶段、二阶段提交和回滚均由 Seata 框架自动生成�
 
 ### 服务端
 
-启动 seata-server，seata-server 主要作为事务协调者，维护全局和分支事务的状态，驱动全局事务提交或回滚。
+启动 seata-server, seata-server 主要作为事务协调者, 维护全局和分支事务的状态, 驱动全局事务提交或回滚.
 
 ```sh
 docker run --name seata-server -p 8091:8091 seataio/seata-server:latest
@@ -71,6 +71,16 @@ root@seata-server:/seata-server# tail -f /root/logs/seata/seata-server.log
 
 ### 配置
 
+项目依赖
+
+```xml
+<dependency>
+  <groupId>com.alibaba.cloud</groupId>
+  <artifactId>spring-cloud-alibaba-seata</artifactId>
+  <version>2.2.0.RELEASE</version>
+</dependency>
+```
+
 配置文件中使用 file 模式连接
 
 ```yaml
@@ -94,7 +104,7 @@ seata:
 
 ### 使用
 
-AT 模式可以使用自带的注解实现简单的无侵入应用，下面新建一个远程服务，使用注解实现 AT 模式
+AT 模式可以使用自带的注解实现简单的无侵入应用, 下面新建一个远程服务, 使用注解实现 AT 模式
 
 ```java
 @Slf4j
@@ -255,7 +265,7 @@ curl http://{{ip}}:7700/insert-at?name=az2
 io.seata.core.exception.GlobalTransactionException: Could not found global transaction xid = 172.19.0.5:8091:2009254517
 ```
 
-注意：**当其他分支数据被修改后会触发异常，当前分支事务不会正常回滚**
+注意：**当其他分支数据被修改后会触发异常, 当前分支事务不会正常回滚**
 
 ```sh
 2020-04-17 16:49:11.596  INFO 17658 --- [tch_RMROLE_1_16] i.s.core.rpc.netty.RmMessageListener     : onMessage:xid=172.19.0.5:8091:2009254554,branchId=2009254555,branchType=AT,resourceId=jdbc:mysql://127.0.0.1:3306/seata_test,applicationData=null
@@ -266,241 +276,6 @@ io.seata.core.exception.GlobalTransactionException: Could not found global trans
 io.seata.core.exception.BranchTransactionException: Branch session rollback failed and try again later xid = 172.19.0.5:8091:2009254554 branchId = 2009254555 Has dirty records when undo.
 ```
 
-## 解析
-
-### 客户端启动
-
-TM 是负责整个全局事务的管理器，因此一个全局事务是由 TM 开启的
-
-```java
-// io.seata.core.model.TransactionManager
-package io.seata.core.model;
-
-import io.seata.core.exception.TransactionException;
-
-/**
- * Transaction Manager.
- *
- * Define a global transaction and control it.
- *
- * @author sharajava
- */
-public interface TransactionManager {
-
-    /**
-     * Begin a new global transaction.
-     *
-     * @param applicationId           ID of the application who begins this transaction.
-     * @param transactionServiceGroup ID of the transaction service group.
-     * @param name                    Give a name to the global transaction.
-     * @param timeout                 Timeout of the global transaction.
-     * @return XID of the global transaction
-     * @throws TransactionException Any exception that fails this will be wrapped with TransactionException and thrown
-     * out.
-     */
-    String begin(String applicationId, String transactionServiceGroup, String name, int timeout)
-        throws TransactionException;
-
-    /**
-     * Global commit.
-     *
-     * @param xid XID of the global transaction.
-     * @return Status of the global transaction after committing.
-     * @throws TransactionException Any exception that fails this will be wrapped with TransactionException and thrown
-     * out.
-     */
-    GlobalStatus commit(String xid) throws TransactionException;
-
-    /**
-     * Global rollback.
-     *
-     * @param xid XID of the global transaction
-     * @return Status of the global transaction after rollbacking.
-     * @throws TransactionException Any exception that fails this will be wrapped with TransactionException and thrown
-     * out.
-     */
-    GlobalStatus rollback(String xid) throws TransactionException;
-
-    /**
-     * Get current status of the give transaction.
-     *
-     * @param xid XID of the global transaction.
-     * @return Current status of the global transaction.
-     * @throws TransactionException Any exception that fails this will be wrapped with TransactionException and thrown
-     * out.
-     */
-    GlobalStatus getStatus(String xid) throws TransactionException;
-
-    /**
-     * Global report.
-     *
-     * @param xid XID of the global transaction.
-     * @param globalStatus Status of the global transaction.
-     * @return Status of the global transaction.
-     * @throws TransactionException Any exception that fails this will be wrapped with TransactionException and thrown
-     * out.
-     */
-    GlobalStatus globalReport(String xid, GlobalStatus globalStatus) throws TransactionException;
-}
-```
-
-通过 holder 可以获取一个单例的 RM 对象
-
-```java
-// io.seata.tm.TransactionManagerHolder
-package io.seata.tm;
-
-import io.seata.common.exception.ShouldNeverHappenException;
-import io.seata.common.loader.EnhancedServiceLoader;
-import io.seata.core.model.TransactionManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-/**
- * The type Default transaction manager.
- *
- * @author sharajava
- */
-public class TransactionManagerHolder {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(TransactionManagerHolder.class);
-
-    private static class SingletonHolder {
-
-        private static TransactionManager INSTANCE = null;
-
-        static {
-            try {
-                INSTANCE = EnhancedServiceLoader.load(TransactionManager.class);
-                LOGGER.info("TransactionManager Singleton " + INSTANCE);
-            } catch (Throwable anyEx) {
-                LOGGER.error("Failed to load TransactionManager Singleton! ", anyEx);
-            }
-        }
-    }
-
-    /**
-     * Get transaction manager.
-     *
-     * @return the transaction manager
-     */
-    public static TransactionManager get() {
-        if (SingletonHolder.INSTANCE == null) {
-            throw new ShouldNeverHappenException("TransactionManager is NOT ready!");
-        }
-        return SingletonHolder.INSTANCE;
-    }
-
-    /**
-     * Set a TM instance.
-     *
-     * @param mock commonly used for test mocking
-     */
-    public static void set(TransactionManager mock) {
-        SingletonHolder.INSTANCE = mock;
-    }
-
-    private TransactionManagerHolder() {
-
-    }
-}
-```
-
-seata 已经将大部分逻辑封装好 starter 了, 可以如下使用
-
-```xml
-<dependency>
-  <groupId>com.alibaba.cloud</groupId>
-  <artifactId>spring-cloud-alibaba-seata</artifactId>
-  <version>2.2.0.RELEASE</version>
-</dependency>
-```
-
-主要提供了一个全局事务注解
-
-```java
-// io.seata.spring.annotation.GlobalTransactional
-package io.seata.spring.annotation;
-
-import io.seata.tm.api.transaction.TransactionInfo;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-/**
- * The interface Global transactional.
- */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
-@Inherited
-public @interface GlobalTransactional {
-
-    /**
-     * Global transaction timeoutMills in MILLISECONDS.
-     *
-     * @return timeoutMills in MILLISECONDS.
-     */
-    int timeoutMills() default TransactionInfo.DEFAULT_TIME_OUT;
-
-    /**
-     * Given name of the global transaction instance.
-     *
-     * @return Given name.
-     */
-    String name() default "";
-
-    /**
-     * roll back for the Class
-     * @return
-     */
-    Class<? extends Throwable>[] rollbackFor() default {};
-
-    /**
-     *  roll back for the class name
-     * @return
-     */
-    String[] rollbackForClassName() default {};
-
-    /**
-     * not roll back for the Class
-     * @return
-     */
-    Class<? extends Throwable>[] noRollbackFor() default {};
-
-    /**
-     * not roll back for the class name
-     * @return
-     */
-    String[] noRollbackForClassName() default {};
-
-
-}
-```
-
-开启一个全局事务是在方法上加上 @GlobalTransactional注解，Seata 的 Spring 模块中，有个 GlobalTransactionScanner，它的继承关系如下
-
-```mermaid
-classDiagram
-  class GlobalTransactionScanner
-  class AbstractAutoProxyCreator
-  class InitializingBean {
-    &lt;&lt;interface&gt;&gt;
-  }
-  class ApplicationContextAware {
-    &lt;&lt;interface&gt;&gt;
-  }
-  class DisposableBean {
-    &lt;&lt;interface&gt;&gt;
-  }
-  AbstractAutoProxyCreator <|-- GlobalTransactionScanner
-  InitializingBean <|.. GlobalTransactionScanner
-  ApplicationContextAware <|.. GlobalTransactionScanner
-  DisposableBean <|.. GlobalTransactionScanner
-```
-
 ## 参考
 
-- [Seata AT 模式启动分析](https://seata.io/zh-cn/blog/seata-at-mode-start.html)
+- [Seata 分布式事务实践和开源详解 | GIAC 实录](https://www.sofastack.tech/blog/seata-distributed-transaction-deep-dive/)
