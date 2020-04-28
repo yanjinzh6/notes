@@ -1,7 +1,7 @@
 ---
 title: Seata AT 模式
 date: 2020-04-25 11:00:00
-tags: 'Java'
+tags: 'Seata'
 categories:
   - ['开发', 'Java', ' 框架']
 permalink: seata-at-mode

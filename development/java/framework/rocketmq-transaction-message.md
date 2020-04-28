@@ -1,7 +1,7 @@
 ---
 title: RocketMQ 事务消息
-date: 2020-04-25 15:00:00
-tags: 'Java'
+date: 2020-04-25 16:00:00
+tags: 'RocketMQ'
 categories:
   - ['开发', 'Java', ' 框架']
 permalink: rocketmq-transaction-message
@@ -49,6 +49,8 @@ sequenceDiagram
 - broker 接收到的如果是 commit, 则 broker 视为整个事务过程执行成功, 将消息下发给 Conusmer 端消费, 如果是 rollback, 则 broker 视为本地事务执行失败, broker 删除 Half 消息, 不下发给 consumer. 如果 broker 未接收到回查的结果 (或者查到的是 unknow) , 则 broker 会定时进行重复回查, 以确保查到最终的事务结果.
 
 注意: `如果执行本地事务突然宕机了 (相当本地事务执行结果返回 unknow) , 则和 broker 未收到确认消息的情况一样处理`
+
+<!-- more -->
 
 ## 简单使用
 
