@@ -21,6 +21,8 @@ permalink: spring-aop-pointcut
 execution(public * *(..))
 ```
 
+<!-- more -->
+
 拦截以 set 开头的任意方法
 
 ```java
