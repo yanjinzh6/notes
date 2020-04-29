@@ -1,10 +1,10 @@
 ---
-title: Java 内部注解
+title: Java 反射 API
 date: 2020-04-27 22:00:00
 tags: 'Java'
 categories:
   - ['开发', 'Java', '基础']
-permalink: java-annotation
+permalink: java-refect-api
 ---
 
 ## 简介
