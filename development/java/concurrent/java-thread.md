@@ -16,6 +16,8 @@ permalink: java-thread
 - 通过 ExecutorService 和 `Callable<Class>` 实现有返回值的线程: 创建一个类并实现 Callable 接口, 在 call 方法中实现具体的运算逻辑并返回计算结果, 具体的调用过程为：创建一个线程池, 一个用于接收返回结果的 Future List 及 Callable 线程实例, 使用线程池提交任务并将线程执行之后的结果保存在 Future 中, 在线程执行结束后遍历 Future List 中的 Future 对象, 在该对象上调用 get 方法就可以获取 Callable 线程任务返回的数据并汇总结果
 - 基于线程池
 
+<!-- more -->
+
 ## 状态
 
 - 新建状态 (New): 在 Java 中使用 new 关键字创建一个线程, 新创建的线程将处于新建状态, 主要为线程分配内存并初始化其成员变量的值
