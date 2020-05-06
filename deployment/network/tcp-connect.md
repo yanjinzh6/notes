@@ -62,6 +62,23 @@ stateDiagram
   Client --> Server: 发送数据
 ```
 
+```mermaid
+graph TB
+  subgraph Client
+    c[CLOSED] -->|发送同步消息| s[SYNC_SENT]
+    s -->|建立连接| e[ESTABLISHED]
+  end
+  c -->|SYN=1 seq=x| sl
+  ss -->|SYN=1 ACK=1 seq=y ack=x+1| s
+  e -->|ACK=1 seq=x+1 ack=y+1| se
+  e -->|发送数据| se
+  subgraph Server
+    sc[CLOSED] -->|绑定 IP, 端口, 开始监听| sl[LISTEN]
+    sl -->|接收同步消息| ss[SYN_REC]
+    ss -.-|建立连接| se[ESTABLISHED]
+  end
+```
+
 在三次握手完成后, TCP 客户端和服务器端成功建立连接
 
 ## 四次挥手
