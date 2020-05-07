@@ -1,10 +1,10 @@
 ---
-title: 负载均衡简介
+title: Nginx 反向代理和负载均衡简介
 date: 2020-05-03 12:00:00
 tags: 'Network'
 categories:
   - ['运维', 'Network']
-permalink: load-balancing-introduction
+permalink: nginx-upstream-and-lb
 photo:
 ---
 
