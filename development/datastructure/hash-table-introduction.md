@@ -1,9 +1,9 @@
 ---
 title: Hash Table 简介
 date: 2020-05-03 14:30:00
-tags: 'Java'
+tags: '数据结构'
 categories:
-  - ['开发', 'Java', '数据结构']
+  - ['开发', '数据结构']
 permalink: hash-table-introduction
 ---
 
