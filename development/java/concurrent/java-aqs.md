@@ -30,6 +30,8 @@ graph TB
   nn -.-> s
 ```
 
+<!-- more -->
+
 ## state
 
 Abstract Queued Synchronizer 维护了一个 `volatile int` 类型的变量, 用于表示当前的同步状态, Volatile 虽然不能保证操作的原子性, 但是能保证当前变量 state 的可见性

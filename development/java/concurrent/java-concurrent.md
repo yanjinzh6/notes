@@ -15,6 +15,8 @@ CountDownLatch 基于线程计数器来实现并发访问控制, 主要用于主
 
 主线程调用 await 方法阻塞等待, 在所有线程都执行完成并调用 countDown 方法后,会主动唤醒主线程并开始执行主线程的业务逻辑
 
+<!-- more -->
+
 ## CyclicBarrier
 
 CyclicBarrier (循环屏障) 是一个同步工具, 可以实现让一组线程等待至某个状态之后再全部同时执行, 在所有等待线程都被释放之后, CyclicBarrier 可以被重用, CyclicBarrier 的运行状态叫作 Barrier 状态, 在调用 await 方法后, 线程就处于 Barrier 状态

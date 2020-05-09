@@ -30,6 +30,8 @@ stateDiagram
   u --> n
 ```
 
+<!-- more -->
+
 ## 过程
 
 ### 加载

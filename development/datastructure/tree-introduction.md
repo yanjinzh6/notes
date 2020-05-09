@@ -15,6 +15,8 @@ permalink: tree-introduction
 - 每个节点可能有 `0` 个或者多个子节点
 - 除根节点外, 每个子节点又可以分为多个不相交的子树
 
+<!-- more -->
+
 ## 定义
 
 ```mermaid

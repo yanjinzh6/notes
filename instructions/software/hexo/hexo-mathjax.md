@@ -43,7 +43,9 @@ math:
 - `true`: 仅当 `front-matter` 中存在 `mathjax: true` 时, 该页面才会被渲染
 - `false`: 每篇文章都会进行渲染
 
-推荐使用 `front-matter` 中定义 `mathjax: true` 的方式, 即仅当手工在文章头部添加 `mathjax` 标记时才会渲染, 提供速度
+推荐使用 `front-matter` 中定义 `mathjax: true` 的方式, 即仅当手工在文章头部添加 `mathjax` 标记时才会渲染, 提高速度
+
+<!-- more -->
 
 这里支持 mathjax 和 katex, 两者是互斥的, 根据注释提示, 看上去可以很方便使用, 下面记录下实际使用过程
 
@@ -148,7 +150,7 @@ Template render error: (/note-website/node_modules/hexo-math/asset/inject.swig) 
 
 这里出现了 JSON 对象为空的问题, 由于使用 next 主题不需要改文件, 可以直接将出现错误的代码去掉即可
 
-因为某些特殊字符不能使用, 也许是被 markdown 解析器解析掉了, 所以 `hexo-math` 插件提供了一个标签给特殊的符号使用 `{% math %} {% endmath %}`
+因为某些特殊字符不能使用, 也许是被 markdown 解析器解析掉了, 所以 `hexo-math` 插件提供了一个标签给特殊的符号使用 `{% math %}`
 
 考虑到通用性最好还是不要使用
 
