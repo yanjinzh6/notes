@@ -150,7 +150,7 @@ Template render error: (/note-website/node_modules/hexo-math/asset/inject.swig) 
 
 这里出现了 JSON 对象为空的问题, 由于使用 next 主题不需要改文件, 可以直接将出现错误的代码去掉即可
 
-因为某些特殊字符不能使用, 也许是被 markdown 解析器解析掉了, 所以 `hexo-math` 插件提供了一个标签给特殊的符号使用 `{% math %}`
+因为某些特殊字符不能使用, 也许是被 markdown 解析器解析掉了, 所以 `hexo-math` 插件提供了一个标签给特殊的符号使用 `% math %`
 
 考虑到通用性最好还是不要使用
 

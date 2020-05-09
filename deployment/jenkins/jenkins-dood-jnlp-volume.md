@@ -146,3 +146,5 @@ node('slave-agent') {
 ## 小结
 
 由于项目中经常改变 Hexo 的插件, 好几次因为缓存导致一直以为配置有问题而排查许久, 现在使用 `volumeMounts` 更得考虑到如何清理 hexo 缓存的问题, 如果需要的话, 应该得在项目中主动调用 `hexo clean` 来清理缓存, 现在还没有好的想法如何能在 `package.json`, `_config.yml` 等关键配置改动时自动清理掉以前的缓存, 估计只能根据 `git pull` 拉取回来的记录来处理了
+
+[Kubernetes plugin](https://j.yzer.club/configureClouds/) 插件提供了相应的配置页面, 可以了解一下里面工作空间的配置是否就是需要的配置

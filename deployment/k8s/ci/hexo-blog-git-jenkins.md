@@ -3,7 +3,7 @@ title: 新建 hexo Jenkins 任务
 date: 2020-01-02 18:00:00
 tags: 'Jenkins'
 categories:
-  - ['部署', 'ci']
+  - ['部署', 'CI']
 permalink: hexo-blog-git-jenkins
 photo:
 ---
