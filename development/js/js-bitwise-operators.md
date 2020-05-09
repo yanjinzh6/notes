@@ -5,6 +5,7 @@ tags: 'JavaScript'
 categories:
   - ['开发', 'JavaScript']
 permalink: js-bitwise-operators
+mathjax: true
 ---
 
 ## 简介

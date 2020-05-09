@@ -5,6 +5,7 @@ tags: '数据结构'
 categories:
   - ['开发', '数据结构']
 permalink: binary-tree
+mathjax: true
 ---
 
 ## 简介

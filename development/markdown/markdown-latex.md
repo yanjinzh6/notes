@@ -5,6 +5,7 @@ tags: 'Markdown'
 categories:
   - ['开发', 'Markdown']
 permalink: markdown-latex
+mathjax: true
 ---
 
 ## 简介
