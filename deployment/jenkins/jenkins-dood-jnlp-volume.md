@@ -104,7 +104,7 @@ node('slave-agent') {
 
     stage('clone notes') {
         sh "cp -r ${home}/. ./ || echo 'copy home'"
-        sh "mkdir -p ${workspace}/${source}/ || echo 'create folder ${source}'"
+        sh "mkdir -p ${workspace}/${source}/ || echo 'has folder ${source}'"
         dir("${workspace}/${source}/") {
             def exise = fileExists 'notes'
             if (exise) {
@@ -118,8 +118,9 @@ node('slave-agent') {
     }
     stage('init workspace') {
         dir("${workspace}/") {
-            sh "yarn --registry=https://registry.npm.taobao.org && yarn build"
+            sh "yarn --registry=https://registry.npm.taobao.org"
             sh "cp ./fixed/inject.swig ./node_modules/hexo-math/asset/inject.swig"
+            sh "yarn build"
         }
     }
     stage('init cos tool') {
