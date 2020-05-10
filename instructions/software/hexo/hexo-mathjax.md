@@ -223,7 +223,7 @@ $a = b + c$
 \\(lim_{n\rightarrow \infty}(1+2^n+3^n)^\frac{1}{x+\sin n}\\)
 ```
 
-`$\pi$`
+$\pi$
 \\(E=mc^2\\)
 \\(lim_{x\rightarrow \infty}\frac{1}{\sin x}\\)
 \\(lim_{n\rightarrow \infty}(1+2^n+3^n)^\frac{1}{x+\sin n}\\)
@@ -320,6 +320,15 @@ $$
   \end{split}
 $$
 ```
+
+$$
+  \begin{split}
+  \frac{\partial{\mathcal{E}}}{\partial{x_l}} & =
+  \frac{\partial{\mathcal{E}}}{\partial{x_L}}\frac{\partial{x_L}}{\partial{x_l}}\\\\
+  & = \frac{\partial{\mathcal{E}}}{\partial{x_L}}\Big(1+\frac{\partial{}}{\partial{x_l}}\sum_{i=l}^{L-1}
+  \mathcal{F}(x_i,\mathcal{W}_i)\Big)
+  \end{split}
+$$
 
 ## 部分引用来源
 
