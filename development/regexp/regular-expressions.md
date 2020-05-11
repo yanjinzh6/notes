@@ -41,6 +41,8 @@ mathjax: true
 
 很多现实世界的 "正则表达式" 引擎实现了不能用正则表达式代数表达的特征, [ [来源请求](https://zh.wikipedia.org/wiki/Wikipedia:%E5%88%97%E6%98%8E%E6%9D%A5%E6%BA%90) ]
 
+<!-- more -->
+
 ## 基本语法
 
 一个正则表达式通常被称为一个模式 (pattern) , 为用来描述或者匹配一系列符合某个句法规则的字符串, 例如: Handel, Händel 和 Haendel 这三个字符串, 都可以由 H(a|ä|ae)ndel 这个模式来描述, 大部分正则表达式的形式都有如下的结构:
