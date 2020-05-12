@@ -18,10 +18,12 @@ mathjax: true
 
 定义了下列运算:
 
+<escape>
 - 串接 ${\displaystyle RS}$ 表示集合 ${\displaystyle \{\alpha \beta \mid \alpha \in R,\beta \in S\}}$, 这里的 ${\displaystyle \alpha \beta }$ 表示将 ${\displaystyle \alpha }$ 和 ${\displaystyle \beta }$ 两个字符串按顺序连接, 例如: ${\displaystyle \{ab,c\}\{d,ef\}=\{abd,abef,cd,cef\}}$
 - 选择 ${\displaystyle R|S}$ 表示 ${\displaystyle R}$ 和 ${\displaystyle S}$ 的并集, 例如: ${\displaystyle \{ab,c\}|\{ab,d,ef\}=\{ab,c,d,ef\}}$
 - 克莱尼 (Kleene) 星号 ${\displaystyle R^{*}}$ 表示包含 ${\displaystyle \varepsilon }$ 且在字符串串接运算下闭合的 ${\displaystyle R}$ 的最小超集, 这是可以通过 ${\displaystyle R}$ 中零或有限个字符串的串接得到所有字符串的集合, 例如: ${\displaystyle \{ab,c\}^{*}=\{\varepsilon ,ab,c,abab,abc,cab,cc,ababab,\cdots \}}$
 - 上述常量和算子形成了克莱尼代数
+</escape>
 
 很多课本使用对选择使用符号 ${\displaystyle \cup }$, ${\displaystyle +}$ 或 ${\displaystyle \vee }$ 替代竖线
 
