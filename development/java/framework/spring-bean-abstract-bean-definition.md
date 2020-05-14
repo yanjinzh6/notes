@@ -9,6 +9,8 @@ permalink: spring-bean-abstract-bean-definition
 
 ## 属性
 
+<!-- more -->
+
 ```java
 public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccessor
          implements BeanDefinition,  Cloneable {

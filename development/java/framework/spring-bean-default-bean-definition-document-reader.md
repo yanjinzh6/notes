@@ -11,6 +11,8 @@ permalink: spring-bean-default-bean-definition-document-reader
 
 DefaultBeanDefinitionDocumentReader 主要实现了默认标签的解析
 
+<!-- more -->
+
 ```java
 // org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader#parseDefaultElement
 private void parseDefaultElement(Element ele, BeanDefinitionParserDelegate delegate) {
@@ -33,8 +35,6 @@ private void parseDefaultElement(Element ele, BeanDefinitionParserDelegate deleg
   }
 }
 ```
-
-<!-- more -->
 
 ## bean 标签
 
