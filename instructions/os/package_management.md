@@ -470,9 +470,15 @@ git -C "$(brew --repo homebrew/cask)" remote set-url origin https://github.com/H
 brew update
 ```
 
-#### Windows
+注意: 这里需要**修改 bottles** 环境变量, 在相应的配置文件中修改配置文件, 如 `~/.zshrc`
 
-##### Scoop 简介
+```sh
+export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
+```
+
+### Windows
+
+#### Scoop 简介
 
 用 Scoop 来安装和管理我们的软件:
 
@@ -482,7 +488,7 @@ brew update
 
 特别的, Scoop 最适合安装那种干净, 小巧, 开源的软件.
 
-##### Scoop 安装
+#### Scoop 安装
 
 安装 Scoop 很简单, 不过你需要先确定一些基础环境是否符合安装要求:
 
@@ -505,7 +511,7 @@ iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
 
 静待脚本执行完成就可以了,
 
-##### Scoop 使用
+#### Scoop 使用
 
 最常用的几个基础动作有这些:
 
@@ -526,7 +532,7 @@ Scoop 和 Homebrew 对软件包安装位置有着相同的处理哲学:下载, �
 
 scoop 文件夹下的 apps 存放有安装的所有应用. 值得一提的是: scoop 是通过 shim 来软链接一些应用, 这样的设计让应用之间不会互相干扰, 十分方便.
 
-#### 软件包管理哲学
+### 软件包管理哲学
 
 在写这篇文章之前我也看了我派上面对包管理工具介绍的文章, 我觉得这些文章其实都没太讲清为什么我们需要用包管理这个看上去复杂难用的命令行工具去下载, 管理我们的软件. 毕竟现在的软件管理哲学是我去 App Store 下一个不就行了嘛.
 
