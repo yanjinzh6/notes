@@ -34,6 +34,8 @@ Hexo 提供了搜索的插件 `hexo-generator-searchdb`
 
 这样可以很方便的进行全文搜索
 
+<!-- more -->
+
 ## 使用
 
 ### 安装插件
