@@ -11,6 +11,8 @@ permalink: java-future-task-callball
 
 Java 在 1.5 版本之后提供了一种新的多线程的创建方式 FutureTask, 可以返回线程执行的结果, 其中最为重要的是 FutureTask 类和 Callable 接口
 
+<!-- more -->
+
 ## Callable 接口
 
 为了解决 Runnable 接口 run 方法没有返回值的问题，Java 定义了一个新的和 Runnable 类似的 Callable 接口。并且将其中的代表业务处理的方法命名为 call，call 方法带返回值
