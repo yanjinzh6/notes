@@ -23,7 +23,7 @@ photo:
   - 添加镜像 tag 不需要添加域名, 默认就是 docker hub
   - 直接推送
 
-**推送时, 默认是 docker hub 需要自定义 tag 推送到自建的镜像注册表**
+注意: **推送时, 默认是 docker hub 需要自定义 tag 推送到自建的镜像注册表**
 
 <!-- more -->
 
