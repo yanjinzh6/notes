@@ -124,6 +124,9 @@ mysqlbinlog -v --base64-output=decode-rows /var/lib/mysql/master.000003 \
   --stop-datetime="2019-03-10 00:00:00"   \
   --start-position="5000"    \
   --stop-position="20000"
+
+## 恢复相应的数据 mysqlbinlog mysql-bin.0000xx | mysql -u用户名 -p密码 数据库名
+mysqlbinlog  --start-position=953  --stop-position=1538 --database=mydb binlog.000002 | mysql -uroot -p123456 -v mydb
 ```
 
 ### sync_binlog 说明
