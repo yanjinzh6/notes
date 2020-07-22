@@ -1,6 +1,6 @@
 ---
 title: Canal 使用
-date: 2020-1-9 18:00:00
+date: 2020-01-09 18:00:00
 tags: 'MySQL'
 categories:
   - ['使用说明', '软件']
