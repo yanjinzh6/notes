@@ -18,6 +18,8 @@ mathjax: false
 - 作为参数传进来的对象（也可以是该对象的字段）
 - 在方法内创建的对象
 
+<!-- more -->
+
 ## 例子
 
 ```mermaid
@@ -38,6 +40,8 @@ classDiagram
   class Paperboy {
     +pay(Customer customer, float payment)
   }
+  Customer ..> Wallet
+  Paperboy ..> Customer
 ```
 
 这里通过一个收银的实例, 可以看下如果收银员的逻辑设计如下
@@ -77,6 +81,8 @@ classDiagram
   class Paperboy {
     +checkOut(Customer customer, float payment)
   }
+  Customer ..> Wallet
+  Paperboy ..> Customer
 ```
 
 ```java

@@ -46,6 +46,8 @@ classDiagram
 
 把高层对象 Customer 对底层对象的需求抽象为一个接口 ILib, 底层对象 LibImpl 实现了接口 ILib, 这就是依赖反转
 
+<!-- more -->
+
 ## 例子
 
 ```mermaid
