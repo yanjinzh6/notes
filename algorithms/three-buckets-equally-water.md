@@ -4,7 +4,7 @@ date: 2020-07-25 14:00:00
 tags: '算法'
 categories:
   - ['算法', '穷举']
-permalink: number-to-chinese
+permalink: three-buckets-equally-water
 photo:
 mathjax: true
 ---
