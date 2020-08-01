@@ -4,7 +4,7 @@ date: 2020-07-25 19:00:00
 tags: '算法'
 categories:
   - ['算法', '栈']
-permalink: window-max-list
+permalink: monotonous-stack
 photo:
 mathjax: true
 ---
@@ -19,7 +19,7 @@ mathjax: true
 
 例如 `arr = {3, 4, 1, 5, 6, 2, 7}`
 
-返回二维数组 `res = {{-1, 2}, {0, 2}, {-1, -1}, {2, 5}, {3, 5}, {2, -1}, {5, -1}}`, -1 表示不存在
+返回二维数组 `res = \{\{-1, 2}, {0, 2}, {-1, -1}, {2, 5}, {3, 5}, {2, -1}, {5, -1\}\}`, -1 表示不存在
 
 <!-- more -->
 
