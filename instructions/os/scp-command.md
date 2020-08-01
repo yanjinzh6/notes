@@ -4,7 +4,7 @@ date: 2020-03-02 11:30:00
 tags: '操作系统'
 categories:
   - ['使用说明', '操作系统']
-permalink: lscp-command
+permalink: scp-command
 ---
 
 ## 简介
