@@ -32,10 +32,10 @@ Lombok 是一种 Java 实用工具, 可以简化各种 Java 对象 (POJO), 通�
 - `@ToString`: 自动生成 `ToString` 方法
 - `@EqualsAndHashCode`: 自动生成 `EqualsAndHashCode` 方法
 - `@Data`: 包含 `@Getter` `@Setter` `@ToString` `@EqualsAndHashCode` `@NoArgsConstructor`
-- `@AllArgsConstructor`: 生成一个包含所有变量的构造函数, 如果变量使用了 `@NotNull`, 会进行是否为空的校验, 该注解的作用域也是只有在实体类上, 参数的顺序与属性定义的顺序一致
+- `@AllArgsConstructor`: 生成一个包含所有变量的构造函数, 如果变量使用了 `@NonNull`, 会进行是否为空的校验, 该注解的作用域也是只有在实体类上, 参数的顺序与属性定义的顺序一致
 - `@NoArgsConstructor`: 生成无参构造函数
   - `boolean force() default false;` 参数设置为 `true` 将初始化所有的参数为默认值, 否则编译错误
-- `@RequiredArgsConstructor`: 生成一个包含常量 (final), 和标识了 `@NotNull` 的变量的构造函数
+- `@RequiredArgsConstructor`: 生成一个包含常量 (final), 和标识了 `@NonNull` 的变量的构造函数
   - 设置 `String staticName() default "";` 参数会将原来的构造方法的访问修饰符将会变成私有的, 另外添加一个静态构造方法, 参数相同, 名字是设置的值, 访问修饰符为公有的
   - `AnyAnnotation[] onConstructor() default {};` 参数可以在构造函数参数前添加注解, 例如 `@RequiredArgsConstructor(onConstructor = @__(@Autowired))` 将在构造函数所有参数前添加 `@Autowired` 注解
   - `AccessLevel access() default lombok.AccessLevel.PUBLIC;` 参数设置构造函数的修饰符
