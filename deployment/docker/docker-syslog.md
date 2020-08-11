@@ -84,6 +84,7 @@ docker 自动将容器 ID 的前 12 个字符输出到日志中, 在运行容器
 
 Docker 已提供的模板标签
 
+```
 - {{.ID}}: 容器 ID 的前 12 个字符
 - {{.FullID}}: 容器 ID 的完整名称
 - {{.Name}}: 容器名称
@@ -91,6 +92,7 @@ Docker 已提供的模板标签
 - {{.ImageFullID}}: 容器镜像 ID 的完整名称
 - {{.ImageName}}: 容器镜像名称
 - {{.DaemonName}}: Docker 守护进程名称 (名为 docker)
+```
 
 例如
 
