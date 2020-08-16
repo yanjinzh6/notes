@@ -416,11 +416,11 @@ $\left(\frac{a}{x} \right)^2$
 
 对于方程式或分段函数, 请使用如下 `cases` 环境变量
 
-`f(x) = \begin{cases} x^2 & x \ge 0 \\ x & x < 0 \end{cases}`
+`f(x) = \begin{cases} x^2 & x \ge 0 \\\\ x & x < 0 \end{cases}`
 
 将会得到
 
-$f(x) = \begin{cases} x^2 & x \ge 0 \\ x & x < 0 \end{cases}$
+$f(x) = \begin{cases} x^2 & x \ge 0 \\\\ x & x < 0 \end{cases}$
 
 除了 `\left` 和 `\right` 命令, 分数执行地板或天花板功能需要如下使用
 
