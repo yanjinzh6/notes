@@ -88,9 +88,9 @@ $f(n)$  1 1 3 1 3 5 7 1 3 5  7  9  11 13 15 1
 
 $$
 f(n,k)=\begin{cases}
-    0&{\text{if }}n=1\\
-    (f(n-1,k)+k){\bmod {n}}&{\text{if }}1<n<k\\
-    \left\lfloor {\frac {k((f(n',k)-n{\bmod {k}}){\bmod {n}}')}{k-1}}\right\rfloor {\text{where }}n'=n-\left\lfloor {\frac {n}{k}}\right\rfloor &{\text{if }}k\leq n\\
+    0&{\text{if }}n=1\\\\
+    (f(n-1,k)+k){\bmod {n}}&{\text{if }}1<n<k\\\\
+    \left\lfloor {\frac {k((f(n',k)-n{\bmod {k}}){\bmod {n}}')}{k-1}}\right\rfloor {\text{where }}n'=n-\left\lfloor {\frac {n}{k}}\right\rfloor &{\text{if }}k\leq n\\\\
 \end{cases}
 $$
 

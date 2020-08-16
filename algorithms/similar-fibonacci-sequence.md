@@ -35,8 +35,8 @@ mathjax: true
 
 $$
 \begin{cases}
-  F_n = 0 & n=0 \\
-  F_n = n & 1 \leq n \leq 2 \\
+  F_n = 0 & n=0 \\\\
+  F_n = n & 1 \leq n \leq 2 \\\\
   F_n = F_{n-1} + F{n-2} & n \geq 3
 \end{cases}
 $$
@@ -48,35 +48,35 @@ $$
 $$
 \left[
   \begin{array}{c}
-    5 \\
+    5 \\\\
     3
   \end{array}
 \right]
 =
 \left[
   \begin{array}{cc}
-    a&b \\
+    a&b \\\\
     c&d
   \end{array}
 \right]
 \times
 \left[
   \begin{array}{c}
-    3 \\
+    3 \\\\
     2
   \end{array}
 \right]
 =
 \left[
   \begin{array}{cc}
-    a&b \\
+    a&b \\\\
     c&d
   \end{array}
 \right]^2
 \times
 \left[
   \begin{array}{c}
-    2 \\
+    2 \\\\
     1
   \end{array}
 \right]
@@ -85,14 +85,14 @@ $$
 $$
 \left[
   \begin{array}{cc}
-    a&b \\
+    a&b \\\\
     c&d
   \end{array}
 \right]
 =
 \left[
   \begin{array}{cc}
-    1&1 \\
+    1&1 \\\\
     1&0
   \end{array}
 \right]
@@ -258,8 +258,8 @@ Process finished with exit code 0
 
 $$
 \begin{cases}
-  F_n = 0 & n=0 \\
-  F_n = n & 1 \leq n \leq 3 \\
+  F_n = 0 & n=0 \\\\
+  F_n = n & 1 \leq n \leq 3 \\\\
   F_n = F_{n-1} + F{n-3} & n \geq 4
 \end{cases}
 $$
@@ -273,24 +273,24 @@ $$
 $$
 \left[
   \begin{array}{c}
-    F_n \\
-    F_{n-1} \\
+    F_n \\\\
+    F_{n-1} \\\\
     F_{n-2}
   \end{array}
 \right]
 =
 \left[
   \begin{array}{ccc}
-    a&b&c \\
-    d&e&f \\
+    a&b&c \\\\
+    d&e&f \\\\
     g&h&j
   \end{array}
 \right]
 \times
 \left[
   \begin{array}{c}
-    F_{n-1} \\
-    F_{n-2} \\
+    F_{n-1} \\\\
+    F_{n-2} \\\\
     F_{n-3}
   \end{array}
 \right]
@@ -301,16 +301,16 @@ $$
 $$
 \left[
   \begin{array}{ccc}
-    a&b&c \\
-    d&e&f \\
+    a&b&c \\\\
+    d&e&f \\\\
     g&h&j
   \end{array}
 \right]
 =
 \left[
   \begin{array}{ccc}
-    1&1&0 \\
-    0&0&1 \\
+    1&1&0 \\\\
+    0&0&1 \\\\
     1&0&0
   \end{array}
 \right]
@@ -321,39 +321,39 @@ $$
 $$
 \left[
   \begin{array}{c}
-    F_n \\
-    F_{n-1} \\
+    F_n \\\\
+    F_{n-1} \\\\
     F_{n-2}
   \end{array}
 \right]
 =
 \left[
   \begin{array}{ccc}
-    1&1&0 \\
-    0&0&1 \\
+    1&1&0 \\\\
+    0&0&1 \\\\
     1&0&0
   \end{array}
 \right]^{n-3}
 \times
 \left[
   \begin{array}{c}
-    F_3 \\
-    F_2 \\
+    F_3 \\\\
+    F_2 \\\\
     F_1
   \end{array}
 \right]
 \left[
   \begin{array}{ccc}
-    1&1&0 \\
-    0&0&1 \\
+    1&1&0 \\\\
+    0&0&1 \\\\
     1&0&0
   \end{array}
 \right]^{n-3}
 \times
 \left[
   \begin{array}{c}
-    3 \\
-    2 \\
+    3 \\\\
+    2 \\\\
     1
   \end{array}
 \right]

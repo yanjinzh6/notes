@@ -31,8 +31,8 @@ mathjax: true
 
 $$
 \begin{cases}
-  F_n = 0 & n=0 \\
-  F_n = 1 & 1 \leq n \leq 2 \\
+  F_n = 0 & n=0 \\\\
+  F_n = 1 & 1 \leq n \leq 2 \\\\
   F_n = F_{n-1} + F{n-2} & n \geq 3
 \end{cases}
 $$
@@ -42,21 +42,21 @@ $$
 $$
 \left[
   \begin{array}{c}
-    F_3 \\
+    F_3 \\\\
     F_2
   \end{array}
 \right]
 =
 \left[
   \begin{array}{cc}
-    a&b \\
+    a&b \\\\
     c&d
   \end{array}
 \right]
 \times
 \left[
   \begin{array}{c}
-    F_2 \\
+    F_2 \\\\
     F_1
   \end{array}
 \right]
@@ -65,35 +65,35 @@ $$
 $$
 \left[
   \begin{array}{c}
-    F_4 \\
+    F_4 \\\\
     F_3
   \end{array}
 \right]
 =
 \left[
   \begin{array}{cc}
-    a&b \\
+    a&b \\\\
     c&d
   \end{array}
 \right]
 \times
 \left[
   \begin{array}{c}
-    F_3 \\
+    F_3 \\\\
     F_2
   \end{array}
 \right]
 =
 \left[
   \begin{array}{cc}
-    a&b \\
+    a&b \\\\
     c&d
   \end{array}
 \right]^2
 \times
 \left[
   \begin{array}{c}
-    F_2 \\
+    F_2 \\\\
     F_1
   \end{array}
 \right]
@@ -104,35 +104,35 @@ $$
 $$
 \left[
   \begin{array}{c}
-    3 \\
+    3 \\\\
     2
   \end{array}
 \right]
 =
 \left[
   \begin{array}{cc}
-    a&b \\
+    a&b \\\\
     c&d
   \end{array}
 \right]
 \times
 \left[
   \begin{array}{c}
-    2 \\
+    2 \\\\
     1
   \end{array}
 \right]
 =
 \left[
   \begin{array}{cc}
-    a&b \\
+    a&b \\\\
     c&d
   \end{array}
 \right]^2
 \times
 \left[
   \begin{array}{c}
-    1 \\
+    1 \\\\
     1
   \end{array}
 \right]
@@ -143,14 +143,14 @@ $$
 $$
 \left[
   \begin{array}{cc}
-    a&b \\
+    a&b \\\\
     c&d
   \end{array}
 \right]
 =
 \left[
   \begin{array}{cc}
-    1&1 \\
+    1&1 \\\\
     1&0
   \end{array}
 \right]
@@ -161,35 +161,35 @@ $$
 $$
 \left[
   \begin{array}{c}
-    F_n \\
+    F_n \\\\
     F_{n-1}
   \end{array}
 \right]
 =
 \left[
   \begin{array}{cc}
-    1&1 \\
+    1&1 \\\\
     1&0
   \end{array}
 \right]^{n-2}
 \times
 \left[
   \begin{array}{c}
-    F_2 \\
+    F_2 \\\\
     F_1
   \end{array}
 \right]
 =
 \left[
   \begin{array}{cc}
-    1&1 \\
+    1&1 \\\\
     1&0
   \end{array}
 \right]^{n-2}
 \times
 \left[
   \begin{array}{c}
-    1 \\
+    1 \\\\
     1
   \end{array}
 \right]
