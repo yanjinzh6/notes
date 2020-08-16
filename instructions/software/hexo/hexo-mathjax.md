@@ -218,6 +218,7 @@ $a = b + c$
 
 ```
 `$\pi$`
+# 双反斜杠是非标准标识符, vscode 插件不能解析
 \\(E=mc^2\\)
 \\(lim_{x\rightarrow \infty}\frac{1}{\sin x}\\)
 \\(lim_{n\rightarrow \infty}(1+2^n+3^n)^\frac{1}{x+\sin n}\\)
@@ -243,6 +244,7 @@ $$\frac{\partial u}{\partial t}
 \frac{\partial^2 u}{\partial z^2}\right)$$
 
 ```
+# newline 换行非标准标识符, vscode 插件不能解析
 $$
 \left[
     \begin{array}{cc|c}
@@ -265,36 +267,37 @@ $$
 矩阵
 
 ```
+# 需要使用多个反斜杠因为 markdown 引擎解析会去掉
 $$
 A = \begin{bmatrix}
-        a_{11}    & a_{12}    & ...    & a_{1n}\\
-        a_{21}    & a_{22}    & ...    & a_{2n}\\
-        a_{31}    & a_{22}    & ...    & a_{3n}\\
-        \vdots    & \vdots    & \ddots & \vdots\\
-        a_{n1}    & a_{n2}    & ... & a_{nn}\\
+        a_{11}    & a_{12}    & ...    & a_{1n}\\\\
+        a_{21}    & a_{22}    & ...    & a_{2n}\\\\
+        a_{31}    & a_{22}    & ...    & a_{3n}\\\\
+        \vdots    & \vdots    & \ddots & \vdots\\\\
+        a_{n1}    & a_{n2}    & ... & a_{nn}\\\\
     \end{bmatrix} , b = \begin{bmatrix}
-        b_{1}  \\
-        b_{2}  \\
-        b_{3}  \\
-        \vdots \\
-        b_{n}  \\
+        b_{1}  \\\\
+        b_{2}  \\\\
+        b_{3}  \\\\
+        \vdots \\\\
+        b_{n}  \\\\
     \end{bmatrix}
 $$
 ```
 
 $$
 A = \begin{bmatrix}
-        a_{11}    & a_{12}    & ...    & a_{1n}\\
-        a_{21}    & a_{22}    & ...    & a_{2n}\\
-        a_{31}    & a_{22}    & ...    & a_{3n}\\
-        \vdots    & \vdots    & \ddots & \vdots\\
-        a_{n1}    & a_{n2}    & ... & a_{nn}\\
+        a_{11}    & a_{12}    & ...    & a_{1n}\\\\
+        a_{21}    & a_{22}    & ...    & a_{2n}\\\\
+        a_{31}    & a_{22}    & ...    & a_{3n}\\\\
+        \vdots    & \vdots    & \ddots & \vdots\\\\
+        a_{n1}    & a_{n2}    & ... & a_{nn}\\\\
     \end{bmatrix} , b = \begin{bmatrix}
-        b_{1}  \\
-        b_{2}  \\
-        b_{3}  \\
-        \vdots \\
-        b_{n}  \\
+        b_{1}  \\\\
+        b_{2}  \\\\
+        b_{3}  \\\\
+        \vdots \\\\
+        b_{n}  \\\\
     \end{bmatrix}
 $$
 
