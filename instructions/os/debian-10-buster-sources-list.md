@@ -4,7 +4,7 @@ date: 2020-08-15 10:00:00
 tags: 'Debian'
 categories:
   - ['使用说明', '操作系统']
-permalink: linux-awk-command
+permalink: debian-10-buster-sources-list
 ---
 
 ## 简介
