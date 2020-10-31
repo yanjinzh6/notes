@@ -34,6 +34,8 @@ permalink: reactor-which-operator
   - 同步且逐个的: `Flux#generate`
   - 异步 (也可同步) 的, 每次尽可能多发出元素: `Flux#create`  (Mono#create 也是异步的, 只不过只能发一个)
 
+<!-- more -->
+
 ## 对序列进行转化
 
 ### 转化一个序列

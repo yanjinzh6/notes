@@ -26,6 +26,8 @@ permalink: nacos-auto-registration
 
 但是打包后部署到服务器上后并不会自动进行注册
 
+<!-- more -->
+
 ## 分析
 
 Nacos 自动注册类 `NacosAutoServiceRegistration` 继承了 spring cloud 中的 `AbstractAutoServiceRegistration`, 监听了 `WebServerInitializedEvent` 事件
