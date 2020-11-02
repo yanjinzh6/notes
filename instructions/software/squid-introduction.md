@@ -1,7 +1,7 @@
 ---
 title: Squid 代理使用
 date: 2020-03-24 10:00:00
-tags: 'Hexo'
+tags: 'Squid'
 categories:
   - ['使用说明', '软件']
 permalink: squid-introduction
