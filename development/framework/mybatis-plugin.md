@@ -3,7 +3,7 @@ title: MyBatis 插件简介
 date: 2020-04-25 18:00:00
 tags: 'MyBatis'
 categories:
-  - ['开发', 'Java', ' 框架']
+  - ['开发', ' 框架']
 permalink: mybatis-plugin
 ---
 

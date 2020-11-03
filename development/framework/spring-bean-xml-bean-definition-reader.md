@@ -3,7 +3,7 @@ title: Spring XmlBeanDefinitionReader
 date: 2020-05-05 14:00:00
 tags: 'Spring'
 categories:
-  - ['开发', 'Java', ' 框架']
+  - ['开发', ' 框架']
 permalink: spring-bean-xml-bean-definition-reader
 ---
 

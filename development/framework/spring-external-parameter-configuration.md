@@ -3,7 +3,7 @@ title: Spring 外置参数配置
 date: 2020-07-19 10:00:00
 tags: 'Spring'
 categories:
-  - ['开发', 'Java', ' 框架']
+  - ['开发', ' 框架']
 permalink: spring-external-parameter-configuration
 ---
 

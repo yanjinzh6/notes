@@ -3,7 +3,7 @@ title: Spring DefaultListableBeanFactory
 date: 2020-05-05 13:00:00
 tags: 'Spring'
 categories:
-  - ['开发', 'Java', ' 框架']
+  - ['开发', ' 框架']
 permalink: spring-bean-default-listable-bean-factory
 ---
 

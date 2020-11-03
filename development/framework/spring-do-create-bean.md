@@ -3,7 +3,7 @@ title: Spring 创建 Bean
 date: 2020-05-05 20:00:00
 tags: 'Spring'
 categories:
-  - ['开发', 'Java', ' 框架']
+  - ['开发', ' 框架']
 permalink: spring-do-create-bean
 ---
 

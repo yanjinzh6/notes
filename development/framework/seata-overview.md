@@ -3,7 +3,7 @@ title: Seata 概览
 date: 2020-04-25 9:00:00
 tags: 'Seata'
 categories:
-  - ['开发', 'Java', ' 框架']
+  - ['开发', ' 框架']
 permalink: seata-overview
 ---
 
