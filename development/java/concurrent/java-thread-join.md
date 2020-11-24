@@ -1,6 +1,6 @@
 ---
 title: Java 线程 join 阻塞
-date: 2020-06-07 9:00:00
+date: 2020-06-07 09:00:00
 tags: 'Java'
 categories:
   - ['开发', 'Java', '并发']
