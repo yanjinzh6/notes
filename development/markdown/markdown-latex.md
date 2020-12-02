@@ -26,7 +26,7 @@ mathjax: true
 
 ### 分数
 
-使用 `\frac{分母}{分子}`, 推荐使用 `\cfrac` 来代替
+使用 `\frac{分子}{分母}`, 推荐使用 `\cfrac` 来代替
 
 `\frac{1}{3} 与 \cfrac{1}{3}`
 
