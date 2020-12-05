@@ -4,7 +4,7 @@ date: 2020-11-28 18:00:00
 tags: '微服务'
 categories:
   - ['开发', ' 框架']
-permalink: micro-service-service-layer
+permalink: micro-service-communication
 ---
 
 ## 简介
