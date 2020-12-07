@@ -65,9 +65,10 @@ graph LR
 | `id[文字]` | 矩形节点 |
 | `id(文字)` | 圆角矩形节点 |
 | `id([文字])` | 体育场形状节点 |
+| `id[[文字]]` | 子程序形状节点 |
 | `id[(文字)]` | 圆柱形节点 |
 | `id((文字))` | 圆形节点 |
-| `id>文字]` | 右向旗帜状节点 |
+| `id>文字]` | 右向旗帜形状节点 |
 | `id{文字}` | 菱形节点 |
 | <code>id{&#123;文字&#125;}</code> | 六边形节点 |
 | `id[/文字/]` | 平行四边形节点 |
@@ -76,6 +77,25 @@ graph LR
 | `id[\文字/]` | 梯形节点 |
 
 注意: **如果节点的文字中包含标点符号, 需要时用双引号包裹起来.**
+
+例子如下
+
+```mermaid
+graph TD
+  a[矩形] --> b
+  b(圆角矩形) --> c
+  c([体育场形状]) --> d
+  d[[子程序形状]] --> e
+  e[(圆柱形状)] --> f
+  f((圆形)) --> g
+  g>右向旗帜形状] --> h
+  h{菱形} --> i
+  i{&#123;六边形&#125;} --> j
+  j[/平行四边形/] --> k
+  k[\平行四边形\] --> l
+  l[/梯形\] --> m
+  m[\梯形/]
+```
 
 ### 连线
 
@@ -95,7 +115,7 @@ graph LR
 | `A == text ==> B` | 粗线加文字 |
 | `A -- text --> B -- text2 --> C` | 多个连接 |
 | `A --> B & C --> D` | 多个节点连接 |
-| `A & B--> C & D` | 多个节点连接 |
+| `A & B --> C & D` | 多个节点连接 |
 
 注意: **当文字中含有括号的需要使用双引号包括起来**
 
@@ -157,6 +177,86 @@ graph LR
   A & B--> C & D
 ```
 
+#### 连线宽度与长度表
+
+| 长度 | 1 单位 | 2 单位 | 3 单位 |
+| -- | -- | -- | -- |
+| 普通 | `---` | `----` | `-----` |
+| 普通带箭头 | `-->` | `--->` | `---->` |
+| 粗 | `===` | `====` | `=====` |
+| 粗带箭头 | `==>` | `===>` | `====>` |
+| 虚线 | `-.-` | `-..-` | `-...-` |
+| 虚线带箭头 | `-.->` | `-..->` | `-...->` |
+
+示例
+
+从节点 `B` 到节点 `E` 的连接需要跨越比较长的距离
+
+```
+graph TD
+  A[Start] --> B{Is it?};
+  B -->|Yes| C[OK];
+  C --> D[Rethink];
+  D --> B;
+  B ---->|No| E[End];
+```
+
+```mermaid
+graph TD
+  A[Start] --> B{Is it?};
+  B -->|Yes| C[OK];
+  C --> D[Rethink];
+  D --> B;
+  B ---->|No| E[End];
+```
+
+注意: **渲染引擎为了适应界面, 可能仍会将连接的长度设置得更长**
+
+当连接标签写在连接中间时, 需要在连接右侧添加多余的破折号, 如上示例, 如果标签在中间则需要在右侧使用上更长的连接线
+
+```
+graph TD
+  A[Start] --> B{Is it?};
+  B -- Yes --> C[OK];
+  C --> D[Rethink];
+  D --> B;
+  B -- No ----> E[End];
+```
+
+```mermaid
+graph TD
+  A[Start] --> B{Is it?};
+  B -- Yes --> C[OK];
+  C --> D[Rethink];
+  D --> B;
+  B -- No ----> E[End];
+```
+
+#### Beta 版
+
+新箭头类型
+
+```
+flowchart LR
+  A --o B
+  B --x C
+```
+
+```mermaid
+flowchart LR
+  A --o B
+  B --x C
+```
+
+多向箭头
+
+```
+flowchart LR
+  A o--o B
+  B <--> C
+  C x--x D
+```
+
 ### 子图表
 
 使用以下语法添加子图表
@@ -185,6 +285,64 @@ graph TB
     id3-.虚线.->id4>右向旗帜]
     id3--无箭头---id5((圆形))
   end
+```
+
+#### 子图表 id
+
+通过以下语法为子图表设置 id
+
+```
+graph TB
+  c1-->a2
+  subgraph ide1 [one]
+    a1-->a2
+  end
+```
+
+```mermaid
+graph TB
+  c1-->a2
+  subgraph ide1 [one]
+    a1-->a2
+  end
+```
+
+#### beta 版
+
+使用新版本流程图时, 可以直接连接子图表边界
+
+```
+flowchart TB
+  c1-->a2
+  subgraph one
+    a1-->a2
+  end
+  subgraph two
+    b1-->b2
+  end
+  subgraph three
+    c1-->c2
+  end
+  one --> two
+    three --> two
+  two --> c2
+```
+
+```mermaid
+flowchart TB
+  c1-->a2
+  subgraph one
+    a1-->a2
+  end
+  subgraph two
+    b1-->b2
+  end
+  subgraph three
+    c1-->c2
+  end
+  one --> two
+    three --> two
+  two --> c2
 ```
 
 ### 点击事件
