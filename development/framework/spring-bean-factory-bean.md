@@ -3,7 +3,7 @@ title: Spring FactoryBean
 date: 2020-05-05 18:00:00
 tags: 'Spring'
 categories:
-  - ['开发', ' 框架']
+  - ['开发', '框架']
 permalink: spring-bean-factory-bean
 ---
 

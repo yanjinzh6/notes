@@ -3,7 +3,7 @@ title: 微服务核心原则
 date: 2020-11-28 11:00:00
 tags: '微服务'
 categories:
-  - ['开发', ' 框架']
+  - ['开发', '框架']
 permalink: micro-service-core-principles
 ---
 

@@ -3,7 +3,7 @@ title: RocketMQ 事务消息
 date: 2020-04-25 16:00:00
 tags: 'RocketMQ'
 categories:
-  - ['开发', ' 框架']
+  - ['开发', '框架']
 permalink: rocketmq-transaction-message
 ---
 

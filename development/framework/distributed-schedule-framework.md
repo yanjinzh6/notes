@@ -3,7 +3,7 @@ title: 分布式调度框架
 date: 2020-10-31 11:00:00
 tags: '调度'
 categories:
-  - ['开发', ' 框架']
+  - ['开发', '框架']
 permalink: distributed-schedule-framework
 ---
 

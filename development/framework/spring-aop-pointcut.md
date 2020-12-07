@@ -3,7 +3,7 @@ title: Spring AOP pointcut 表达式
 date: 2020-04-25 22:00:00
 tags: 'Spring'
 categories:
-  - ['开发', ' 框架']
+  - ['开发', '框架']
 permalink: spring-aop-pointcut
 ---
 

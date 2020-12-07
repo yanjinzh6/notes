@@ -3,7 +3,7 @@ title: Spring 4.x 对动态代理接口使用注解 aop 不生效
 date: 2020-06-20 8:00:00
 tags: 'Spring'
 categories:
-  - ['开发', ' 框架']
+  - ['开发', '框架']
 permalink: spring-4-proxy-annotation-aop
 ---
 

@@ -3,7 +3,7 @@ title: Google guava 异步回调框架
 date: 2020-06-13 10:00:00
 tags: 'guava'
 categories:
-  - ['开发', ' 框架']
+  - ['开发', '框架']
 permalink: google-guava
 ---
 

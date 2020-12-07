@@ -3,7 +3,7 @@ title: 微服务基础设施
 date: 2020-11-28 13:00:00
 tags: '微服务'
 categories:
-  - ['开发', ' 框架']
+  - ['开发', '框架']
 permalink: micro-service-infrastructure
 ---
 

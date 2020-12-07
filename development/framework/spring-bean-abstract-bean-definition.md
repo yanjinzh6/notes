@@ -3,7 +3,7 @@ title: Spring AbstractBeanDefinition
 date: 2020-05-05 16:00:00
 tags: 'Spring'
 categories:
-  - ['开发', ' 框架']
+  - ['开发', '框架']
 permalink: spring-bean-abstract-bean-definition
 ---
 

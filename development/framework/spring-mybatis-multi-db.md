@@ -3,7 +3,7 @@ title: Spring 4.x 整合 MyBatis 多数据类型配置
 date: 2020-07-05 8:00:00
 tags: 'Spring'
 categories:
-  - ['开发', ' 框架']
+  - ['开发', '框架']
 permalink: spring-mybatis-multi-db
 ---
 

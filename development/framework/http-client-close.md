@@ -3,7 +3,7 @@ title: HttpClient 释放资源
 date: 2020-11-21 15:00:00
 tags: 'HttpClient'
 categories:
-  - ['开发', ' 框架']
+  - ['开发', '框架']
 permalink: http-client-close
 ---
 

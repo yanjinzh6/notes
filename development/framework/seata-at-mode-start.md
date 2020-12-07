@@ -3,7 +3,7 @@ title: Seata AT 模式解析
 date: 2020-04-25 13:00:00
 tags: 'Seata'
 categories:
-  - ['开发', ' 框架']
+  - ['开发', '框架']
 permalink: seata-at-mode-start
 ---
 
